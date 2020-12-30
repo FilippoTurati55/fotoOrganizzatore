@@ -14,49 +14,14 @@ namespace FotoOrganizzatore
 {
     public partial class Form1 : Form
     {
-        Image i;
         public Form1()
         {
             InitializeComponent();
-            immagine1.Image = leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
-        }
-        public static Image leggiImmagineDaFile(string path)
-        {
-            Bitmap myImage = null;
-            PropertyItem propItem4 = null;
-            try
-            {
-                if (File.Exists(path))
-                {
-                    myImage = (Bitmap)System.Drawing.Image.FromFile(path);
-                    try
-                    {
-                        propItem4 = myImage.GetPropertyItem(0x112);
-                        switch (propItem4.Value[0])
-                        {
-                            case 0: break;
-                            case 6:
-                                myImage.RotateFlip(RotateFlipType.Rotate90FlipX);
-                                myImage.RotateFlip(RotateFlipType.Rotate180FlipY);
-                                break;
-                            case 8:
-                                break;
-                            case 3:
-                                myImage.RotateFlip(RotateFlipType.Rotate180FlipX);
-                                break;
-                            default:
-                                    break;
-                        }
-                    }
-                    catch { };
-                }
-            }
-            catch
-            {
-                myImage = null;
-                // VarGlo.tracciaEccezioni("leggiImmagineDaFile myImage = null" + path + "\r\n");
-            }
-            return myImage;
+            // immagine1.Image = leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
+            Immagine i = new Immagine();
+            i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
+            this.Controls.Add(i);
+            
         }
     }
 }

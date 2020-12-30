@@ -37,9 +37,9 @@ namespace FotoOrganizzatore
             // 
             this.immagine1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.immagine1.InitialImage = null;
-            this.immagine1.Location = new System.Drawing.Point(12, 31);
+            this.immagine1.Location = new System.Drawing.Point(1913, 876);
             this.immagine1.Name = "immagine1";
-            this.immagine1.Size = new System.Drawing.Size(1577, 881);
+            this.immagine1.Size = new System.Drawing.Size(183, 92);
             this.immagine1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.immagine1.TabIndex = 0;
             this.immagine1.TabStop = false;
