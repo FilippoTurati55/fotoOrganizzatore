@@ -12,7 +12,6 @@ namespace FotoOrganizzatore
 {
     class Immagine : PictureBox
     {
-        // public Image iii;
         public Immagine()
         {
             Image = null;

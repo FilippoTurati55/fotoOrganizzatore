@@ -8,3 +8,4 @@ C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\bin\Debug\FotoOr
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\bin\Debug\FotoOrganizzatore.pdb
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.exe
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.pdb
+C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.BoxImmagine.resources

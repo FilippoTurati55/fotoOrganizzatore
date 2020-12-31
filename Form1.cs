@@ -17,11 +17,13 @@ namespace FotoOrganizzatore
         public Form1()
         {
             InitializeComponent();
-            // immagine1.Image = leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
-            Immagine i = new Immagine();
+            /*Immagine i = new Immagine();
             i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
             this.Controls.Add(i);
-            
+            */
+            BoxImmagine bi = new BoxImmagine();
+            bi.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
+            this.Controls.Add(bi);
         }
     }
 }
