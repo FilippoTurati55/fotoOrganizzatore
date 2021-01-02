@@ -62,6 +62,12 @@
     <Compile Include="Avvenimento.Designer.cs">
       <DependentUpon>Avvenimento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AccreditamentoUnitaBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AccreditamentoUnitaBackup.Designer.cs">
+      <DependentUpon>AccreditamentoUnitaBackup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Avvenimento.resx">
       <DependentUpon>Avvenimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AccreditamentoUnitaBackup.resx">
+      <DependentUpon>AccreditamentoUnitaBackup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
