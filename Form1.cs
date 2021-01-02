@@ -17,6 +17,7 @@ namespace FotoOrganizzatore
         public Form1()
         {
             InitializeComponent();
+            Preferenze.LeggiPreferenze();
             /*Immagine i = new Immagine();
             i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
             this.Controls.Add(i);

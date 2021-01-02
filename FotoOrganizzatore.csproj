@@ -52,6 +52,7 @@
     <Compile Include="BoxImmagine.Designer.cs">
       <DependentUpon>BoxImmagine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classi statiche\Preferenze.cs" />
     <Compile Include="Classi statiche\Variabili.cs" />
     <Compile Include="Avvenimento.cs">
       <SubType>UserControl</SubType>

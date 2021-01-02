@@ -9,4 +9,3 @@ C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOr
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.pdb
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.BoxImmagine.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Avvenimento.resources
-C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.csprojAssemblyReference.cache
