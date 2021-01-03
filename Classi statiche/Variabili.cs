@@ -20,5 +20,6 @@ namespace FotoOrganizzatore
 
         public static ArchivioLocale ArchivioLocale = new ArchivioLocale();
         public static Backup Backup = new Backup();
+        public static Calendario Calendario = new Calendario();
     }
 }

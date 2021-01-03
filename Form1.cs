@@ -23,6 +23,7 @@ namespace FotoOrganizzatore
                 Variabili.Backup.CercaUnitaEsterne();
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
                 Variabili.dataBaseFotoLocali.creaDataBase();
+                Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();
                 i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
                 this.Controls.Add(i);

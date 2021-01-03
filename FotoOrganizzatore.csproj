@@ -55,6 +55,7 @@
     <Compile Include="BoxImmagine.Designer.cs">
       <DependentUpon>BoxImmagine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Calendario.cs" />
     <Compile Include="Classi statiche\Preferenze.cs" />
     <Compile Include="Classi statiche\Variabili.cs" />
     <Compile Include="Avvenimento.cs">
@@ -81,6 +82,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetDataOraBase.cs" />
     <EmbeddedResource Include="BoxImmagine.resx">
       <DependentUpon>BoxImmagine.cs</DependentUpon>
     </EmbeddedResource>
