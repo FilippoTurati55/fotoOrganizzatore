@@ -10,7 +10,7 @@ namespace FotoOrganizzatore
 {
     static class Preferenze
     {
-        static string NomeCartellaFotoOrganizzate = @"c:\foto";
+        public static string NomeCartellaFotoOrganizzate = @"c:\foto";
         public static bool LeggiPreferenze()
         {
             bool res = false;

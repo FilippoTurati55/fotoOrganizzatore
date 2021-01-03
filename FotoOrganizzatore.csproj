@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchivioLocale.cs" />
     <Compile Include="Backup.cs" />
     <Compile Include="BoxImmagine.cs">
       <SubType>UserControl</SubType>
@@ -62,6 +63,7 @@
     <Compile Include="Avvenimento.Designer.cs">
       <DependentUpon>Avvenimento.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseFoto.cs" />
     <Compile Include="Dialogs\AccreditamentoUnitaBackup.cs">
       <SubType>Form</SubType>
     </Compile>
