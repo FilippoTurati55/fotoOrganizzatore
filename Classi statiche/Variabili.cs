@@ -14,7 +14,8 @@ namespace FotoOrganizzatore
         public static TextBox DataOraEvidenziata;
         public static int MostraFotoInGiorno;
         public static List<UnitaEsterna> UnitaEsterne = new List<UnitaEsterna>();
-        public static SortedList<string,string> UnitaEsterneAccreditate = new SortedList<string, string>();
+        public static SortedList<string, string> UnitaEsterneAccreditate = new SortedList<string, string>();
+        public static SortedList<string, string> UnitaEsterneRifiutate = new SortedList<string, string>();
 
         public static Backup Backup = new Backup();
     }

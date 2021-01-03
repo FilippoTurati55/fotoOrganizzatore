@@ -17,11 +17,15 @@ namespace FotoOrganizzatore
             InitializeComponent();
         }
 
-        public void inizializza(string disco, string costruttore_, string numeroDiSerie_)
+        public void inizializza(string disco, string costruttore, string numeroDiSerie)
         {
-            disco = "percorso: " + disco;
-            costruttore.Text = costruttore_;
-            numeroDiSerie.Text = numeroDiSerie_;
+            discoImpostazione.Text = disco + ":";
+            costruttoreImpostazione.Text = costruttore;
+            numeroDiSerieImpostazione.Text = numeroDiSerie;
+        }
+        public string getIdentificatore()
+        {
+            return identificatore.Text;
         }
         private void button1_Click(object sender, EventArgs e)
         {

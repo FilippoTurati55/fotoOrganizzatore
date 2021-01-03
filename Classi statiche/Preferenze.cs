@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,6 +34,12 @@ namespace FotoOrganizzatore
                                 case "cartella locale foto":
                                     NomeCartellaFotoOrganizzate = sSplit[1];
                                     break;
+                                case "disco esterno accreditato":
+                                    Variabili.UnitaEsterneAccreditate.Add(sSplit[1], sSplit[2]);
+                                    break;
+                                case "disco esterno rifiutato":
+                                    Variabili.UnitaEsterneRifiutate.Add(sSplit[1], "");
+                                    break;
                             }
                         }
                         res = true;
@@ -55,6 +62,23 @@ namespace FotoOrganizzatore
                 }
                 StreamWriter sw = new StreamWriter(path, false, Encoding.GetEncoding("iso-8859-1"));
                 sw.WriteLine("cartella locale foto;" + NomeCartellaFotoOrganizzate);
+                // scrivi dischi esterni accreditati
+                if (Variabili.UnitaEsterneAccreditate.Count > 0)
+                {
+                    for (int n = 0; n < Variabili.UnitaEsterneAccreditate.Count; n++)
+                    {
+                        var id = Variabili.UnitaEsterneAccreditate.ElementAt(n);
+                        sw.WriteLine("disco esterno accreditato;" + id.Key + ";" + id.Value);
+                    }
+                }
+                if (Variabili.UnitaEsterneRifiutate.Count > 0)
+                {
+                    for (int n = 0; n < Variabili.UnitaEsterneRifiutate.Count; n++)
+                    {
+                        var id = Variabili.UnitaEsterneRifiutate.ElementAt(n);
+                        sw.WriteLine("disco esterno rifiutato;" + id.Key + ";" + id.Value);
+                    }
+                }
                 sw.Close();
 
             }
