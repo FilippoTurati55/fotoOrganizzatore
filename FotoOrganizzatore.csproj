@@ -83,6 +83,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetDataOraBase.cs" />
+    <Compile Include="Utility.cs" />
     <EmbeddedResource Include="BoxImmagine.resx">
       <DependentUpon>BoxImmagine.cs</DependentUpon>
     </EmbeddedResource>

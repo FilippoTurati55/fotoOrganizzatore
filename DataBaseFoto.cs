@@ -25,6 +25,12 @@ namespace FotoOrganizzatore
         void ProcessDirectory(string dir)
         {
             string[] fileEntries = Directory.GetFiles(dir);
+            if (fileEntries.Length != 0)
+            {
+                // crea calendario
+                Variabili.Calendario.AggiungiData(fileEntries[0]);
+                ;
+            }
             foreach (string fileName in fileEntries)
                 ProcessFile(fileName);
 
