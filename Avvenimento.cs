@@ -22,6 +22,20 @@ namespace FotoOrganizzatore
         {
             InitializeComponent();
         }
+        #region ACCESSO
+        public void setCommento(string valore)
+        {
+            commento.Text = valore;
+        }
+        public void setDataFine(string valore)
+        {
+            dataFine.Text = valore;
+        }
+        public void setDataInizio(string valore)
+        {
+            dataInizio.Text = valore;
+        }
+        #endregion
         #region EVENTI
         private void SetInizioFine_Click(object sender, EventArgs e)
         {

@@ -61,5 +61,29 @@ namespace FotoOrganizzatore
             /*if (Evento != null)
                 Evento.Text = commentoEvento;*/
         }
+        #region COMPONENTE_VISUALE
+        public Avvenimento creaAvvenimento()
+        {
+            avvenimento = new Avvenimento();
+            avvenimento.setDataInizio(testoDataInizio);
+            avvenimento.setDataFine(testoDataFine);
+            avvenimento.setCommento(testoCommento);
+            /*
+             * avvenimento.GiorniEstesi = sdob.GiorniEstesi;
+            avvenimento.DateTime = sdob.DateTime;
+            avvenimento.DateTimeFine = sdob.DateTimeFine;
+            */
+            return avvenimento;
+        }
+        /*public Avvenimento creaAvvenimento(double width)
+        {
+            avvenimento = new Avvenimento(width);
+            return avvenimento;
+        }*/
+        public Avvenimento get()
+        {
+            return avvenimento;
+        }
+        #endregion
     }
 }

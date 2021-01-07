@@ -52,6 +52,7 @@ namespace FotoOrganizzatore
                             if (giornoCorretto)
                             {
                                 dateTime = new DateTime(anno, mese, giorno);
+                                res = true;
                             }
                         }
                     }

@@ -43,6 +43,7 @@ namespace FotoOrganizzatore
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.Resize += new System.EventHandler(this.splitContainer1_Panel1_Resize);
             this.splitContainer1.Size = new System.Drawing.Size(2215, 1070);
             this.splitContainer1.SplitterDistance = 1309;
