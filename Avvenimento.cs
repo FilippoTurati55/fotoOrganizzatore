@@ -82,8 +82,10 @@ namespace FotoOrganizzatore
         public bool resize()
         {
             //int larghezza = this.Width;
-            int larghezza = Parent.Width;
-            int altezza = Height;
+            //Panel parent = (Panel)Parent;
+            //int widthScrollBar = parent.VerticalScroll.si
+            int larghezza = Parent.Width - 25;
+            //int altezza = Height;
             int posX = 1;
             statoButton.Location = new Point(2, 2);
             statoButton.Height = dataInizio.Height - 1;

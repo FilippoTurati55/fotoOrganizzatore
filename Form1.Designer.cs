@@ -45,15 +45,15 @@ namespace FotoOrganizzatore
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.Resize += new System.EventHandler(this.splitContainer1_Panel1_Resize);
-            this.splitContainer1.Size = new System.Drawing.Size(2215, 1070);
-            this.splitContainer1.SplitterDistance = 1309;
+            this.splitContainer1.Size = new System.Drawing.Size(3012, 1070);
+            this.splitContainer1.SplitterDistance = 1780;
             this.splitContainer1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2215, 1070);
+            this.ClientSize = new System.Drawing.Size(3012, 1070);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";

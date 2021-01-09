@@ -33,13 +33,13 @@ namespace FotoOrganizzatore
                 bi.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
                 this.Controls.Add(bi);
                 */
-                Avvenimento a1 = new Avvenimento();
+                /*Avvenimento a1 = new Avvenimento();
                 Avvenimento a2 = new Avvenimento();
                 // this.Controls.Add(a);
                 splitContainer1.Panel1.Controls.Add(a1);
                 a1.resize();
                 splitContainer1.Panel1.Controls.Add(a2);
-                a2.Location = new Point(0, a1.Height);
+                a2.Location = new Point(0, a1.Height);*/
             }
             // mostra messaggio mancata creazione cartella archivio locale foto
         }
