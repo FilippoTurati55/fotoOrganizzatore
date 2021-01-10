@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FotoOrganizzatore
 {
-    class SetDataOraBase
+    public class SetDataOraBase
     {
         public DateTime DateTimeInizio { get; set; }
         public DateTime DateTimeFine { get; set; }
@@ -61,13 +61,15 @@ namespace FotoOrganizzatore
             /*if (Evento != null)
                 Evento.Text = commentoEvento;*/
         }
+        private STATO_SELEZIONE_DATA stato = STATO_SELEZIONE_DATA.NIENTE;
         #region COMPONENTE_VISUALE
         public Avvenimento creaAvvenimento()
         {
-            avvenimento = new Avvenimento();
+            avvenimento = new Avvenimento(this);
             avvenimento.setDataInizio(testoDataInizio);
             avvenimento.setDataFine(testoDataFine);
             avvenimento.setCommento(testoCommento);
+            avvenimento.setStato(stato);
             /*
              * avvenimento.GiorniEstesi = sdob.GiorniEstesi;
             avvenimento.DateTime = sdob.DateTime;
@@ -85,5 +87,16 @@ namespace FotoOrganizzatore
             return avvenimento;
         }
         #endregion
+        public STATO_SELEZIONE_DATA Stato
+        {
+            get { return stato; }
+            set
+            {
+                stato = value;
+                if (avvenimento != null)
+                    avvenimento.setStato(stato);
+            }
+
+        }
     }
 }

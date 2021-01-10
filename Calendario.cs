@@ -69,6 +69,9 @@ namespace FotoOrganizzatore
                 {
                     avvenimento = sdob.avvenimento;
                 }
+                avvenimento.resetEventiClick();
+                avvenimento.EventoClick += EventoSelezionaData;
+                //avvenimento.EventoModificaCommento += EventoModificaCommento;
                 /*sdo.resetEventiClick();
                 //if (dt.Value.GiorniEstesi)
                 if (sdo.GiorniEstesi)
@@ -102,6 +105,292 @@ namespace FotoOrganizzatore
                 avvenimento.Location = new Point(0, location);
                 location += avvenimento.Height;
             }
+        }
+        #region AZIONI_EVENTI
+        private void EventoSelezionaData(Avvenimento origine)
+        {
+            bool continua;
+            int posizione;
+            SetDataOraBase sdob = origine.Sdob;
+            DateTime data = sdob.DateTimeInizio;
+            switch (sdob.Stato)
+            {
+                case STATO_SELEZIONE_DATA.NIENTE:
+                    DateTime dataInizio = new DateTime();
+                    if (CercaIniziPrima(data, ref dataInizio))
+                    {
+                        // per cambiare permanentemente le cartelle sostituire ModificaStatoGruppo
+                        /*if (ModificaStatoGruppo(dataInizio, data, false, STATO_SELEZIONE_DATA.INTERMEDIO))
+                        {
+                            elencoDateFotiAsync[data].avvenimento.Stato = STATO_SELEZIONE_DATA.FINE;
+                            int a = 0;*/
+                            // occorre prima chiudere la finestra a destra
+                            Raggruppa(dataInizio, data, elencoDateFotiAsync[dataInizio].GetCommento(), Variabili.dispositivi.NomeCartellaFotoOrganizzate);
+                            if (EventoAggiornaCalendario != null)
+                                EventoAggiornaCalendario.Invoke();
+                            //ElencaDateFotoCatalogate();
+                            //MostraCalendarioFoto(SceltaCalendarioSP, false);
+                        //}
+                    }
+                    else
+                    {
+                        elencoDateFotiAsync[data].Stato = STATO_SELEZIONE_DATA.INIZIO;
+                    }
+                    sdob.Stato = STATO_SELEZIONE_DATA.INIZIO;
+                    break;
+                case STATO_SELEZIONE_DATA.INIZIO:
+                    /*elencoDateFotiAsync[data].avvenimento.Stato = STATO_SELEZIONE_DATA.NIENTE;
+                    continua = true;
+                    posizione = elencoDateFotiAsync.IndexOfKey(data) + 1;
+                    while ((continua) && (posizione < elencoDateFotiAsync.Count))
+                    {
+                        DateTime key = elencoDateFotiAsync.Keys[posizione];
+                        switch (elencoDateFotiAsync[key].avvenimento.Stato)
+                        {
+                            case STATO_SELEZIONE_DATA.INIZIO:
+                            case STATO_SELEZIONE_DATA.NIENTE:
+                                continua = false;
+                                break;
+                            case STATO_SELEZIONE_DATA.INTERMEDIO:
+                                elencoDateFotiAsync[key].avvenimento.Stato = STATO_SELEZIONE_DATA.NIENTE;
+                                break;
+                            case STATO_SELEZIONE_DATA.FINE:
+                                elencoDateFotiAsync[key].avvenimento.Stato = STATO_SELEZIONE_DATA.NIENTE;
+                                continua = false;
+                                break;
+                        }
+                        posizione++;
+                    }*/
+                    sdob.Stato = STATO_SELEZIONE_DATA.NIENTE; 
+                    break;
+                case STATO_SELEZIONE_DATA.FINE:
+                    /*elencoDateFotiAsync[data].avvenimento.Stato = STATO_SELEZIONE_DATA.NIENTE;
+                    continua = true;
+                    posizione = elencoDateFotiAsync.IndexOfKey(data) - 1;
+                    while ((continua) && (posizione >= 0))
+                    {
+                        DateTime key = elencoDateFotiAsync.Keys[posizione];
+                        switch (elencoDateFotiAsync[key].avvenimento.Stato)
+                        {
+                            case STATO_SELEZIONE_DATA.FINE:
+                            case STATO_SELEZIONE_DATA.NIENTE:
+                            case STATO_SELEZIONE_DATA.INIZIO:
+                                continua = false;
+                                break;
+                            case STATO_SELEZIONE_DATA.INTERMEDIO:
+                                elencoDateFotiAsync[key].avvenimento.Stato = STATO_SELEZIONE_DATA.NIENTE;
+                                break;
+                        }
+                        posizione--;
+                    }*/
+                    break;
+                case STATO_SELEZIONE_DATA.INTERMEDIO:
+                    break;
+                default:
+                    break;
+            }
+        }
+        /*
+         * private void EventoModificaCommento(SetDataOra origine)
+        {
+            //bool modificata = false;
+            //string nomeCartella = CalcolaNomeCartella(origine.DateTime, origine.DateTime, origine.GetCommento());
+            string nomeCartella = Variabili.operazioniSuPc.cercaCartellaDaData(origine.DateTime);
+            nomeCartella = Variabili.operazioniSuPc.togliCommentoDaNomeCartella(nomeCartella);
+            //nomeCartella = @"c: \foto\" + origine.DateTime.Year.ToString("D4") +@"\" + nomeCartella;
+            if (origine.Evento.Text != "")
+                nomeCartella += " " + origine.Evento.Text;
+            string nomeVecchio = Variabili.operazioniSuPc.cercaCartellaDaData(origine.DateTime);
+            nomeVecchio = nomeVecchio.Replace('/', '\\');
+            nomeCartella = nomeCartella.Replace('/', '\\');
+            if (nomeCartella != nomeVecchio)
+            {
+                Directory.Move(nomeVecchio, nomeCartella);
+            }
+            // return modificata;
+        }
+        private void EventoSciogliRaggruppamento(SetDataOra origine)
+        {
+            //EventoSciogliRaggruppamento(origine, false);
+            EventoSciogliRaggruppamento(origine, "");
+        }
+        public void EventoSciogliRaggruppamento(SetDataOra origine, string nomeBaseCartella)
+        {
+            // string nomeCartella = Variabili.operazioniSuPc.cercaCartellaDaData(origine.DateTime,backup);
+            string nomeCartella = Variabili.operazioniSuPc.cercaCartellaDaData(origine.DateTime, nomeBaseCartella);
+            if (nomeCartella != "")
+            {
+                string[] files = Directory.GetFiles(nomeCartella);
+                foreach (var foto in files)
+                {
+                    string[] fotoScomposta = foto.Split('\\');
+                    DateTime data = FileImmagini.CalcolaDataFoto(foto);
+                    string cartella = Variabili.operazioniSuPc.cercaCartellaDaData(data, nomeBaseCartella);
+                    if (cartella != nomeCartella)
+                    {
+                        if (cartella == "")
+                        {
+                            int a = 0;
+                            cartella = Variabili.operazioniSuPc.CreaCartella(nomeBaseCartella, data);
+                        }
+                        Variabili.operazioniSuPc.MuoviFile(foto, cartella);
+                    }
+                }
+                string nuovoNomeCartella = CalcolaNomeCartella(origine.DateTime, origine.GetCommento(), nomeBaseCartella);
+                if (nomeCartella != nuovoNomeCartella)
+                {
+                    if (Directory.Exists(nuovoNomeCartella))
+                    {
+                        Variabili.operazioniSuPc.MuoviCartella(nomeCartella, nuovoNomeCartella);
+                    }
+                    else
+                    {
+                        Directory.Move(nomeCartella, nuovoNomeCartella);
+                    }
+                }
+                // if ((EventoAggiornaCalendario != null) && (!backup))
+                if ((EventoAggiornaCalendario != null) && (nomeBaseCartella == ""))
+                    EventoAggiornaCalendario.Invoke();
+            }
+        }*/
+        #endregion
+        bool CercaIniziPrima(DateTime data, ref DateTime dataInizio)
+        {
+            bool trovatoInizio = false;
+            foreach (var dateTime in elencoDateFotiAsync)
+            {
+                if (dateTime.Key == data)
+                    break;
+                else
+                {
+                    if (trovatoInizio)
+                    {
+                        if (dateTime.Value.Stato == STATO_SELEZIONE_DATA.FINE)
+                        {
+                            trovatoInizio = false;
+                        }
+                    }
+                    else
+                    {
+                        if (dateTime.Value.Stato == STATO_SELEZIONE_DATA.INIZIO)
+                        {
+                            dataInizio = dateTime.Key;
+                            trovatoInizio = true;
+                        }
+                    }
+                }
+            }
+            return trovatoInizio;
+        }
+        public void Raggruppa(DateTime dataInizio,
+                                 DateTime dataFine,
+                                 string commento,
+                                 string nomeCartella)
+        {
+            Raggruppa(dataInizio, dataFine, commento, nomeCartella, elencoDateFotiAsync);
+        }
+        public void Raggruppa(DateTime dataInizio,
+                                 DateTime dataFine,
+                                 string commento,
+                                 string nomeCartellaBackup,
+                                 SortedList<DateTime, SetDataOraBase> elencoFoti)
+        {
+            string nomeCartella;
+            string nomeCompleto = "";
+            nomeCartella = CalcolaNomeCartella(dataInizio, dataFine, commento);
+            /* temporaneo
+             * if (dataInizio != dataFine)
+            {
+                int a = 0;
+                nomeCompleto = Variabili.operazioniSuPc.CreaCartella(dataInizio.Year.ToString("D4"), nomeCartella, nomeCartellaBackup);
+                if (nomeCompleto != "")
+                {
+                    // sposta le cartelle nell'intervallo
+                    foreach (var dateTime in elencoFoti)
+                    {
+                        //if ((dateTime.Key >= dataInizio) && (dateTime.Key <= dataFine))
+                        if (dateTime.Key == dataInizio)
+                        {
+                            // muovi la cartella
+                            // string vecchioNome = Variabili.operazioniSuPc.cercaCartellaDaData(dataInizio,backup);
+                            string vecchioNome = Variabili.operazioniSuPc.cercaCartellaDaData(dataInizio, nomeCartellaBackup);
+                            if (vecchioNome != "")
+                            {
+                                if (vecchioNome != nomeCompleto)
+                                {
+                                    if (Directory.Exists(nomeCompleto))
+                                        Variabili.operazioniSuPc.MuoviCartella(vecchioNome, nomeCompleto);
+                                    else Directory.Move(vecchioNome, nomeCompleto);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if ((dateTime.Key > dataInizio) && (dateTime.Key <= dataFine))
+                            {
+                                //string cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, backup);
+                                string cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
+                                if (cartellaSorgente == "")
+                                    cartellaSorgente = cartellaSorgente;
+                                //cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, backup);
+                                cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
+                                Variabili.operazioniSuPc.MuoviCartella(cartellaSorgente, nomeCompleto);//string aa = dateTime.Key.ToString();
+                            }
+                        }
+                    }
+                }
+            } fine temporaneo */
+        }
+        public string CalcolaNomeCartella(DateTime dateTime, string commento)
+        {
+            return CalcolaNomeCartella(dateTime, commento, false);
+        }
+        public string CalcolaNomeCartella(DateTime dateTime, string commento, bool backup)
+        {
+            string cartellaFoti = Variabili.dispositivi.NomeCartellaFotoOrganizzate;
+            if (backup)
+                cartellaFoti = Variabili.NomeCartellaBackupFotoOrganizzate;
+            //string nomeCartella = @"c: \foto\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
+            string nomeCartella = cartellaFoti + @"\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
+            if (commento != "")
+                nomeCartella += " " + commento;
+            return nomeCartella;
+        }
+        public string CalcolaNomeCartella(DateTime dateTime, string commento, string nomeBaseCartella)
+        {
+            string cartellaFoti = Variabili.dispositivi.NomeCartellaFotoOrganizzate;
+            if (nomeBaseCartella != "")
+                cartellaFoti = nomeBaseCartella;
+            //string nomeCartella = @"c: \foto\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
+            string nomeCartella = cartellaFoti + @"\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
+            if (commento != "")
+                nomeCartella += " " + commento;
+            return nomeCartella;
+        }
+        string CalcolaNomeCartella(DateTime dataInizio, DateTime dataFine, string commento)
+        {
+            string nomeCartella = dataInizio.Month.ToString("D2") + " " +
+                                    dataInizio.Day.ToString("D2");
+            if (dataInizio != dataFine)
+            {
+                nomeCartella += "_";
+                if (dataInizio.Year != dataFine.Year)
+                {
+                    nomeCartella += dataFine.Year.ToString("D4") + "_";
+                    nomeCartella += dataFine.Month.ToString("D2") + "_";
+                }
+                else
+                {
+                    if (dataInizio.Month != dataFine.Month)
+                    {
+                        nomeCartella += dataFine.Month.ToString("D2") + "_";
+                    }
+                }
+                nomeCartella += dataFine.Day.ToString("D2");
+            }
+            if (commento != "")
+                nomeCartella += " " + commento;
+            return nomeCartella;
         }
     }
 }

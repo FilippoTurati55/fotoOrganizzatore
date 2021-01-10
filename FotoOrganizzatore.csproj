@@ -64,6 +64,7 @@
     <Compile Include="Avvenimento.Designer.cs">
       <DependentUpon>Avvenimento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Costanti.cs" />
     <Compile Include="DataBaseFoto.cs" />
     <Compile Include="Dialogs\AccreditamentoUnitaBackup.cs">
       <SubType>Form</SubType>

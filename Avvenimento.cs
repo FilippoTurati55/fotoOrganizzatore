@@ -18,9 +18,15 @@ namespace FotoOrganizzatore
         public event EventoClickEventHandler EventoClick;
         public delegate void EventoModificaCommentoEventHandler(Avvenimento modificaCommento);
         public event EventoModificaCommentoEventHandler EventoModificaCommento;
+        public SetDataOraBase Sdob = null;
         public Avvenimento()
         {
             InitializeComponent();
+        }
+        public Avvenimento(SetDataOraBase collegamentoParent)
+        {
+            InitializeComponent();
+            Sdob = collegamentoParent;
         }
         #region ACCESSO
         public void setCommento(string valore)
@@ -35,8 +41,36 @@ namespace FotoOrganizzatore
         {
             dataInizio.Text = valore;
         }
+        public void setStato(STATO_SELEZIONE_DATA value)
+        {
+            switch (value)
+            {
+                case STATO_SELEZIONE_DATA.NIENTE:
+                    statoButton.BackColor = SystemColors.Control;
+                    break;
+                case STATO_SELEZIONE_DATA.INIZIO:
+                    statoButton.BackColor = Color.Red;
+                    break;
+                case STATO_SELEZIONE_DATA.FINE:
+                    statoButton.BackColor = Color.Pink;
+                    //apriChiudi.Visibility = Visibility.Visible;
+                    break;
+                case STATO_SELEZIONE_DATA.INTERMEDIO:
+                    statoButton.BackColor = Color.Yellow;
+                    break;
+                case STATO_SELEZIONE_DATA.GIA_PRESENTE:
+                    statoButton.BackColor = Color.Gray;
+                    break;
+            }
+
+        }
         #endregion
         #region EVENTI
+        public void resetEventiClick()
+        {
+            EventoClick = null;
+            EventoModificaCommento = null;
+        }
         private void SetInizioFine_Click(object sender, EventArgs e)
         {
             if (EventoClick != null)
