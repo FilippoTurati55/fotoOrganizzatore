@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,9 +126,9 @@ namespace FotoOrganizzatore
                             elencoDateFotiAsync[data].avvenimento.Stato = STATO_SELEZIONE_DATA.FINE;
                             int a = 0;*/
                             // occorre prima chiudere la finestra a destra
-                            Raggruppa(dataInizio, data, elencoDateFotiAsync[dataInizio].GetCommento(), Variabili.dispositivi.NomeCartellaFotoOrganizzate);
-                            if (EventoAggiornaCalendario != null)
-                                EventoAggiornaCalendario.Invoke();
+                            Raggruppa(dataInizio, data, elencoDateFotiAsync[dataInizio].testoCommento, Preferenze.NomeCartellaFotoOrganizzate);
+                            /*if (EventoAggiornaCalendario != null)
+                                EventoAggiornaCalendario.Invoke();*/
                             //ElencaDateFotoCatalogate();
                             //MostraCalendarioFoto(SceltaCalendarioSP, false);
                         //}
@@ -292,17 +293,18 @@ namespace FotoOrganizzatore
         public void Raggruppa(DateTime dataInizio,
                                  DateTime dataFine,
                                  string commento,
-                                 string nomeCartellaBackup,
-                                 SortedList<DateTime, SetDataOraBase> elencoFoti)
+                                 string nomeCartellaBackup,  // rinominare in nomeInizioPath
+                                 SortedList<DateTime, SetDataOraBase> elencoFoti) // rinominare in elencoDateFoti
+                                // in SetDataOraBase mettere un campo che contiene il nome della cartella
         {
             string nomeCartella;
             string nomeCompleto = "";
             nomeCartella = CalcolaNomeCartella(dataInizio, dataFine, commento);
-            /* temporaneo
-             * if (dataInizio != dataFine)
+            if (dataInizio != dataFine)
             {
                 int a = 0;
-                nomeCompleto = Variabili.operazioniSuPc.CreaCartella(dataInizio.Year.ToString("D4"), nomeCartella, nomeCartellaBackup);
+                string nomeInizioPath = nomeCartellaBackup + @"/" + dataInizio.Year.ToString("D4");
+                nomeCompleto = Utility.CreaCartella(nomeInizioPath, nomeCartella);
                 if (nomeCompleto != "")
                 {
                     // sposta le cartelle nell'intervallo
@@ -313,13 +315,13 @@ namespace FotoOrganizzatore
                         {
                             // muovi la cartella
                             // string vecchioNome = Variabili.operazioniSuPc.cercaCartellaDaData(dataInizio,backup);
-                            string vecchioNome = Variabili.operazioniSuPc.cercaCartellaDaData(dataInizio, nomeCartellaBackup);
+                            string vecchioNome = cercaCartellaDaData(dataInizio, nomeCartellaBackup);
                             if (vecchioNome != "")
                             {
                                 if (vecchioNome != nomeCompleto)
                                 {
                                     if (Directory.Exists(nomeCompleto))
-                                        Variabili.operazioniSuPc.MuoviCartella(vecchioNome, nomeCompleto);
+                                        Utility.MuoviCartella(vecchioNome, nomeCompleto);
                                     else Directory.Move(vecchioNome, nomeCompleto);
                                 }
                             }
@@ -329,17 +331,17 @@ namespace FotoOrganizzatore
                             if ((dateTime.Key > dataInizio) && (dateTime.Key <= dataFine))
                             {
                                 //string cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, backup);
-                                string cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
+                                string cartellaSorgente = cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
                                 if (cartellaSorgente == "")
                                     cartellaSorgente = cartellaSorgente;
                                 //cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, backup);
-                                cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
-                                Variabili.operazioniSuPc.MuoviCartella(cartellaSorgente, nomeCompleto);//string aa = dateTime.Key.ToString();
+                                cartellaSorgente = cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
+                                Utility.MuoviCartella(cartellaSorgente, nomeCompleto);//string aa = dateTime.Key.ToString();
                             }
                         }
                     }
                 }
-            } fine temporaneo */
+            }
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento)
         {
@@ -347,9 +349,9 @@ namespace FotoOrganizzatore
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento, bool backup)
         {
-            string cartellaFoti = Variabili.dispositivi.NomeCartellaFotoOrganizzate;
+            string cartellaFoti = Preferenze.NomeCartellaFotoOrganizzate;
             if (backup)
-                cartellaFoti = Variabili.NomeCartellaBackupFotoOrganizzate;
+                cartellaFoti = Preferenze.NomeCartellaFotoOrganizzate;
             //string nomeCartella = @"c: \foto\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
             string nomeCartella = cartellaFoti + @"\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
             if (commento != "")
@@ -358,7 +360,7 @@ namespace FotoOrganizzatore
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento, string nomeBaseCartella)
         {
-            string cartellaFoti = Variabili.dispositivi.NomeCartellaFotoOrganizzate;
+            string cartellaFoti = Preferenze.NomeCartellaFotoOrganizzate;
             if (nomeBaseCartella != "")
                 cartellaFoti = nomeBaseCartella;
             //string nomeCartella = @"c: \foto\" + dateTime.Year.ToString() + "\\" + dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
@@ -391,6 +393,31 @@ namespace FotoOrganizzatore
             if (commento != "")
                 nomeCartella += " " + commento;
             return nomeCartella;
+        }
+        // public string cercaCartellaDaData(DateTime dateTime, bool backup)
+        string cercaCartellaDaData(DateTime dateTime, string rootBase)
+            // rootBase è cambiato rispetto al parametro precedente, va verificato tutto
+        {
+            string result = "";
+            try
+            {
+                string cercata = dateTime.Month.ToString("D2") + " " + dateTime.Day.ToString("D2");
+                //string nomeCartella = @"c: \foto\" + dateTime.Year.ToString("D4");
+                string nomeCartella = rootBase + @"\" + dateTime.Year.ToString("D4");
+                string[] subdirectoryEntries = Directory.GetDirectories(nomeCartella);
+                foreach (string subName in subdirectoryEntries)
+                {
+                    string[] sn = subName.Replace('/', '\\').Split('\\');
+                    string snr = sn[3].Substring(0, 5);
+                    if (snr == cercata)
+                    {
+                        result = subName;
+                        break;
+                    }
+                }
+            }
+            catch { }
+            return result;
         }
     }
 }

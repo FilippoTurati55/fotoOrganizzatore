@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,5 +104,63 @@ namespace FotoOrganizzatore
             catch { }
             return res;
         }
+        #region DISCO
+        public static string CreaCartella(string disco, string nome)
+        {
+            string nomeCompleto = disco + @"/" + nome;
+            try
+            {
+                if (!Directory.Exists(nomeCompleto))
+                {
+                    Directory.CreateDirectory(nomeCompleto);
+                }
+            }
+            catch
+            {
+                nomeCompleto = "";
+            }
+            return nomeCompleto;
+        }
+        public static bool MuoviCartella(string sorgente, string destinazione)
+        {
+            if (!Directory.Exists(destinazione))
+                Directory.CreateDirectory(destinazione);
+            MuoviCartellainEsistente(sorgente, destinazione);
+            Directory.Delete(sorgente);
+            return true;
+        }
+        static bool MuoviCartellainEsistente(string sorgente, string destinazione)
+        {
+            bool result = false;
+            List<string> files = new List<string>(Directory.EnumerateFiles(sorgente));
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                string nomeCorto = fi.Name;
+                string fileDestinazione = destinazione + "\\" + nomeCorto;
+                if (File.Exists(fileDestinazione))
+                {
+                    // modificare il modo in cui viene creato il nome del file doppio,
+                    // non va modificata l'estensione
+                    string cartellaDoppie = fileDestinazione.Substring(0, 3) + "doppie";
+                    if (!Directory.Exists(cartellaDoppie))
+                        Directory.CreateDirectory(cartellaDoppie);
+                    string nomeDoppio = cartellaDoppie + "\\" + nomeCorto;
+                    int numeroDoppio = 2;
+                    string nomeDoppioIntero = nomeDoppio + "." + numeroDoppio;
+                    while (File.Exists(nomeDoppioIntero))
+                    {
+                        numeroDoppio++;
+                    }
+                    File.Move(file, nomeDoppioIntero);
+                }
+                else
+                {
+                    File.Move(file, fileDestinazione);
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 }
