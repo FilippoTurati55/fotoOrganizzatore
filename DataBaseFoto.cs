@@ -28,7 +28,7 @@ namespace FotoOrganizzatore
             if (fileEntries.Length != 0)
             {
                 // crea calendario
-                Variabili.Calendario.AggiungiData(fileEntries[0]);
+                Variabili.Calendario.AggiungiData(fileEntries[0], dir);
                 ;
             }
             foreach (string fileName in fileEntries)

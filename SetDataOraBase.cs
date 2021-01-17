@@ -16,7 +16,8 @@ namespace FotoOrganizzatore
         public string testoCommento = "";
         public string testoDataFine = "";
         public string testoDataInizio = "";
-        public void SetData(DateTime inizio, string giornoEsteso, string commento)
+        public string nomeCompletoCartella = "";
+        public void SetDataeCartella(DateTime inizio, string giornoEsteso, string commento, string cartella)
         {
             int giorno, mese, anno;
             DateTimeInizio = inizio;
@@ -54,6 +55,7 @@ namespace FotoOrganizzatore
                 GiorniEstesi = false;
             }
             testoCommento = commento;
+            nomeCompletoCartella = cartella;
         }
         public void SetCommento(String commentoEvento)
         {

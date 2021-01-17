@@ -29,7 +29,9 @@ namespace FotoOrganizzatore
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.timerBase = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +51,10 @@ namespace FotoOrganizzatore
             this.splitContainer1.SplitterDistance = 1780;
             this.splitContainer1.TabIndex = 0;
             // 
+            // timerBase
+            // 
+            this.timerBase.Tick += new System.EventHandler(this.timerBase_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -66,6 +72,7 @@ namespace FotoOrganizzatore
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Timer timerBase;
     }
 }
 

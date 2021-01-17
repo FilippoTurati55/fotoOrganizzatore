@@ -42,6 +42,8 @@ namespace FotoOrganizzatore
                 a2.Location = new Point(0, a1.Height);*/
             }
             // mostra messaggio mancata creazione cartella archivio locale foto
+            timerBase.Interval = 100;
+            timerBase.Start();
         }
 
         private void splitContainer1_Panel1_Resize(object sender, EventArgs e)
@@ -50,6 +52,17 @@ namespace FotoOrganizzatore
             {
                 Avvenimento a = (Avvenimento)c;
                 a.resize();
+            }
+        }
+
+        private void timerBase_Tick(object sender, EventArgs e)
+        {
+            switch (Variabili.comandi)
+            {
+                case 1:
+                    Variabili.Calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
+                    Variabili.comandi = 0;
+                    break;
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace FotoOrganizzatore
 {
@@ -31,7 +33,7 @@ namespace FotoOrganizzatore
                 }
             }
         }*/
-        public void AggiungiData(string data)
+        public void AggiungiData(string data, string cartella)
         {
             //SetDataOra nuovoEvento = null;
             SetDataOraBase nuovoEventoBase = new SetDataOraBase();
@@ -40,7 +42,7 @@ namespace FotoOrganizzatore
             string commento = "";
             if (Utility.CalcolaDateTimeDaStringa(data, ref dateTime, ref conclusione, ref commento))
             {
-                nuovoEventoBase.SetData(dateTime, conclusione, commento);
+                nuovoEventoBase.SetDataeCartella(dateTime, conclusione, commento, cartella);
                 if (!elencoDateFotiAsync.ContainsKey(dateTime))
                 {
                     elencoDateFotiAsync.Add(dateTime, nuovoEventoBase);
@@ -293,29 +295,27 @@ namespace FotoOrganizzatore
         public void Raggruppa(DateTime dataInizio,
                                  DateTime dataFine,
                                  string commento,
-                                 string nomeCartellaBackup,  // rinominare in nomeInizioPath
-                                 SortedList<DateTime, SetDataOraBase> elencoFoti) // rinominare in elencoDateFoti
-                                // in SetDataOraBase mettere un campo che contiene il nome della cartella
+                                 string nomePrimoInizioPath,
+                                 SortedList<DateTime, SetDataOraBase> elencoDateFoti) 
         {
             string nomeCartella;
             string nomeCompleto = "";
+            ArrayList dateDaRimuovereDaLista = new ArrayList();
             nomeCartella = CalcolaNomeCartella(dataInizio, dataFine, commento);
             if (dataInizio != dataFine)
             {
                 int a = 0;
-                string nomeInizioPath = nomeCartellaBackup + @"/" + dataInizio.Year.ToString("D4");
+                string nomeInizioPath = nomePrimoInizioPath + @"/" + dataInizio.Year.ToString("D4");
                 nomeCompleto = Utility.CreaCartella(nomeInizioPath, nomeCartella);
                 if (nomeCompleto != "")
                 {
                     // sposta le cartelle nell'intervallo
-                    foreach (var dateTime in elencoFoti)
+                    foreach (var dateTime in elencoDateFoti)
                     {
-                        //if ((dateTime.Key >= dataInizio) && (dateTime.Key <= dataFine))
                         if (dateTime.Key == dataInizio)
                         {
                             // muovi la cartella
-                            // string vecchioNome = Variabili.operazioniSuPc.cercaCartellaDaData(dataInizio,backup);
-                            string vecchioNome = cercaCartellaDaData(dataInizio, nomeCartellaBackup);
+                            string vecchioNome = dateTime.Value.nomeCompletoCartella;
                             if (vecchioNome != "")
                             {
                                 if (vecchioNome != nomeCompleto)
@@ -323,6 +323,9 @@ namespace FotoOrganizzatore
                                     if (Directory.Exists(nomeCompleto))
                                         Utility.MuoviCartella(vecchioNome, nomeCompleto);
                                     else Directory.Move(vecchioNome, nomeCompleto);
+                                    dateTime.Value.nomeCompletoCartella = nomeCompleto;
+                                    dateTime.Value.DateTimeFine = dataFine;
+                                    dateTime.Value.testoDataFine = ;   // errore voluto, il valore va calcolato
                                 }
                             }
                         }
@@ -330,18 +333,26 @@ namespace FotoOrganizzatore
                         {
                             if ((dateTime.Key > dataInizio) && (dateTime.Key <= dataFine))
                             {
-                                //string cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, backup);
-                                string cartellaSorgente = cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
-                                if (cartellaSorgente == "")
-                                    cartellaSorgente = cartellaSorgente;
-                                //cartellaSorgente = Variabili.operazioniSuPc.cercaCartellaDaData(dateTime.Key, backup);
-                                cartellaSorgente = cercaCartellaDaData(dateTime.Key, nomeCartellaBackup);
-                                Utility.MuoviCartella(cartellaSorgente, nomeCompleto);//string aa = dateTime.Key.ToString();
+                                string cartellaSorgente = dateTime.Value.nomeCompletoCartella;
+                                if (cartellaSorgente != "")
+                                { 
+                                    Utility.MuoviCartella(cartellaSorgente, nomeCompleto);
+                                    // elencoDateFoti.Remove(dateTime.Key);
+                                    dateDaRimuovereDaLista.Add(dateTime.Key);
+                                }
                             }
+                        }
+                    }
+                    if (dateDaRimuovereDaLista.Count > 0)
+                    {
+                        foreach(DateTime dt in dateDaRimuovereDaLista)
+                        {
+                            elencoDateFoti.Remove(dt);
                         }
                     }
                 }
             }
+            Variabili.comandi = 1;
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento)
         {

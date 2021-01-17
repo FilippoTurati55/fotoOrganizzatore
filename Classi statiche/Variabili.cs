@@ -10,6 +10,7 @@ namespace FotoOrganizzatore
 {
     static class Variabili
     {
+        public static int comandi;
         public static DataBaseFoto dataBaseFotoLocali;
         public static TextBox DataOraEvidenziata;
         public static int MostraFotoInGiorno;
