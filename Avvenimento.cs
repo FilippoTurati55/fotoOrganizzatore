@@ -33,6 +33,12 @@ namespace FotoOrganizzatore
         {
             commento.Text = valore;
         }
+        public void setDataFine()
+        {
+            if (Sdob != null)
+                dataFine.Text = Sdob.GetTestoDataFine();
+            else dataFine.Text = "";
+        }
         public void setDataFine(string valore)
         {
             dataFine.Text = valore;

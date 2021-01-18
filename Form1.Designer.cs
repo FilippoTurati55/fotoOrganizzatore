@@ -62,7 +62,7 @@ namespace FotoOrganizzatore
             this.ClientSize = new System.Drawing.Size(3012, 1070);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Organizzatore fotografie";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);

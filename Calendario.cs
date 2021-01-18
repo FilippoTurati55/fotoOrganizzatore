@@ -115,12 +115,13 @@ namespace FotoOrganizzatore
             bool continua;
             int posizione;
             SetDataOraBase sdob = origine.Sdob;
-            DateTime data = sdob.DateTimeInizio;
+            DateTime dataInizioOrigine = sdob.DateTimeInizio;
+            DateTime dataFineOrigine = sdob.GetDateTimeFine();
             switch (sdob.Stato)
             {
                 case STATO_SELEZIONE_DATA.NIENTE:
                     DateTime dataInizio = new DateTime();
-                    if (CercaIniziPrima(data, ref dataInizio))
+                    if (CercaIniziPrima(dataInizioOrigine, ref dataInizio))
                     {
                         // per cambiare permanentemente le cartelle sostituire ModificaStatoGruppo
                         /*if (ModificaStatoGruppo(dataInizio, data, false, STATO_SELEZIONE_DATA.INTERMEDIO))
@@ -128,7 +129,7 @@ namespace FotoOrganizzatore
                             elencoDateFotiAsync[data].avvenimento.Stato = STATO_SELEZIONE_DATA.FINE;
                             int a = 0;*/
                             // occorre prima chiudere la finestra a destra
-                            Raggruppa(dataInizio, data, elencoDateFotiAsync[dataInizio].testoCommento, Preferenze.NomeCartellaFotoOrganizzate);
+                            Raggruppa(dataInizio, dataFineOrigine, elencoDateFotiAsync[dataInizio].testoCommento, Preferenze.NomeCartellaFotoOrganizzate);
                             /*if (EventoAggiornaCalendario != null)
                                 EventoAggiornaCalendario.Invoke();*/
                             //ElencaDateFotoCatalogate();
@@ -137,7 +138,7 @@ namespace FotoOrganizzatore
                     }
                     else
                     {
-                        elencoDateFotiAsync[data].Stato = STATO_SELEZIONE_DATA.INIZIO;
+                        elencoDateFotiAsync[dataInizioOrigine].Stato = STATO_SELEZIONE_DATA.INIZIO;
                     }
                     sdob.Stato = STATO_SELEZIONE_DATA.INIZIO;
                     break;
@@ -324,8 +325,8 @@ namespace FotoOrganizzatore
                                         Utility.MuoviCartella(vecchioNome, nomeCompleto);
                                     else Directory.Move(vecchioNome, nomeCompleto);
                                     dateTime.Value.nomeCompletoCartella = nomeCompleto;
-                                    dateTime.Value.DateTimeFine = dataFine;
-                                    dateTime.Value.testoDataFine = ;   // errore voluto, il valore va calcolato
+                                    dateTime.Value.SetDateTimeFine(dataFine);
+                                    //dateTime.Value.testoDataFine = ;   // errore voluto, il valore va calcolato
                                 }
                             }
                         }

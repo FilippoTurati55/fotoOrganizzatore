@@ -10,13 +10,14 @@ namespace FotoOrganizzatore
     public class SetDataOraBase
     {
         public DateTime DateTimeInizio { get; set; }
-        public DateTime DateTimeFine { get; set; }
+        DateTime DateTimeFine;
         public bool GiorniEstesi { get; set; }
         public Avvenimento avvenimento = null;
         public string testoCommento = "";
-        public string testoDataFine = "";
+        string testoDataFine = "";
         public string testoDataInizio = "";
         public string nomeCompletoCartella = "";
+        #region ACCESSO
         public void SetDataeCartella(DateTime inizio, string giornoEsteso, string commento, string cartella)
         {
             int giorno, mese, anno;
@@ -55,7 +56,43 @@ namespace FotoOrganizzatore
                 GiorniEstesi = false;
             }
             testoCommento = commento;
+            if (avvenimento != null)
+                avvenimento.setDataFine();
             nomeCompletoCartella = cartella;
+        }
+        public string GetTestoDataFine() { return testoDataFine; }
+        public DateTime GetDateTimeFine() { return DateTimeFine; }
+        public void SetDateTimeFine(DateTime fine)
+        {
+            DateTimeFine = fine;
+            // calcola indicazione evento su date multiple
+            testoDataFine = "";
+            if (DateTimeFine != DateTimeInizio)
+            {
+                if (DateTimeInizio.Year != DateTimeFine.Year)
+                {
+                    testoDataFine = DateTimeFine.Year.ToString("D4") + " " +
+                                     DateTimeFine.Month.ToString("D2") + " " +
+                                     DateTimeFine.Day.ToString("D2");
+                }
+                else
+                {
+                    if (DateTimeInizio.Month != DateTimeFine.Month)
+                    {
+                        testoDataFine = DateTimeFine.Month.ToString("D2") + " " +
+                                         DateTimeFine.Day.ToString("D2");
+                    }
+                    else
+                    {
+                        if (DateTimeInizio.Day != DateTimeFine.Day)
+                        {
+                            testoDataFine = DateTimeFine.Day.ToString("D2");
+                        }
+                    }
+                }
+            }
+            if (avvenimento != null)
+                avvenimento.setDataFine();
         }
         public void SetCommento(String commentoEvento)
         {
@@ -63,6 +100,7 @@ namespace FotoOrganizzatore
             /*if (Evento != null)
                 Evento.Text = commentoEvento;*/
         }
+        #endregion
         private STATO_SELEZIONE_DATA stato = STATO_SELEZIONE_DATA.NIENTE;
         #region COMPONENTE_VISUALE
         public Avvenimento creaAvvenimento()
