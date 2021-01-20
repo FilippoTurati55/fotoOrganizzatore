@@ -72,6 +72,7 @@ namespace FotoOrganizzatore
             this.commento.TabIndex = 3;
             this.commento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Evento_KeyUp);
             this.commento.Leave += new System.EventHandler(this.Evento_LostFocus);
+            this.commento.MouseEnter += new System.EventHandler(this.data_MouseEnter);
             // 
             // Avvenimento
             // 

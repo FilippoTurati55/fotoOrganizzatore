@@ -12,7 +12,7 @@ namespace FotoOrganizzatore
     {
         public static int comandi;
         public static DataBaseFoto dataBaseFotoLocali;
-        public static TextBox DataOraEvidenziata;
+        public static Avvenimento DataOraEvidenziata;
         public static int MostraFotoInGiorno;
         public static Avvenimento MostraFotoSetDataOra;
         public static List<UnitaEsterna> UnitaEsterne = new List<UnitaEsterna>();

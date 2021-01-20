@@ -353,6 +353,11 @@ namespace FotoOrganizzatore
                     }
                 }
             }
+            if (elencoDateFoti.ContainsKey(dataInizio))
+            {
+                SetDataOraBase sdobinizio = elencoDateFoti[dataInizio];
+                sdobinizio.Stato = STATO_SELEZIONE_DATA.NIENTE;
+            }
             Variabili.comandi = 1;
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento)

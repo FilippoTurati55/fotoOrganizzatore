@@ -92,11 +92,15 @@ namespace FotoOrganizzatore
             TextBox tb = (TextBox)sender;
             if (Variabili.DataOraEvidenziata != null)
             {
-                Variabili.DataOraEvidenziata.BackColor = ColorePrimaDiEvidenziatura;
+                // Variabili.DataOraEvidenziata.BackColor = ColorePrimaDiEvidenziatura;
+                Variabili.DataOraEvidenziata.dataInizio.BackColor = 
+                    Variabili.DataOraEvidenziata.dataFine.BackColor = 
+                    Variabili.DataOraEvidenziata.commento.BackColor = ColorePrimaDiEvidenziatura;
             }
-            Variabili.DataOraEvidenziata = tb;
+            Variabili.DataOraEvidenziata = this;
             ColorePrimaDiEvidenziatura = tb.BackColor;
-            tb.BackColor = Color.Red;
+            // tb.BackColor = Color.Red;
+            dataInizio.BackColor = dataFine.BackColor = commento.BackColor = Color.Red;
         }
 
         private void Evento_KeyUp(object sender, KeyEventArgs e)
