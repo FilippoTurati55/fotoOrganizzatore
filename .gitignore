@@ -1,0 +1,5 @@
+
+*.exe
+bin/Debug/FotoOrganizzatore.pdb
+*.cache
+obj/Debug/FotoOrganizzatore.exe

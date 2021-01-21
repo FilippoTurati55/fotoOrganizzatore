@@ -468,6 +468,29 @@ namespace FotoOrganizzatore
                     Int32.TryParse(anno, out annoInt);
                     Int32.TryParse(mese, out meseInt);
                     Int32.TryParse(giorno, out giornoInt);
+                    DateTime dataFoto = new DateTime(annoInt, meseInt, giornoInt);
+                    if (elencoDateFotiAsync.ContainsKey(dataFoto))
+                    {
+                        // cartella già esistente
+                        string nomeCartellaFoto = elencoDateFotiAsync[dataFoto].nomeCompletoCartella;
+                        if (nomeCartellaFoto != nomeCartella)
+                        {
+                            ;
+                            //string nomeCompletoFile = nomeCartellaFoto + @"/" + foto;
+                            //File.Move(foto,)
+                                }
+                    }
+
+                    string cartella = CalcolaNomeCartella(dataFoto, "");
+                    ;//
+                    if (!Directory.Exists(cartella))
+                    {
+                        Directory.CreateDirectory(cartella);
+                        elencoDateFotiAsync.Add()
+                    }
+                    ;//string cartella = Variabili.operazioniSuPc.CreaCartella(nomeBaseCartella, data);
+
+
                     /*DateTime data = FileImmagini.CalcolaDataFoto(foto);
                     string cartella = Variabili.operazioniSuPc.cercaCartellaDaData(data, nomeBaseCartella);
                     if (cartella != nomeCartella)
