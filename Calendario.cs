@@ -230,7 +230,7 @@ namespace FotoOrganizzatore
                     if (sdob.DateTimeInizio != sdob.GetDateTimeFine())
                     {
                         // raggruppamento da sciogliere
-                        nomeCartella = sdob.nomeCompletoCartella;
+                        nomeCartella = sdob.nomeCompletoCartella.Replace('/','\\');
                         classificaCartellaConNomiNormalizzati(nomeCartella);
                         string[] nomeCartellaSplit = nomeCartella.Split('\\');
                         string finale = nomeCartellaSplit[nomeCartellaSplit.Length - 1];
