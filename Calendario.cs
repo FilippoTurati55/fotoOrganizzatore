@@ -232,6 +232,22 @@ namespace FotoOrganizzatore
                         // raggruppamento da sciogliere
                         nomeCartella = sdob.nomeCompletoCartella;
                         classificaCartellaConNomiNormalizzati(nomeCartella);
+                        string[] nomeCartellaSplit = nomeCartella.Split('\\');
+                        string finale = nomeCartellaSplit[nomeCartellaSplit.Length - 1];
+                        string inizioFinale = finale.Substring(0, 5);
+                        string nuovoNomeCartella = nomeCartellaSplit[0];
+                        for (int n = 1; n < nomeCartellaSplit.Length - 1; n++)
+                        {
+                            nuovoNomeCartella += @"\" + nomeCartellaSplit[n];
+                        }
+                        nuovoNomeCartella += @"\" + inizioFinale;
+                        if (nomeCartella != nuovoNomeCartella)
+                        {
+                            Directory.Move(nomeCartella, nuovoNomeCartella);
+                            sdob.nomeCompletoCartella = nuovoNomeCartella;
+                            sdob.SetDateTimeFine(sdob.DateTimeInizio);
+                        }
+                        Variabili.comandi = 1;
                     }
                 }
             }
@@ -469,27 +485,30 @@ namespace FotoOrganizzatore
                     Int32.TryParse(mese, out meseInt);
                     Int32.TryParse(giorno, out giornoInt);
                     DateTime dataFoto = new DateTime(annoInt, meseInt, giornoInt);
-                    if (elencoDateFotiAsync.ContainsKey(dataFoto))
+                    if (!elencoDateFotiAsync.ContainsKey(dataFoto))
                     {
-                        // cartella già esistente
-                        string nomeCartellaFoto = elencoDateFotiAsync[dataFoto].nomeCompletoCartella;
-                        if (nomeCartellaFoto != nomeCartella)
+                        string cartella = CalcolaNomeCartella(dataFoto, "");
+                        if (!Directory.Exists(cartella))
                         {
-                            ;
-                            //string nomeCompletoFile = nomeCartellaFoto + @"/" + foto;
-                            //File.Move(foto,)
-                                }
+                            // crea cartella nuova data
+                            Directory.CreateDirectory(cartella);
+                        }
+                        SetDataOraBase nuovoEventoBase = new SetDataOraBase();
+                        nuovoEventoBase.SetDataeCartella(dataFoto, "", "", cartella);
+                        elencoDateFotiAsync.Add(dataFoto, nuovoEventoBase);
                     }
-
-                    string cartella = CalcolaNomeCartella(dataFoto, "");
-                    ;//
-                    if (!Directory.Exists(cartella))
+                    // cartella già esistente
+                    string nomeCartellaFoto = elencoDateFotiAsync[dataFoto].nomeCompletoCartella;
+                    if (nomeCartellaFoto != nomeCartella)
                     {
-                        Directory.CreateDirectory(cartella);
-                        elencoDateFotiAsync.Add()
+                        // sposta in cartella nuova data
+                        string nomeFileCorto = fotoScomposta[fotoScomposta.Length - 1];
+                        string nomeCompletoFile = nomeCartellaFoto + @"\\" + nomeFileCorto;
+                        if (!File.Exists(nomeCompletoFile))
+                        {
+                            File.Move(foto, nomeCompletoFile);
+                        }
                     }
-                    ;//string cartella = Variabili.operazioniSuPc.CreaCartella(nomeBaseCartella, data);
-
 
                     /*DateTime data = FileImmagini.CalcolaDataFoto(foto);
                     string cartella = Variabili.operazioniSuPc.cercaCartellaDaData(data, nomeBaseCartella);
@@ -514,9 +533,9 @@ namespace FotoOrganizzatore
                     {
                         Directory.Move(nomeCartella, nuovoNomeCartella);
                     }
-                }
+                }*/
                 // if ((EventoAggiornaCalendario != null) && (!backup))
-                if ((EventoAggiornaCalendario != null) && (nomeBaseCartella == ""))
+                /*if ((EventoAggiornaCalendario != null) && (nomeBaseCartella == ""))
                     EventoAggiornaCalendario.Invoke();*/
             }
             catch { }
