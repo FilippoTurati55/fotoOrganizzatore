@@ -74,7 +74,7 @@ namespace FotoOrganizzatore
                 }
                 avvenimento.resetEventiClick();
                 avvenimento.EventoClick += EventoSelezionaData;
-                //avvenimento.EventoModificaCommento += EventoModificaCommento;
+                avvenimento.EventoModificaCommento += EventoModificaCommento;
                 /*sdo.resetEventiClick();
                 //if (dt.Value.GiorniEstesi)
                 if (sdo.GiorniEstesi)
@@ -195,30 +195,21 @@ namespace FotoOrganizzatore
                     break;
             }
         }
-        /*
-         * private void EventoModificaCommento(SetDataOra origine)
+        private void EventoModificaCommento(Avvenimento origine)
         {
-            //bool modificata = false;
-            //string nomeCartella = CalcolaNomeCartella(origine.DateTime, origine.DateTime, origine.GetCommento());
-            string nomeCartella = Variabili.operazioniSuPc.cercaCartellaDaData(origine.DateTime);
-            nomeCartella = Variabili.operazioniSuPc.togliCommentoDaNomeCartella(nomeCartella);
-            //nomeCartella = @"c: \foto\" + origine.DateTime.Year.ToString("D4") +@"\" + nomeCartella;
-            if (origine.Evento.Text != "")
-                nomeCartella += " " + origine.Evento.Text;
-            string nomeVecchio = Variabili.operazioniSuPc.cercaCartellaDaData(origine.DateTime);
-            nomeVecchio = nomeVecchio.Replace('/', '\\');
-            nomeCartella = nomeCartella.Replace('/', '\\');
-            if (nomeCartella != nomeVecchio)
+            string nomeInizialeCartella, nomeFinaleCartella;
+            SetDataOraBase sdob = origine.Sdob;
+            nomeInizialeCartella = sdob.nomeCompletoCartella;
+            nomeFinaleCartella = Utility.togliCommentoDaNomeCartella(nomeInizialeCartella);
+            string commentoVisualizzato = sdob.GetCommentoVisualizzato();
+            if (commentoVisualizzato != "")
+                nomeFinaleCartella += " " + commentoVisualizzato;
+            if (nomeInizialeCartella != nomeFinaleCartella)
             {
-                Directory.Move(nomeVecchio, nomeCartella);
+                Directory.Move(nomeInizialeCartella, nomeFinaleCartella);
+                sdob.nomeCompletoCartella = nomeFinaleCartella;
             }
-            // return modificata;
-        }*/
-        /*private void SciogliRaggruppamento(SetDataOra origine)
-        {
-            //EventoSciogliRaggruppamento(origine, false);
-            EventoSciogliRaggruppamento(origine, "");
-        }*/
+        }
         void SciogliRaggruppamento(Avvenimento origine)
         {
             string nomeCartella;

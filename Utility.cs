@@ -162,5 +162,23 @@ namespace FotoOrganizzatore
             return true;
         }
         #endregion
+        public static string togliCommentoDaNomeCartella(string nomeConCommento)
+        {
+            string nomeSenzaCommento = "";
+            DirectoryInfo aa = Directory.GetParent(nomeConCommento);
+            string nome = nomeConCommento.Substring(aa.ToString().Length + 1);
+            string[] nomeScomposto = nome.Split(' ');
+            if (nomeScomposto.Length > 2)
+            {
+                // Commento presente
+                nomeSenzaCommento = aa + "\\" + nomeScomposto[0] + " " + nomeScomposto[1];
+            }
+            else
+            {
+                // commento assente
+                nomeSenzaCommento = nomeConCommento;
+            }
+            return nomeSenzaCommento;
+        }
     }
 }

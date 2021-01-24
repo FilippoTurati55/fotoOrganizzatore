@@ -100,6 +100,11 @@ namespace FotoOrganizzatore
             /*if (Evento != null)
                 Evento.Text = commentoEvento;*/
         }
+        public string GetCommentoVisualizzato()
+        {
+            testoCommento = avvenimento.getCommento();
+            return (testoCommento);
+        }
         #endregion
         private STATO_SELEZIONE_DATA stato = STATO_SELEZIONE_DATA.NIENTE;
         #region COMPONENTE_VISUALE
