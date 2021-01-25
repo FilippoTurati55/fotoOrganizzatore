@@ -18,6 +18,7 @@ namespace FotoOrganizzatore
         int numeroFotoDaMostrare = 0;
         string nomeCartella = "";
         string[] elencoFotiDaMostrareInVignetta;
+        int posX, posY;
         public Form1()
         {
             InitializeComponent();
@@ -77,6 +78,7 @@ namespace FotoOrganizzatore
                 nomeCartella = puntato.nomeCompletoCartella;
                 elencoFotiDaMostrareInVignetta = Directory.GetFiles(nomeCartella);
                 numeroFotoDaMostrare = elencoFotiDaMostrareInVignetta.Count();
+                posX = posY = 0;
             }
             if (nomeCartella != "")
             {
@@ -89,58 +91,22 @@ namespace FotoOrganizzatore
                     try
                     {
                         src = elencoFotiDaMostrareInVignetta[numeroFotoMostrate];
-                        vignetta.leggiImmagineDaFile(src);
-                        splitContainer1.Panel2.Controls.Add(vignetta);
-                        numeroFotoMostrate++;
-
-                        /*FileStream stream = new FileStream(src, FileMode.Open, FileAccess.Read);
-                        System.Drawing.Image myImage = System.Drawing.Image.FromStream(stream);
-                        stream.Close();
-
-                        BitmapImage image = new BitmapImage();
-                        image.BeginInit();
-                        image.UriSource = new Uri(src);
-                        image.EndInit();
-                        Image img = new Image();
-                        img.Source = image;*/
-
-                        /*
-                        string src = Variabili.NomeCartellaFotoInCartella[Variabili.NomeCartellaNumeroFoto++];
-                        Image img = new Image();
-                        var uri = new Uri(src);
-                        var img1 = new BitmapImage(uri);
-                        img.Source = img1;
-                        */
-                        // img.Source = new ImageSourceConverter().ConvertFromString(src) as ImageSource;
-
-                        //Vignetta vignetta = new Vignetta();
-                        //vignetta.setImmagine(img);
-                        //SelezioneFotoSP.Children.Add(vignetta);
-                        //vignetta.Visibility = Visibility.Visible;
-                        // ripristina per vedere 
-                        /* oraif (gruppoVignette.setImmagine(n, src))
+                        if (vignetta.leggiImmagineDaFile(src))
                         {
-                            //gruppoVignette.setImmagine(n, myImage);
-
-                            trovatoQualcosa = true;
-                            prevsrc = src;
+                            splitContainer1.Panel2.Controls.Add(vignetta);
+                            vignetta.Location = new Point(posX, posY);
+                            posX += vignetta.Width;
+                            if (posX > vignetta.Width * 4)
+                            {
+                                posX = 0;
+                                posY += vignetta.Height;
+                            }
+                            numeroFotoMostrate++;
                         }
-                        else
-                        {
-                            // segnalare errore
-                            n--;
-                        } */
                     }
                     catch
                     {
-                        // segnalare errore
-                        //n--;
                     }
-                    /*if (trovatoQualcosa)
-                    {
-                        SelezioneFotoSP.Children.Add(gruppoVignette);
-                        gruppoVignette.Visibility = Visibility.Visible;
-                    }*/
                 }
             }
         }

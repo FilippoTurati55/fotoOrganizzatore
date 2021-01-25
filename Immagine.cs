@@ -16,8 +16,9 @@ namespace FotoOrganizzatore
         {
             Image = null;
         }
-        public void leggiImmagineDaFile(string path)
+        public bool leggiImmagineDaFile(string path)
         {
+            bool res = false;
             PropertyItem propItem4 = null;
             try
             {
@@ -42,6 +43,7 @@ namespace FotoOrganizzatore
                             default:
                                 break;
                         }
+                        res = true;
                     }
                     catch { };
                 }
@@ -49,13 +51,13 @@ namespace FotoOrganizzatore
             catch
             {
                 Image = null;
-                // VarGlo.tracciaEccezioni("leggiImmagineDaFile myImage = null" + path + "\r\n");
             }
             if (Image != null)
             {
                 Size = new System.Drawing.Size(183, 92);
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             }
+            return res;
         }
     }
 }

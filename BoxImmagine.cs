@@ -18,9 +18,9 @@ namespace FotoOrganizzatore
             InitializeComponent();
         }
 
-        public void leggiImmagineDaFile(string path)
+        public bool leggiImmagineDaFile(string path)
         {
-            immagine.leggiImmagineDaFile(path);
+            return (immagine.leggiImmagineDaFile(path));
         }
 
         private void button1_Click(object sender, EventArgs e)
