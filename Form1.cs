@@ -14,6 +14,10 @@ namespace FotoOrganizzatore
 {
     public partial class Form1 : Form
     {
+        int numeroFotoMostrate = 0;
+        int numeroFotoDaMostrare = 0;
+        string nomeCartella = "";
+        string[] elencoFotiDaMostrareInVignetta;
         public Form1()
         {
             InitializeComponent();
@@ -63,6 +67,81 @@ namespace FotoOrganizzatore
                     Variabili.Calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
                     Variabili.comandi = 0;
                     break;
+            }
+            if (Variabili.MostraFotoInGiorno != Variabili.MostraFotoInGiornoPrevValue)
+            {
+                Variabili.MostraFotoInGiornoPrevValue = Variabili.MostraFotoInGiorno;
+                numeroFotoMostrate = 0;
+                splitContainer1.Panel2.Controls.Clear();
+                SetDataOraBase puntato = Variabili.MostraFotoSetDataOra;
+                nomeCartella = puntato.nomeCompletoCartella;
+                elencoFotiDaMostrareInVignetta = Directory.GetFiles(nomeCartella);
+                numeroFotoDaMostrare = elencoFotiDaMostrareInVignetta.Count();
+            }
+            if (nomeCartella != "")
+            {
+                if (numeroFotoMostrate < numeroFotoDaMostrare)
+                {
+                    string src;
+                    string prevsrc;
+                    BoxImmagine vignetta = new BoxImmagine();
+                    bool trovatoQualcosa = false;
+                    try
+                    {
+                        src = elencoFotiDaMostrareInVignetta[numeroFotoMostrate];
+                        vignetta.leggiImmagineDaFile(src);
+                        splitContainer1.Panel2.Controls.Add(vignetta);
+                        numeroFotoMostrate++;
+
+                        /*FileStream stream = new FileStream(src, FileMode.Open, FileAccess.Read);
+                        System.Drawing.Image myImage = System.Drawing.Image.FromStream(stream);
+                        stream.Close();
+
+                        BitmapImage image = new BitmapImage();
+                        image.BeginInit();
+                        image.UriSource = new Uri(src);
+                        image.EndInit();
+                        Image img = new Image();
+                        img.Source = image;*/
+
+                        /*
+                        string src = Variabili.NomeCartellaFotoInCartella[Variabili.NomeCartellaNumeroFoto++];
+                        Image img = new Image();
+                        var uri = new Uri(src);
+                        var img1 = new BitmapImage(uri);
+                        img.Source = img1;
+                        */
+                        // img.Source = new ImageSourceConverter().ConvertFromString(src) as ImageSource;
+
+                        //Vignetta vignetta = new Vignetta();
+                        //vignetta.setImmagine(img);
+                        //SelezioneFotoSP.Children.Add(vignetta);
+                        //vignetta.Visibility = Visibility.Visible;
+                        // ripristina per vedere 
+                        /* oraif (gruppoVignette.setImmagine(n, src))
+                        {
+                            //gruppoVignette.setImmagine(n, myImage);
+
+                            trovatoQualcosa = true;
+                            prevsrc = src;
+                        }
+                        else
+                        {
+                            // segnalare errore
+                            n--;
+                        } */
+                    }
+                    catch
+                    {
+                        // segnalare errore
+                        //n--;
+                    }
+                    /*if (trovatoQualcosa)
+                    {
+                        SelezioneFotoSP.Children.Add(gruppoVignette);
+                        gruppoVignette.Visibility = Visibility.Visible;
+                    }*/
+                }
             }
         }
     }

@@ -14,7 +14,8 @@ namespace FotoOrganizzatore
         public static DataBaseFoto dataBaseFotoLocali;
         public static Avvenimento DataOraEvidenziata;
         public static int MostraFotoInGiorno;
-        public static Avvenimento MostraFotoSetDataOra;
+        public static int MostraFotoInGiornoPrevValue;
+        public static SetDataOraBase MostraFotoSetDataOra;
         public static List<UnitaEsterna> UnitaEsterne = new List<UnitaEsterna>();
         public static SortedList<string, string> UnitaEsterneAccreditate = new SortedList<string, string>();
         public static SortedList<string, string> UnitaEsterneRifiutate = new SortedList<string, string>();

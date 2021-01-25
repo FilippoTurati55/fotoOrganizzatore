@@ -92,7 +92,7 @@ namespace FotoOrganizzatore
         private void data_MouseEnter(object sender, EventArgs e)
         {
             Variabili.MostraFotoInGiorno++; // = true;
-            Variabili.MostraFotoSetDataOra = this;
+            Variabili.MostraFotoSetDataOra = this.Sdob;
             TextBox tb = (TextBox)sender;
             if (Variabili.DataOraEvidenziata != null)
             {
