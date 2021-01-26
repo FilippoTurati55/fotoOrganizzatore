@@ -3,3 +3,6 @@
 bin/Debug/FotoOrganizzatore.pdb
 *.cache
 obj/Debug/FotoOrganizzatore.exe
+*.exe
+*.pdb
+bin/Debug/FotoOrganizzatore.exe

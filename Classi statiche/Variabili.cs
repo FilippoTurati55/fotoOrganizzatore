@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace FotoOrganizzatore
 {
     static class Variabili
     {
+        public static Button codePopup = new Button();
+        public static bool mostraFoto;
         public static int comandi;
         public static DataBaseFoto dataBaseFotoLocali;
         public static Avvenimento DataOraEvidenziata;

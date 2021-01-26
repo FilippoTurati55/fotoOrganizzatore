@@ -55,6 +55,8 @@ namespace FotoOrganizzatore
             this.immagine.Size = new System.Drawing.Size(320, 180);
             this.immagine.TabIndex = 1;
             this.immagine.TabStop = false;
+            this.immagine.MouseEnter += new System.EventHandler(this.BoxImmagine_MouseEnter);
+            this.immagine.MouseLeave += new System.EventHandler(this.immagine_MouseLeave);
             // 
             // BoxImmagine
             // 
@@ -65,6 +67,8 @@ namespace FotoOrganizzatore
             this.Controls.Add(this.immagine);
             this.Name = "BoxImmagine";
             this.Size = new System.Drawing.Size(320, 180);
+            this.MouseEnter += new System.EventHandler(this.BoxImmagine_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.immagine_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.immagine)).EndInit();
             this.ResumeLayout(false);
 

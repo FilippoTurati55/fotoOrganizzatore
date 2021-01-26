@@ -36,5 +36,23 @@ namespace FotoOrganizzatore
                 selected = true;
             }
         }
+
+        private void BoxImmagine_MouseEnter(object sender, EventArgs e)
+        {
+            /*Button b = new Button();
+            b.Visible = true;
+            b.Image = this.immagine.Image;
+            b.Width = 600;
+            b.Height = 400;*/
+            Variabili.codePopup.Image = this.immagine.Image;
+            Variabili.mostraFoto = true;
+            /*//Form1..ActiveForm.Controls.Add(b);
+            this.Parent.Parent.Controls.Add(b);*/
+        }
+
+        private void immagine_MouseLeave(object sender, EventArgs e)
+        {
+            Variabili.mostraFoto = false;
+        }
     }
 }

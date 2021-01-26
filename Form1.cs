@@ -19,6 +19,7 @@ namespace FotoOrganizzatore
         string nomeCartella = "";
         string[] elencoFotiDaMostrareInVignetta;
         int posX, posY;
+        bool mostrato = false;
         public Form1()
         {
             InitializeComponent();
@@ -108,6 +109,24 @@ namespace FotoOrganizzatore
                     {
                     }
                 }
+            }
+            if (Variabili.mostraFoto)
+            {
+                if (!mostrato)
+                {
+                    this.Controls.Add(Variabili.codePopup);
+                    Variabili.codePopup.Size = new Size(400, 400);
+                    Variabili.codePopup.Location = new Point(1, 1);
+                    Variabili.codePopup.Enabled = true;
+                    Variabili.codePopup.BringToFront();
+                    mostrato = true;
+                }
+            }
+            else
+            {
+                if (this.Controls.Contains(Variabili.codePopup))
+                    this.Controls.Remove(Variabili.codePopup);
+                mostrato = false;
             }
         }
     }
