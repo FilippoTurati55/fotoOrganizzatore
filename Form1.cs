@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using external_drive_lib.interfaces;
 
 namespace FotoOrganizzatore
 {
@@ -26,6 +27,7 @@ namespace FotoOrganizzatore
             Preferenze.LeggiPreferenze();
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
+                PortableDrivers.Show_all_portable_drives();  // 1.4 s
                 Variabili.Backup.CercaUnitaEsterne();
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
                 Variabili.dataBaseFotoLocali.creaDataBase();

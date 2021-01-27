@@ -9,6 +9,20 @@ namespace FotoOrganizzatore
 {
     static class Utility
     {
+        public static string TempPath { get; set; } = New_temp_path;
+        private static string New_temp_path
+        {
+            get
+            {
+                var temp_dir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\";
+                if (Directory.Exists(temp_dir + "Temp"))
+                    temp_dir += "Temp\\";
+                temp_dir += "external_drive_temp\\temp-" + DateTime.Now.Ticks;
+
+                Directory.CreateDirectory(temp_dir);
+                return temp_dir;
+            }
+        }
         public static bool CalcolaDateTimeDaStringa(string nomeFile, ref DateTime dateTime, ref string conclusione, ref string commento)
         {
             int anno, mese,giorno;

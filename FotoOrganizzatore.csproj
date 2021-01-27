@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="external_drive_lib">
+      <HintPath>..\..\..\..\..\..\app\cs\external_drive_lib\external_drive_lib\bin\Debug\external_drive_lib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -72,6 +75,7 @@
     <Compile Include="Dialogs\AccreditamentoUnitaBackup.Designer.cs">
       <DependentUpon>AccreditamentoUnitaBackup.cs</DependentUpon>
     </Compile>
+    <Compile Include="DispositivoRemoto.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +85,7 @@
     <Compile Include="Immagine.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PortableDrivers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetDataOraBase.cs" />
