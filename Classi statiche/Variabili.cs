@@ -22,13 +22,16 @@ namespace FotoOrganizzatore
         public static Button codePopup = new Button();
         public static bool mostraFoto;
         public static int comandi;
+        public static bool fermaTaskRicercaDispositivi;
         public static DataBaseFoto dataBaseFotoLocali;
         public static DateTime DataLetturaFotoPrecedente;
         public static Avvenimento DataOraEvidenziata;
+        public static List<DispositivoRemoto> DispositiviRemoti = new List<DispositivoRemoto>();
         public static DispositivoRemoto DispositivoPrincipale;
         public static int MostraFotoInGiorno;
         public static int MostraFotoInGiornoPrevValue;
         public static SetDataOraBase MostraFotoSetDataOra;
+        public static int NumeroDispositiviUsbTrovatiInEsame;
         public static Passi Passo = Passi.RicercaDispositivi;
         public static List<UnitaEsterna> UnitaEsterne = new List<UnitaEsterna>();
         public static SortedList<string, string> UnitaEsterneAccreditate = new SortedList<string, string>();

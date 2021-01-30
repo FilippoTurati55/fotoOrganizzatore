@@ -16,6 +16,18 @@ namespace FotoOrganizzatore
         public SortedList<DateTime, SetDataOraBase> elencoDateFotiAsync = new SortedList<DateTime, SetDataOraBase>();
         Panel SceltaCalendario;
         public List<string> elencoDateDoppie = new List<string>();
+        #region QUERY
+        public SetDataOraBase getData(DateTime data)
+        {
+            SetDataOraBase result = null;
+            DateTime dataFloor = new DateTime(data.Year, data.Month, data.Day);
+            if (elencoDateFotiAsync.ContainsKey(dataFloor))
+            {
+                result = elencoDateFotiAsync[dataFloor];
+            }
+            return result;
+        }
+        #endregion
         /*public void ElencaDateFotoCatalogate()
         {
             int lunghezzaRadice = Preferenze.NomeCartellaFotoOrganizzate.Length + 1;

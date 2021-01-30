@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,13 @@ using external_drive_lib.interfaces;
 
 namespace FotoOrganizzatore
 {
+    enum STATO_DISPOSITIVO
+    {
+        DA_ESAMINARE,
+        DA_CATALOGARE,
+        SCARTATO,
+        ACCETTATO
+    }
     class Foto
     {
         // commento da cancellare
@@ -43,6 +51,7 @@ namespace FotoOrganizzatore
         public string IdentificatoreTipoDispositivo;
         public int NumeroFotiNuove;
         public int NumeroFotiVecchie;
+        public STATO_DISPOSITIVO statoDispositivo = STATO_DISPOSITIVO.DA_ESAMINARE;
 
         public bool Esamina(IDrive _idrive)
         {
@@ -56,27 +65,34 @@ namespace FotoOrganizzatore
         {
             bool trovato = false;
             // LeggiInfoDaDevice(idrive);
-            LeggiInfoDevice();
-            if (CartelleFoto.Count != 0)
+            if (!LeggiInfoDevice())
             {
-                Variabili.Passo = Passi.RicercaNuoveFoto;
-                Variabili.DispositivoPrincipale = this;
-                // cerca foto nuove su camera
-                trovato |= LeggiDateFotoRemoto();
-                Variabili.Passo = Passi.LetturaNuoveFoto;
-                LeggiNuoveFotoDaRemoto();
-                Variabili.Passo = Passi.ConclusaLetturaNuoveFoto;
-                // modifica temporaneo 
-                AggiornaInfoDevice();
+                // dispositivo non classificato
+                statoDispositivo = STATO_DISPOSITIVO.DA_CATALOGARE;
             }
-            /*provvisorio
-             * else
+            else
             {
-                if (CercaCartellaCamera(_idrive))
+                if (CartelleFoto.Count != 0)
                 {
-                    //return n;
+                    Variabili.Passo = Passi.RicercaNuoveFoto;
+                    Variabili.DispositivoPrincipale = this;
+                    // cerca foto nuove su camera
+                    trovato |= LeggiDateFotoRemoto();
+                    Variabili.Passo = Passi.LetturaNuoveFoto;
+                    LeggiNuoveFotoDaRemoto();
+                    Variabili.Passo = Passi.ConclusaLetturaNuoveFoto;
+                    // modifica temporaneo 
+                    AggiornaInfoDevice();
                 }
-            }*/
+                /*provvisorio
+                 * else
+                {
+                    if (CercaCartellaCamera(_idrive))
+                    {
+                        //return n;
+                    }
+                }*/
+            }
         }
         bool CercaCartellaCamera(IDrive d)
         {
@@ -266,11 +282,10 @@ namespace FotoOrganizzatore
                 Foto foto = new Foto(nomeFile, file, dt);
                 if (dt > DataUltimaLetturaFoto)
                 {
-                    /* temporaneo 27 1 21
                     cartellaFoti.DateTrovateNuove.Add(nomeFile, foto);
-                    if (!Variabili.calendario.elencoDateFotiNuove.ContainsKey(dt1))
-                        Variabili.calendario.elencoDateFotiNuove.Add(dt1, dt1);
-                    Variabili.Passo = Passi.TrovateNuoveFoto; */
+                    /*if (!Variabili.calendario.elencoDateFotiNuove.ContainsKey(dt1))
+                        Variabili.calendario.elencoDateFotiNuove.Add(dt1, dt1);*/
+                    Variabili.Passo = Passi.TrovateNuoveFoto;
                     nuoveDate = true;
                 }
                 else cartellaFoti.DateTrovateVecchie.Add(nomeFile, foto);
@@ -296,8 +311,24 @@ namespace FotoOrganizzatore
                         IFile fileFoto = foto.file;
                         DateTime data = foto.dateTime;
                         string pathTrovato = "";
-                        /* provvisorio 27 1 21
-                        if (Variabili.operazioniSuPc.CercaDataInCartelle(data, ref evento, ref pathTrovato))
+                        SetDataOraBase sdob = Variabili.Calendario.getData(data);
+                        string percorsoFoto;
+                        if (sdob != null)
+                        {
+                            // data già presente
+                            percorsoFoto = sdob.nomeCompletoCartella;
+                        }
+                        else
+                        {
+                            percorsoFoto = Variabili.Calendario.CalcolaNomeCartella(data, "");
+                            if (!Directory.Exists(percorsoFoto))
+                            {
+                                Directory.CreateDirectory(percorsoFoto);
+                            }
+                        }
+                        fileFoto.copy_sync(percorsoFoto);
+                        NumeroFotiNuove++;
+                        /*if (Variabili.operazioniSuPc.CercaDataInCartelle(data, ref evento, ref pathTrovato))
                         {
                             // cartella già presente
                             if (data > DataUltimaLetturaFoto)

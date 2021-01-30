@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using external_drive_lib.interfaces;
@@ -27,7 +28,7 @@ namespace FotoOrganizzatore
             Preferenze.LeggiPreferenze();
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
-                PortableDrivers.Show_all_portable_drives();  // 1.4 s
+                var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne();
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
                 Variabili.dataBaseFotoLocali.creaDataBase();
@@ -129,6 +130,37 @@ namespace FotoOrganizzatore
                 if (this.Controls.Contains(Variabili.codePopup))
                     this.Controls.Remove(Variabili.codePopup);
                 mostrato = false;
+            }
+        }
+        void taskCercaDispositivi()
+        {
+            while (!Variabili.fermaTaskRicercaDispositivi)
+            {
+                PortableDrivers.Show_all_portable_drives();  // 1.4 s
+                if (PortableDrivers.elencoDispositiviUsb.Count > 0)
+                {
+                    while (Variabili.NumeroDispositiviUsbTrovatiInEsame < PortableDrivers.elencoDispositiviUsb.Count)
+                    {
+                        Object[] portable_drives = PortableDrivers.elencoDispositiviUsb.ToArray();
+                        // var dispositivoTrovato = PortableDrivers.CercaCartellaCameraInTuttiIDispositiviUsb();
+                        IDrive pd = (IDrive)portable_drives[Variabili.NumeroDispositiviUsbTrovatiInEsame++];
+                        int dispositivoTrovato = PortableDrivers.CercaCartellaCameraInUnDispositivoUsb(pd);
+                        if ((dispositivoTrovato >= 0) && (PortableDrivers.elencoDispositiviUsb.Count > dispositivoTrovato))
+                        {
+                            ;// messaggi.Text = "trovato " + PortableDrivers.elencoDispositiviUsb[dispositivoTrovato].ToString() + " corretto";
+                        }
+                        else
+                        {
+                            ;// messaggi.Text = "trovato " + PortableDrivers.elencoDispositiviUsb[0].ToString() + " senza cartella CAMERA";
+                        }
+                        PortableDrivers.Enumerate_all_camera_pics();
+                    }
+                }
+                else
+                {
+                    ;// messaggi.Text = "trovato niente";
+                }
+                Thread.Sleep(1000);
             }
         }
     }

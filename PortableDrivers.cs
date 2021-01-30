@@ -77,13 +77,12 @@ namespace FotoOrganizzatore
             if (dispositivo.is_available())
             {
                 DispositivoRemoto dr = new DispositivoRemoto();
-                /* provvisorio 27 1 21
-                 * if (!Variabili.DispositiviRemoti.Contains(dr))
+                if (!Variabili.DispositiviRemoti.Contains(dr))
                 {
                     Variabili.DispositiviRemoti.Add(dr);
                     if (dr.Esamina(dispositivo))
                         found = 1;
-                }*/
+                }
             }
             return found;
         }
