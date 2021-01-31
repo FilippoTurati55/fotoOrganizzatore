@@ -44,7 +44,7 @@ namespace FotoOrganizzatore
             b.Image = this.immagine.Image;
             b.Width = 600;
             b.Height = 400;*/
-            Variabili.codePopup.Image = this.immagine.Image;
+            Variabili.codePopup.setImmagine(this.immagine.Image);
             Variabili.mostraFoto = true;
             /*//Form1..ActiveForm.Controls.Add(b);
             this.Parent.Parent.Controls.Add(b);*/

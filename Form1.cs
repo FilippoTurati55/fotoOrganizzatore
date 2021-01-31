@@ -22,6 +22,7 @@ namespace FotoOrganizzatore
         string[] elencoFotiDaMostrareInVignetta;
         int posX, posY;
         bool mostrato = false;
+        int ritardoErroreLettura = 0;
         public Form1()
         {
             InitializeComponent();
@@ -78,6 +79,7 @@ namespace FotoOrganizzatore
                 Variabili.MostraFotoInGiornoPrevValue = Variabili.MostraFotoInGiorno;
                 numeroFotoMostrate = 0;
                 splitContainer1.Panel2.Controls.Clear();
+                System.GC.Collect();
                 SetDataOraBase puntato = Variabili.MostraFotoSetDataOra;
                 nomeCartella = puntato.nomeCompletoCartella;
                 elencoFotiDaMostrareInVignetta = Directory.GetFiles(nomeCartella);
@@ -86,31 +88,42 @@ namespace FotoOrganizzatore
             }
             if (nomeCartella != "")
             {
-                if (numeroFotoMostrate < numeroFotoDaMostrare)
+                if (ritardoErroreLettura <= 0)
                 {
-                    string src;
-                    string prevsrc;
-                    BoxImmagine vignetta = new BoxImmagine();
-                    bool trovatoQualcosa = false;
-                    try
+                    if (numeroFotoMostrate < numeroFotoDaMostrare)
                     {
-                        src = elencoFotiDaMostrareInVignetta[numeroFotoMostrate];
-                        if (vignetta.leggiImmagineDaFile(src))
+                        string src;
+                        string prevsrc;
+                        BoxImmagine vignetta = new BoxImmagine();
+                        bool trovatoQualcosa = false;
+                        try
                         {
-                            splitContainer1.Panel2.Controls.Add(vignetta);
-                            vignetta.Location = new Point(posX, posY);
-                            posX += vignetta.Width;
-                            if (posX > vignetta.Width * 4)
+                            src = elencoFotiDaMostrareInVignetta[numeroFotoMostrate];
+                            if (vignetta.leggiImmagineDaFile(src))
                             {
-                                posX = 0;
-                                posY += vignetta.Height;
+                                splitContainer1.Panel2.Controls.Add(vignetta);
+                                vignetta.Location = new Point(posX, posY);
+                                posX += vignetta.Width;
+                                if (posX > vignetta.Width * 4)
+                                {
+                                    posX = 0;
+                                    posY += vignetta.Height;
+                                }
+                                numeroFotoMostrate++;
                             }
-                            numeroFotoMostrate++;
+                            else
+                            {
+                                ritardoErroreLettura = 20;
+                            }
+                        }
+                        catch
+                        {
                         }
                     }
-                    catch
-                    {
-                    }
+                }
+                else
+                {
+                    ritardoErroreLettura--;
                 }
             }
             if (Variabili.mostraFoto)

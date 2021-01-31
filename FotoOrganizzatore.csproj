@@ -52,6 +52,12 @@
   <ItemGroup>
     <Compile Include="ArchivioLocale.cs" />
     <Compile Include="Backup.cs" />
+    <Compile Include="ImmagineIngrandita.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImmagineIngrandita.Designer.cs">
+      <DependentUpon>ImmagineIngrandita.cs</DependentUpon>
+    </Compile>
     <Compile Include="BoxImmagine.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetDataOraBase.cs" />
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="ImmagineIngrandita.resx">
+      <DependentUpon>ImmagineIngrandita.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BoxImmagine.resx">
       <DependentUpon>BoxImmagine.cs</DependentUpon>
     </EmbeddedResource>
