@@ -129,31 +129,23 @@ namespace FotoOrganizzatore
         #region RESIZE
         public bool resize()
         {
-            //int larghezza = this.Width;
-            //Panel parent = (Panel)Parent;
-            //int widthScrollBar = parent.VerticalScroll.si
             int larghezza = Parent.Width - 25;
-            //int altezza = Height;
             int posX = 1;
             statoButton.Location = new Point(2, 2);
             statoButton.Height = dataInizio.Height - 1;
             statoButton.Width = statoButton.Height;
             posX += statoButton.Width + 2;
             dataInizio.Location = new Point(posX, 1);
-            //dataInizio.Height = altezza - 2;
-            //dataInizio.Width = (larghezza - 2) / 10;
             Font font = new Font("Times new roman", 12);
             Size occupazioneStringaInizio = TextRenderer.MeasureText("0000 00 00 mercoledì", font);
             dataInizio.Width = occupazioneStringaInizio.Width;
             posX += dataInizio.Width + 1;
             dataFine.Location = new Point(posX, 1);
             dataFine.Visible = (dataFine.Text != "");
-            //dataFine.Height = altezza - 2;
             Size occupazioneStringaFine = TextRenderer.MeasureText("0000 00", font);
             dataFine.Width = occupazioneStringaFine.Width;
             posX += dataFine.Width + 1;
             commento.Location = new Point(posX, 1);
-            //commento.Height = altezza - 2;
             commento.Width = larghezza - posX - 1;
             return true;
         }

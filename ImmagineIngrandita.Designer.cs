@@ -29,22 +29,12 @@ namespace FotoOrganizzatore
         /// </summary>
         private void InitializeComponent()
         {
-            this.immagine = new FotoOrganizzatore.Immagine();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.immagine)).BeginInit();
+            this.immagine = new FotoOrganizzatore.Immagine();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.immagine)).BeginInit();
             this.SuspendLayout();
-            // 
-            // immagine
-            // 
-            this.immagine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.immagine.Location = new System.Drawing.Point(0, 0);
-            this.immagine.Name = "immagine";
-            this.immagine.Size = new System.Drawing.Size(1922, 1255);
-            this.immagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.immagine.TabIndex = 1;
-            this.immagine.TabStop = false;
             // 
             // panel1
             // 
@@ -68,6 +58,16 @@ namespace FotoOrganizzatore
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
+            // immagine
+            // 
+            this.immagine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.immagine.Location = new System.Drawing.Point(0, 0);
+            this.immagine.Name = "immagine";
+            this.immagine.Size = new System.Drawing.Size(1922, 1255);
+            this.immagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.immagine.TabIndex = 1;
+            this.immagine.TabStop = false;
+            // 
             // ImmagineIngrandita
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -78,9 +78,9 @@ namespace FotoOrganizzatore
             this.Controls.Add(this.immagine);
             this.Name = "ImmagineIngrandita";
             this.Size = new System.Drawing.Size(1922, 1255);
-            ((System.ComponentModel.ISupportInitialize)(this.immagine)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.immagine)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

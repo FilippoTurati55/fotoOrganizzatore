@@ -21,7 +21,7 @@ namespace FotoOrganizzatore
         string nomeCartella = "";
         string[] elencoFotiDaMostrareInVignetta;
         int posX, posY;
-        bool mostrato = false;
+        int mostrato = 0;
         int ritardoErroreLettura = 0;
         public Form1()
         {
@@ -60,8 +60,12 @@ namespace FotoOrganizzatore
         {
             foreach (Control c in splitContainer1.Panel1.Controls)
             {
-                Avvenimento a = (Avvenimento)c;
-                a.resize();
+                try
+                {
+                    Avvenimento a = (Avvenimento)c;
+                    a.resize();
+                }
+                catch { }
             }
         }
 
@@ -128,21 +132,26 @@ namespace FotoOrganizzatore
             }
             if (Variabili.mostraFoto)
             {
-                if (!mostrato)
+                if (Variabili.mostraFotoCount > mostrato)
                 {
                     this.Controls.Add(Variabili.codePopup);
-                    Variabili.codePopup.Size = new Size(400, 400);
+                    //splitContainer1.Panel1.Controls.Add(Variabili.codePopup);
+                    int larghezza = splitContainer1.Panel1.Size.Width;
+                    int altezza = splitContainer1.Panel1.Size.Height;
+                    //Variabili.codePopup.Size = new Size(larghezza, 400);
                     Variabili.codePopup.Location = new Point(1, 1);
+                    //Variabili.codePopup.Dock = DockStyle.Fill;
+                    Variabili.codePopup.resize(larghezza, altezza);
                     Variabili.codePopup.Enabled = true;
                     Variabili.codePopup.BringToFront();
-                    mostrato = true;
+                    Variabili.codePopup.Refresh();
+                    mostrato++;
                 }
             }
             else
             {
                 if (this.Controls.Contains(Variabili.codePopup))
                     this.Controls.Remove(Variabili.codePopup);
-                mostrato = false;
             }
         }
         void taskCercaDispositivi()

@@ -20,7 +20,8 @@ namespace FotoOrganizzatore
     static class Variabili
     {
         public static ImmagineIngrandita codePopup = new ImmagineIngrandita();
-        public static bool mostraFoto;
+        public static int mostraFotoCount = 0;
+        public static bool mostraFoto = false;
         public static int comandi;
         public static bool fermaTaskRicercaDispositivi;
         public static DataBaseFoto dataBaseFotoLocali;
