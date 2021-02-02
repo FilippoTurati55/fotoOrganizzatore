@@ -13,6 +13,7 @@ namespace FotoOrganizzatore
     public partial class BoxImmagine : UserControl
     {
         bool selected = false;
+        string nomeFile = "";
         public BoxImmagine()
         {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace FotoOrganizzatore
 
         public bool leggiImmagineDaFile(string path)
         {
+            nomeFile = path;
             return (immagine.leggiImmagineDaFile(path));
         }
 
@@ -44,7 +46,7 @@ namespace FotoOrganizzatore
             b.Image = this.immagine.Image;
             b.Width = 600;
             b.Height = 400;*/
-            Variabili.codePopup.setImmagine(this.immagine.Image);
+            Variabili.codePopup.setImmagine(this.immagine.Image, nomeFile);
             Variabili.mostraFotoCount++;
             Variabili.mostraFoto = true;
             /*//Form1..ActiveForm.Controls.Add(b);

@@ -14,14 +14,16 @@ namespace FotoOrganizzatore
     {
         bool selected = false;
         int numeroResize = 0;
+        string nomeFile = "";
         public ImmagineIngrandita()
         {
             InitializeComponent();
         }
         #region ACCESSO
-        public void setImmagine(Image i)
+        public void setImmagine(Image i, string nome)
         {
             immagine.Image = i;
+            nomeFile = nome;
         }
         #endregion
         #region RESIZE
@@ -56,7 +58,7 @@ namespace FotoOrganizzatore
             //this.Height = immagine.Height;
             //this.Refresh();
             //immagine.Refresh();
-            label1.Text = "n res=" + numeroResize + " larghezza imma=" +larghezzaImmagine + " altezza imma=" + altezzaImmagine + " rapporto=" + rapportoFotoOriginale + " larghezza=" + larghezza + " altezza =" + altezza + " - larghezza = " + this.Width + "  altezza = " + this.Height;
+            label1.Text = nomeFile;
             return true;
         }
         #endregion 
