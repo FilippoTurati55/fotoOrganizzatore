@@ -32,7 +32,7 @@ namespace FotoOrganizzatore
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne();
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
-                Variabili.dataBaseFotoLocali.creaDataBase();
+                Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 Variabili.Calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
                 // Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();

@@ -16,20 +16,20 @@ namespace FotoOrganizzatore
         {
             pathBase = path;
         }
-        public bool creaDataBase()
+        public bool creaDataBase(Calendario calendario)
         {
             bool res = false;
-            ProcessDirectory(pathBase);
+            ProcessDirectory(pathBase,calendario);
             return res;
         }
-        void ProcessDirectory(string dir)
+        void ProcessDirectory(string dir, Calendario calendario)
         {
             string[] fileEntries = Directory.GetFiles(dir);
             if (fileEntries.Length != 0)
             {
                 // crea calendario
-                Variabili.Calendario.AggiungiData(fileEntries[0], dir);
-                ;
+                // Variabili.Calendario.AggiungiData(fileEntries[0], dir);
+                calendario.AggiungiData(fileEntries[0], dir);
             }
             foreach (string fileName in fileEntries)
                 ProcessFile(fileName);
@@ -37,7 +37,7 @@ namespace FotoOrganizzatore
             // Recurse into subdirectories of this directory.
             string[] subdirectoryEntries = Directory.GetDirectories(dir);
             foreach (string subdirectory in subdirectoryEntries)
-                ProcessDirectory(subdirectory);
+                ProcessDirectory(subdirectory,calendario);
         }
         void ProcessFile(string path)
         {

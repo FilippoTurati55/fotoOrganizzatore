@@ -82,6 +82,9 @@ namespace FotoOrganizzatore
     }
     class Backup
     {
+        UnitaEsterna disco;
+        DataBaseFoto dataBaseFotoSuDiscoBackup;
+        Calendario calendarioBackup = new Calendario();
         public void CercaUnitaEsterne()
         {
             DriveInfo[] allDrives = DriveInfo.GetDrives();
@@ -90,18 +93,29 @@ namespace FotoOrganizzatore
                 switch (d.DriveType)
                 {
                     case DriveType.Removable:
-                        UnitaEsterna disco = new UnitaEsterna();
+                        disco = new UnitaEsterna();
                         if (disco.esaminaDisco(d))
                         {
                             Variabili.UnitaEsterne.Add(disco);
                             if (disco.accredita())
                             {
-                                // Variabili.UnitaEsterneAccreditate.Add(disco.idUnivoco, disco.identificatore);
+                                //Variabili.UnitaEsterneAccreditate.Add(disco.idUnivoco, disco.identificatore);
+                                var t = Task.Run(() => taskBackup());
                             }    
                         }
                         break;
                 }
             }
+        }
+        void taskBackup()
+        {
+            dataBaseFotoSuDiscoBackup = new DataBaseFoto(disco.name);
+            dataBaseFotoSuDiscoBackup.creaDataBase(calendarioBackup);
+            // anni = Variabili.operazioniSuPc.elencaAnni(name);
+            /*Variabili.elencaDateFotoInCartellaClasse.ElencaImmediatamente(elencoDateFoti, anni, false, elencoDateDateDoppie, true);
+            aggiungiModificaDateSuBackup(name);
+            copiaFotoNuove();
+            */
         }
     }
 }
