@@ -14,11 +14,12 @@ namespace FotoOrganizzatore
         public string idUnivoco;
         string format;
         string label;           // id costruttore o simile es. Lexar
-        public string name;     // percorso. es. f://
+        string name;     // percorso. es. f://
         string drive;           // unità disco es. F
         string numeroDiSerie;   // numero di serie
+        public string pathFoto;        // per esempio foto
         long spazioLibero, spazioDisponibile, spazioTotale;
-        public string identificatore = "";     // identificatore utente es. backup foto
+        public string identificatore = "";     // identificatore utente es. copia sicurezza
         DriveType tipo;
 
         public bool esaminaDisco(DriveInfo driveInfo)
@@ -49,7 +50,10 @@ namespace FotoOrganizzatore
             if (Variabili.UnitaEsterneAccreditate.ContainsKey(idUnivoco))
             {
                 // unità esterna già registrata
-                identificatore = Variabili.UnitaEsterneAccreditate[idUnivoco];
+                string s = Variabili.UnitaEsterneAccreditate[idUnivoco];
+                string[] ssplit = s.Split(';');
+                identificatore = ssplit[0];
+                pathFoto = name + ssplit[1];
                 Variabili.UnitaEsterne.Add(this);
                 result = true;
             }
@@ -109,13 +113,68 @@ namespace FotoOrganizzatore
         }
         void taskBackup()
         {
-            dataBaseFotoSuDiscoBackup = new DataBaseFoto(disco.name);
+            dataBaseFotoSuDiscoBackup = new DataBaseFoto(disco.pathFoto);
             dataBaseFotoSuDiscoBackup.creaDataBase(calendarioBackup);
             // anni = Variabili.operazioniSuPc.elencaAnni(name);
-            /*Variabili.elencaDateFotoInCartellaClasse.ElencaImmediatamente(elencoDateFoti, anni, false, elencoDateDateDoppie, true);
-            aggiungiModificaDateSuBackup(name);
-            copiaFotoNuove();
-            */
+            //Variabili.elencaDateFotoInCartellaClasse.ElencaImmediatamente(elencoDateFoti, anni, false, elencoDateDateDoppie, true);
+            aggiungiModificaDateSuBackup();
+            //copiaFotoNuove();
+            
+        }
+        void aggiungiModificaDateSuBackup()
+        {
+            foreach (var dt in Variabili.Calendario.elencoDateFotiAsync)
+            {
+                DateTime inizio = dt.Value.DateTimeInizio;
+                DateTime fine = dt.Value.GetDateTimeFine();
+                if (calendarioBackup.elencoDateFotiAsync.ContainsKey(dt.Key))
+                {
+                    // data già presente nel backup
+                    ;
+                }
+                else
+                {
+                    // data non presente nel backup
+                    string nomeCartellaOriginale = dt.Value.nomeCompletoCartella;
+                    string inizioNomeCartellaOriginale = Preferenze.NomeCartellaFotoOrganizzate;
+
+                    ; // va creata la cartella 
+                    string nomeCartella = nomeCartellaOriginale.Substring(inizioNomeCartellaOriginale.Length);
+                    ;
+                    string nomeCompletoNuovaCartella = disco.pathFoto + nomeCartella;
+                    ;
+                    Directory.CreateDirectory(nomeCompletoNuovaCartella);
+                    calendarioBackup.AggiungiData(nomeCompletoNuovaCartella,nomeCartella);
+                }
+                /*
+                DateTime confronto = new DateTime(2020, 11, 11);
+                if (inizio == confronto)
+                    inizio = inizio;
+                string commento = dt.Value.GetCommento();
+                if (!elencoDateFoti.ContainsKey(inizio))
+                {
+                    Variabili.operazioniSuPc.CreaCartella(nomeCartellaBackup, inizio, fine, commento);
+                }
+                else
+                {
+                    var vecchio = elencoDateFoti[inizio];
+                    DateTime inizioVecchio = vecchio.DateTime;
+                    DateTime fineVecchio = vecchio.DateTimeFine;
+                    string commentoVecchio = vecchio.GetCommento();
+                    if (fine != fineVecchio)
+                    {
+                        Variabili.calendario.EventoSciogliRaggruppamento(vecchio.setDataOra, nomeCartellaBackup);
+                        Variabili.calendario.Raggruppa(inizio, fine, commento, nomeCartellaBackup, elencoDateFoti);
+                    }
+                    if (commento != commentoVecchio)
+                    {
+                        string nomeNuovo = Variabili.operazioniSuPc.CalcolaNomeCartella(inizio, fine, commento);
+                        commentoVecchio = vecchio.GetCommento(); // messo per debug
+                        string nomeVecchio = Variabili.operazioniSuPc.CalcolaNomeCartella(inizioVecchio, fineVecchio, commentoVecchio);
+                        Variabili.operazioniSuPc.RinominaCartella(nomeCartellaBackup, nomeVecchio, nomeNuovo);
+                    }
+                }*/
+            }
         }
     }
 }

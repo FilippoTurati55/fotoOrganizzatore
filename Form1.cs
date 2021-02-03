@@ -30,10 +30,10 @@ namespace FotoOrganizzatore
             Preferenze.LeggiPreferenze();
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
-                var t = Task.Run(() => taskCercaDispositivi());
-                Variabili.Backup.CercaUnitaEsterne();
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
+                var t = Task.Run(() => taskCercaDispositivi());
+                Variabili.Backup.CercaUnitaEsterne();
                 Variabili.Calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
                 // Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();

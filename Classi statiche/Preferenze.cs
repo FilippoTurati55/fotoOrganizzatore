@@ -35,7 +35,7 @@ namespace FotoOrganizzatore
                                     NomeCartellaFotoOrganizzate = sSplit[1];
                                     break;
                                 case "disco esterno accreditato":
-                                    Variabili.UnitaEsterneAccreditate.Add(sSplit[1], sSplit[2]);
+                                    Variabili.UnitaEsterneAccreditate.Add(sSplit[1], sSplit[2] + ";" + sSplit[3]);
                                     break;
                                 case "disco esterno rifiutato":
                                     Variabili.UnitaEsterneRifiutate.Add(sSplit[1], "");
