@@ -29,8 +29,10 @@ namespace FotoOrganizzatore
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.immagine = new FotoOrganizzatore.Immagine();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.immagine)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,6 +48,8 @@ namespace FotoOrganizzatore
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseEnter += new System.EventHandler(this.BoxImmagine_MouseEnter);
+            this.button1.MouseLeave += new System.EventHandler(this.immagine_MouseLeave);
             // 
             // immagine
             // 
@@ -55,6 +59,7 @@ namespace FotoOrganizzatore
             this.immagine.Size = new System.Drawing.Size(320, 180);
             this.immagine.TabIndex = 1;
             this.immagine.TabStop = false;
+            this.immagine.Click += new System.EventHandler(this.button1_Click);
             this.immagine.MouseEnter += new System.EventHandler(this.BoxImmagine_MouseEnter);
             this.immagine.MouseLeave += new System.EventHandler(this.immagine_MouseLeave);
             // 
@@ -78,5 +83,6 @@ namespace FotoOrganizzatore
 
         private System.Windows.Forms.Button button1;
         private Immagine immagine;
+        private System.Windows.Forms.Timer timer1;
     }
 }

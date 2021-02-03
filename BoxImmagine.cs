@@ -14,6 +14,8 @@ namespace FotoOrganizzatore
     {
         bool selected = false;
         string nomeFile = "";
+        bool selezionato = false;
+        bool ingresso = false;
         public BoxImmagine()
         {
             InitializeComponent();
@@ -24,6 +26,7 @@ namespace FotoOrganizzatore
             nomeFile = path;
             return (immagine.leggiImmagineDaFile(path));
         }
+        #region EVENTI
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -38,24 +41,42 @@ namespace FotoOrganizzatore
                 selected = true;
             }
         }
-
         private void BoxImmagine_MouseEnter(object sender, EventArgs e)
         {
-            /*Button b = new Button();
-            b.Visible = true;
-            b.Image = this.immagine.Image;
-            b.Width = 600;
-            b.Height = 400;*/
+            /*timer1.Interval = 10;
+            timer1.Start();*/
+            selezionato = true;
+            //ingresso = true;
             Variabili.codePopup.setImmagine(this.immagine.Image, nomeFile);
             Variabili.mostraFotoCount++;
             Variabili.mostraFoto = true;
-            /*//Form1..ActiveForm.Controls.Add(b);
-            this.Parent.Parent.Controls.Add(b);*/
         }
 
         private void immagine_MouseLeave(object sender, EventArgs e)
         {
+            /*timer1.Interval = 10;
+            timer1.Start();
+            selezionato = false;*/
             Variabili.mostraFoto = false;
         }
+        #endregion
+
+        /*private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (selezionato)
+            {
+                if (ingresso)
+                {
+                    Variabili.codePopup.setImmagine(this.immagine.Image, nomeFile);
+                    Variabili.mostraFotoCount++;
+                    Variabili.mostraFoto = true;
+                    ingresso = false;
+                }
+            }
+            else
+            {
+                Variabili.mostraFoto = false;
+            }
+        }*/
     }
 }

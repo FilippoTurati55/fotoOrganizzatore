@@ -23,6 +23,7 @@ namespace FotoOrganizzatore
         int posX, posY;
         int mostrato = 0;
         int ritardoErroreLettura = 0;
+        int aspettaSpegnimentoFoto = 0;
         public Form1()
         {
             InitializeComponent();
@@ -134,8 +135,10 @@ namespace FotoOrganizzatore
             {
                 if (Variabili.mostraFotoCount > mostrato)
                 {
-                    this.Controls.Add(Variabili.codePopup);
-                    //splitContainer1.Panel1.Controls.Add(Variabili.codePopup);
+                    if (!this.Controls.Contains(Variabili.codePopup))
+                    {
+                        this.Controls.Add(Variabili.codePopup);
+                    }//splitContainer1.Panel1.Controls.Add(Variabili.codePopup);
                     int larghezza = splitContainer1.Panel1.Size.Width;
                     int altezza = splitContainer1.Panel1.Size.Height;
                     //Variabili.codePopup.Size = new Size(larghezza, 400);
@@ -146,12 +149,20 @@ namespace FotoOrganizzatore
                     Variabili.codePopup.BringToFront();
                     Variabili.codePopup.Refresh();
                     mostrato++;
+                    aspettaSpegnimentoFoto = 3;
                 }
             }
             else
             {
-                if (this.Controls.Contains(Variabili.codePopup))
-                    this.Controls.Remove(Variabili.codePopup);
+                if (aspettaSpegnimentoFoto <= 0)
+                {
+                    if (this.Controls.Contains(Variabili.codePopup))
+                        this.Controls.Remove(Variabili.codePopup);
+                }
+                else
+                {
+                    aspettaSpegnimentoFoto--;
+                }
             }
         }
         void taskCercaDispositivi()
