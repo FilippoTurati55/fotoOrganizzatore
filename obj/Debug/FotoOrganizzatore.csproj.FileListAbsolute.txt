@@ -10,7 +10,6 @@ C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOr
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.BoxImmagine.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Avvenimento.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.AccreditamentoUnitaBackup.resources
-C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.csprojAssemblyReference.cache
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\bin\Debug\external_drive_lib.dll
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\bin\Debug\external_drive_lib.pdb
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.csproj.CopyComplete

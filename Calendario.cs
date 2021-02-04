@@ -65,6 +65,11 @@ namespace FotoOrganizzatore
                         elencoDateDoppie.Add(data);
                 }
             }
+            else
+            {
+                // il nome della foto potrebbe non contenere la data
+                ;
+            }
         }
         public void MostraCalendarioFoto(Panel pannello, bool soloDateNuove)
         {

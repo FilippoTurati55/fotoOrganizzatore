@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="ArchivioLocale.cs" />
     <Compile Include="Backup.cs" />
+    <Compile Include="FileImmagini.cs" />
     <Compile Include="ImmagineIngrandita.cs">
       <SubType>UserControl</SubType>
     </Compile>
