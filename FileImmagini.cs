@@ -149,7 +149,6 @@ namespace FotoOrganizzatore
             //risultato = new DateTime()
             return risultato;
         }
-
         static public DateTime CalcolaMomentoScattoFoto(string foto)
         {
             DateTime dt = new DateTime();
@@ -161,7 +160,8 @@ namespace FotoOrganizzatore
         {
             DateTime dt = new DateTime();
             FileInfo fi = new FileInfo(foto);
-            dt = fi.CreationTime;
+            // dt = fi.CreationTime;
+            dt = fi.LastWriteTime;
             return dt;
         }
         static public bool CalcolaMomentoScattoDaProprietaFoto(string foto, ref DateTime dt)
@@ -209,6 +209,18 @@ namespace FotoOrganizzatore
             return result;
         }
 
+        static public bool VerificaDataFotoConPath(DateTime dataFoto, string percorso)
+        {
+            bool res = false;
+            DateTime dt = new DateTime();
+            string conclusione = "";
+            string commento = "";
+            if (Utility.CalcolaDateTimeDaStringa(percorso, ref dt, ref conclusione, ref commento)) ;
+            {
+
+            }
+            return res;
+        }
 
         #endregion
         private static bool StartsWith(this byte[] thisBytes, byte[] thatBytes)

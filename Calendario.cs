@@ -45,14 +45,14 @@ namespace FotoOrganizzatore
                 }
             }
         }*/
-        public void AggiungiData(string data, string cartella)
+        public void AggiungiData(string pathCompletoFoto, string cartella)
         {
             //SetDataOra nuovoEvento = null;
             SetDataOraBase nuovoEventoBase = new SetDataOraBase();
             DateTime dateTime = new DateTime();
             string conclusione = "";
             string commento = "";
-            if (Utility.CalcolaDateTimeDaStringa(data, ref dateTime, ref conclusione, ref commento))
+            if (Utility.CalcolaDateTimeDaStringa(pathCompletoFoto, ref dateTime, ref conclusione, ref commento))
             {
                 nuovoEventoBase.SetDataeCartella(dateTime, conclusione, commento, cartella);
                 if (!elencoDateFotiAsync.ContainsKey(dateTime))
@@ -61,14 +61,16 @@ namespace FotoOrganizzatore
                 }
                 else
                 {
-                    if (!elencoDateDoppie.Contains(data))
-                        elencoDateDoppie.Add(data);
+                    if (!elencoDateDoppie.Contains(pathCompletoFoto))
+                        elencoDateDoppie.Add(pathCompletoFoto);
                 }
             }
             else
             {
                 // il nome della foto potrebbe non contenere la data
-                ;
+                DateTime dataFoto = new DateTime();
+                dataFoto = FileImmagini.CalcolaMomentoScattoFoto(pathCompletoFoto);
+                FileImmagini.VerificaDataFotoConPath(dataFoto, pathCompletoFoto);
             }
         }
         public void MostraCalendarioFoto(Panel pannello, bool soloDateNuove)
