@@ -28,9 +28,10 @@ namespace FotoOrganizzatore
             string[] dirScomposto = dir.Replace("/", "\\").Split('\\');
             if (dirScomposto.Length == 4)
             {
-                DateTime dt = new DateTime();
-                string a = "", b = "";
-                Utility.CalcolaDateTimeDaStringa(dir, ref dt, ref a, ref b);
+                DateTime inizio = new DateTime(),
+                         fine = new DateTime();
+                string b = "";
+                Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b);
             }
             string[] fileEntries = Directory.GetFiles(dir);
             if (fileEntries.Length != 0)

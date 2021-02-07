@@ -23,9 +23,105 @@ namespace FotoOrganizzatore
                 return temp_dir;
             }
         }
+        #region DATA_DA_STRINGA
+        public static bool CalcolaDateTimeDaPath(string[] fileFotoSplit, ref DateTime inizio, ref DateTime fine, ref string commento)
+        {
+            int anno, mese, giorno = 1;
+            int annoFine = 0, meseFine = 0, giornoFine = 0;
+            bool res = false;
+            bool fineUgualeInizio = false;
+            bool fineCorretta = false;
+            try
+            {
+                if (fileFotoSplit.Length >= 4)
+                {
+                    if (Int32.TryParse(fileFotoSplit[2], out anno))
+                    {
+                        string[] meseGiorno = fileFotoSplit[3].Split(' ');
+                        if (Int32.TryParse(meseGiorno[0], out mese))
+                        {
+                            bool giornoCorretto = false;
+                            if (meseGiorno[1].Contains('_'))
+                            {
+                                // evento su più di un giorno
+                                string[] giornoMultiplo = meseGiorno[1].Split('_');
+                                switch (giornoMultiplo.Length)
+                                {
+                                    case 2: // contiene giorno inizio e giorno fine
+                                        if ((Int32.TryParse(giornoMultiplo[0], out giorno)) &&
+                                            (Int32.TryParse(giornoMultiplo[1], out giornoFine)))
+                                        {
+                                            annoFine = anno;
+                                            meseFine = mese;
+                                            fineCorretta = true;
+                                        }
+                                        break;
+                                    case 3: // contiene giorno inizio, mese e giorno fine
+                                        if ((Int32.TryParse(giornoMultiplo[0], out giorno)) &&
+                                            (Int32.TryParse(giornoMultiplo[1], out meseFine)) &&
+                                            (Int32.TryParse(giornoMultiplo[2], out giornoFine)))
+                                        {
+                                            annoFine = anno;
+                                            fineCorretta = true;
+                                        }
+                                        break;
+                                    case 4: // contiene giorno inizio, anno, mese e giorno fine
+                                        if ((Int32.TryParse(giornoMultiplo[0], out giorno)) &&
+                                            (Int32.TryParse(giornoMultiplo[1], out annoFine)) &&
+                                            (Int32.TryParse(giornoMultiplo[2], out meseFine)) &&
+                                            (Int32.TryParse(giornoMultiplo[3], out giornoFine)))
+                                            fineCorretta = true;
+                                        break;
+                                }
+                                if (fineCorretta)
+                                {
+                                    fine = new DateTime(annoFine, meseFine, giornoFine);
+                                    giornoCorretto = true;
+                                }
+                                /*fine = giornoMultiplo[1];
+                                for (int n = 2; n < giornoMultiplo.Length; n++)
+                                {
+                                    // evento su più mesi o anni
+                                    fine += " " + giornoMultiplo[n];
+                                }
+                                if (Int32.TryParse(giornoMultiplo[0], out giorno))
+                                    giornoCorretto = true;*/
+                            }
+                            else
+                            {
+                                fineUgualeInizio = true;
+                                if (Int32.TryParse(meseGiorno[1], out giorno))
+                                    giornoCorretto = true;
+                            }
+                            if (meseGiorno.Length > 2)
+                            {
+                                commento += meseGiorno[2];
+                                for (int n = 3; n < meseGiorno.Length; n++)
+                                {
+                                    commento += " " + meseGiorno[n];
+                                }
+                            }
+                            if (giornoCorretto)
+                            {
+                                inizio = new DateTime(anno, mese, giorno);
+                                if (fineUgualeInizio)
+                                    fine = inizio;
+                                res = true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // tracciare l'errore nel calcolo della data
+                ;
+            }
+            return res;
+        }
         public static bool CalcolaDateTimeDaStringa(string nomeFile, ref DateTime dateTime, ref string conclusione, ref string commento)
         {
-            int anno, mese,giorno;
+            int anno, mese, giorno;
             bool res = false;
             try
             {
@@ -118,6 +214,7 @@ namespace FotoOrganizzatore
             catch { }
             return res;
         }
+        #endregion
         #region DISCO
         public static string CreaCartella(string disco, string nome)
         {
