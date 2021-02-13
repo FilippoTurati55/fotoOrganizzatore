@@ -45,7 +45,7 @@ namespace FotoOrganizzatore
             // 
             this.disco.AutoSize = true;
             this.disco.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.disco.Location = new System.Drawing.Point(86, 36);
+            this.disco.Location = new System.Drawing.Point(35, 38);
             this.disco.Name = "disco";
             this.disco.Size = new System.Drawing.Size(88, 64);
             this.disco.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace FotoOrganizzatore
             // 
             this.costruttore.AutoSize = true;
             this.costruttore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.costruttore.Location = new System.Drawing.Point(86, 134);
+            this.costruttore.Location = new System.Drawing.Point(35, 136);
             this.costruttore.Name = "costruttore";
             this.costruttore.Size = new System.Drawing.Size(364, 64);
             this.costruttore.TabIndex = 1;
@@ -65,7 +65,7 @@ namespace FotoOrganizzatore
             // 
             this.numeroDiSerie.AutoSize = true;
             this.numeroDiSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numeroDiSerie.Location = new System.Drawing.Point(86, 225);
+            this.numeroDiSerie.Location = new System.Drawing.Point(35, 227);
             this.numeroDiSerie.Name = "numeroDiSerie";
             this.numeroDiSerie.Size = new System.Drawing.Size(430, 64);
             this.numeroDiSerie.TabIndex = 2;
@@ -74,7 +74,7 @@ namespace FotoOrganizzatore
             // identificatore
             // 
             this.identificatore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.identificatore.Location = new System.Drawing.Point(352, 376);
+            this.identificatore.Location = new System.Drawing.Point(301, 378);
             this.identificatore.Name = "identificatore";
             this.identificatore.Size = new System.Drawing.Size(1060, 71);
             this.identificatore.TabIndex = 3;
@@ -84,7 +84,7 @@ namespace FotoOrganizzatore
             // 
             this.accredita.BackColor = System.Drawing.Color.Lime;
             this.accredita.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accredita.Location = new System.Drawing.Point(839, 625);
+            this.accredita.Location = new System.Drawing.Point(788, 627);
             this.accredita.Name = "accredita";
             this.accredita.Size = new System.Drawing.Size(573, 274);
             this.accredita.TabIndex = 4;
@@ -96,7 +96,7 @@ namespace FotoOrganizzatore
             // 
             this.button1.BackColor = System.Drawing.Color.Red;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(129, 625);
+            this.button1.Location = new System.Drawing.Point(78, 627);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(573, 274);
             this.button1.TabIndex = 5;
@@ -108,7 +108,7 @@ namespace FotoOrganizzatore
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(86, 376);
+            this.label1.Location = new System.Drawing.Point(35, 378);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 64);
             this.label1.TabIndex = 6;
@@ -118,7 +118,7 @@ namespace FotoOrganizzatore
             // 
             this.discoImpostazione.AutoSize = true;
             this.discoImpostazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.discoImpostazione.Location = new System.Drawing.Point(526, 36);
+            this.discoImpostazione.Location = new System.Drawing.Point(475, 38);
             this.discoImpostazione.Name = "discoImpostazione";
             this.discoImpostazione.Size = new System.Drawing.Size(214, 64);
             this.discoImpostazione.TabIndex = 7;
@@ -128,7 +128,7 @@ namespace FotoOrganizzatore
             // 
             this.costruttoreImpostazione.AutoSize = true;
             this.costruttoreImpostazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.costruttoreImpostazione.Location = new System.Drawing.Point(526, 134);
+            this.costruttoreImpostazione.Location = new System.Drawing.Point(475, 136);
             this.costruttoreImpostazione.Name = "costruttoreImpostazione";
             this.costruttoreImpostazione.Size = new System.Drawing.Size(214, 64);
             this.costruttoreImpostazione.TabIndex = 8;
@@ -138,7 +138,7 @@ namespace FotoOrganizzatore
             // 
             this.numeroDiSerieImpostazione.AutoSize = true;
             this.numeroDiSerieImpostazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numeroDiSerieImpostazione.Location = new System.Drawing.Point(526, 225);
+            this.numeroDiSerieImpostazione.Location = new System.Drawing.Point(475, 227);
             this.numeroDiSerieImpostazione.Name = "numeroDiSerieImpostazione";
             this.numeroDiSerieImpostazione.Size = new System.Drawing.Size(214, 64);
             this.numeroDiSerieImpostazione.TabIndex = 9;

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using FotoOrganizzatore.Dialogs;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FotoOrganizzatore
 {
@@ -24,6 +27,9 @@ namespace FotoOrganizzatore
         }
         void ProcessDirectory(string dir, Calendario calendario)
         {
+            string[] fileEntries;
+            DateTime dataTime;
+            string nomeProposto = "";
             // verifica correttezza nome cartella
             string[] dirScomposto = dir.Replace("/", "\\").Split('\\');
             if (dirScomposto.Length == 4)
@@ -31,9 +37,58 @@ namespace FotoOrganizzatore
                 DateTime inizio = new DateTime(),
                          fine = new DateTime();
                 string b = "";
-                Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b);
+                if (Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b))
+                {
+                    // nome cartella corretto
+                    ;
+                }
+                else
+                {
+                    // nome cartella errato, cerca le date dei file presenti in cartella
+                    // todo : considerare il caso di cartella vuota
+                    fileEntries = Directory.GetFiles(dir);
+                    DateTime dataMinima = new DateTime(3000,1,1);
+                    DateTime dataMassima = new DateTime(1,1,1);
+                    foreach (string fileName in fileEntries)
+                    {
+                        dataTime = Utility.CalcolaDateTimeFileImmagine(fileName);
+                        if (dataTime != null)
+                        {
+                            if (dataTime > dataMassima)
+                                dataMassima = dataTime;
+                            if (dataTime < dataMinima)
+                                dataMinima = dataTime;
+                        }
+                    }
+                    RinominaCartella aub = new RinominaCartella();
+                    aub.setnomeErratoCartella(dir);
+                    string dataMin = dataMinima.ToShortDateString();
+                    aub.setdataMinima(dataMin);
+                    string dataMax = dataMassima.ToShortDateString();
+                    aub.setdataMassima(dataMax);
+                    if (dataMax == dataMin)
+                    {
+                        nomeProposto = dataMinima.Month.ToString("D2") +
+                            " " + dataMinima.Day.ToString("D2");
+                        
+                    }
+                    aub.setnomeProposto(nomeProposto);
+                    // aub.inizializza(drive, label, numeroDiSerie);
+                    DialogResult dr;
+                    aub.Size = new Size(650, 300);
+                    //aub.Size = new System.Drawing.Size(480, 370);
+                    dr = aub.ShowDialog();
+                    if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
-            string[] fileEntries = Directory.GetFiles(dir);
+            fileEntries = Directory.GetFiles(dir);
             if (fileEntries.Length != 0)
             {
                 // crea calendario

@@ -215,8 +215,22 @@ namespace FotoOrganizzatore
             return res;
         }
         #endregion
-        #region DISCO
-        public static string CreaCartella(string disco, string nome)
+        #region DATA_DA_FILE_IMMAGINE
+        public static DateTime CalcolaDateTimeFileImmagine(string nomeFile)
+        {
+            DateTime dateTime = new DateTime();
+            string conclusione = "",
+                commento = "";
+            if (!Utility.CalcolaDateTimeDaStringa(nomeFile, ref dateTime, ref conclusione, ref commento))
+            {
+                // il nome della foto potrebbe non contenere la data
+                dateTime = FileImmagini.CalcolaMomentoScattoFoto(nomeFile);
+            }
+            return dateTime;
+        }
+#endregion
+#region DISCO
+public static string CreaCartella(string disco, string nome)
         {
             string nomeCompleto = disco + @"/" + nome;
             try
