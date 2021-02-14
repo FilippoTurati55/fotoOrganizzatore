@@ -228,9 +228,40 @@ namespace FotoOrganizzatore
             }
             return dateTime;
         }
-#endregion
-#region DISCO
-public static string CreaCartella(string disco, string nome)
+        #endregion
+        #region NOME_CARTELLA_DA_DATA
+        public static string CalcolaNomeCartella(DateTime dataInizio, DateTime dataFine)
+        {
+            return CalcolaNomeCartella(dataInizio, dataFine, "");
+        }
+        public static string CalcolaNomeCartella(DateTime dataInizio, DateTime dataFine, string commento)
+        {
+            string nomeCartella = dataInizio.Month.ToString("D2") + " " +
+                                    dataInizio.Day.ToString("D2");
+            if (dataInizio.ToShortDateString() != dataFine.ToShortDateString())
+            {
+                nomeCartella += "_";
+                if (dataInizio.Year != dataFine.Year)
+                {
+                    nomeCartella += dataFine.Year.ToString("D4") + "_";
+                    nomeCartella += dataFine.Month.ToString("D2") + "_";
+                }
+                else
+                {
+                    if (dataInizio.Month != dataFine.Month)
+                    {
+                        nomeCartella += dataFine.Month.ToString("D2") + "_";
+                    }
+                }
+                nomeCartella += dataFine.Day.ToString("D2");
+            }
+            if (commento != "")
+                nomeCartella += " " + commento;
+            return nomeCartella;
+        }
+        #endregion
+        #region DISCO
+        public static string CreaCartella(string disco, string nome)
         {
             string nomeCompleto = disco + @"/" + nome;
             try

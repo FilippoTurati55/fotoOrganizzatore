@@ -63,15 +63,9 @@ namespace FotoOrganizzatore
                     RinominaCartella aub = new RinominaCartella();
                     aub.setnomeErratoCartella(dir);
                     string dataMin = dataMinima.ToShortDateString();
-                    aub.setdataMinima(dataMin);
                     string dataMax = dataMassima.ToShortDateString();
-                    aub.setdataMassima(dataMax);
-                    if (dataMax == dataMin)
-                    {
-                        nomeProposto = dataMinima.Month.ToString("D2") +
-                            " " + dataMinima.Day.ToString("D2");
-                        
-                    }
+                    aub.setdataMinimaMassima(dataMin, dataMax);
+                    nomeProposto = Utility.CalcolaNomeCartella(dataMinima, dataMassima);
                     aub.setnomeProposto(nomeProposto);
                     // aub.inizializza(drive, label, numeroDiSerie);
                     DialogResult dr;
@@ -80,11 +74,11 @@ namespace FotoOrganizzatore
                     dr = aub.ShowDialog();
                     if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
                     {
-
+                        // correggi
                     }
                     else
                     {
-
+                        // crea cartella speciale
                     }
                 }
             }

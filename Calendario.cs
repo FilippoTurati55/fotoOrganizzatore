@@ -343,7 +343,7 @@ namespace FotoOrganizzatore
             string nomeCartella;
             string nomeCompleto = "";
             ArrayList dateDaRimuovereDaLista = new ArrayList();
-            nomeCartella = CalcolaNomeCartella(dataInizio, dataFine, commento);
+            nomeCartella = Utility.CalcolaNomeCartella(dataInizio, dataFine, commento);
             if (dataInizio != dataFine)
             {
                 int a = 0;
@@ -427,7 +427,7 @@ namespace FotoOrganizzatore
                 nomeCartella += " " + commento;
             return nomeCartella;
         }
-        string CalcolaNomeCartella(DateTime dataInizio, DateTime dataFine, string commento)
+        /*string CalcolaNomeCartella(DateTime dataInizio, DateTime dataFine, string commento)
         {
             string nomeCartella = dataInizio.Month.ToString("D2") + " " +
                                     dataInizio.Day.ToString("D2");
@@ -452,6 +452,7 @@ namespace FotoOrganizzatore
                 nomeCartella += " " + commento;
             return nomeCartella;
         }
+        */
         // public string cercaCartellaDaData(DateTime dateTime, bool backup)
         string cercaCartellaDaData(DateTime dateTime, string rootBase)
             // rootBase è cambiato rispetto al parametro precedente, va verificato tutto

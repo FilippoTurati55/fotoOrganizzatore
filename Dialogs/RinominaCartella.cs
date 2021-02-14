@@ -12,6 +12,7 @@ namespace FotoOrganizzatore.Dialogs
 {
     public partial class RinominaCartella : Form
     {
+        int posizioneDescrizioneDataMinima;
         public RinominaCartella()
         {
             InitializeComponent();
@@ -19,15 +20,32 @@ namespace FotoOrganizzatore.Dialogs
         #region
         public void setnomeErratoCartella(string name)
         {
+            int posX = disco.Location.X;
+            Font font = disco.Font; 
+            Size dim =  TextRenderer.MeasureText(disco.Text, font);
+            posX += dim.Width;
             nomeErratoCartella.Text = name;
+            font = nomeErratoCartella.Font;
+            dim = TextRenderer.MeasureText(nomeErratoCartella.Text, font);
+            posX += dim.Width;
+            label2.Location = new Point(posX, label2.Location.Y);
         }
-        public void setdataMinima(string data)
+        public void setdataMinimaMassima(string newDataMinima, string newDataMassima)
         {
-            dataMinima.Text = data;
-        }
-        public void setdataMassima(string data)
-        {
-            dataMassima.Text = data;
+            int posX = descrizioneDataMinima.Location.X;
+            Font font = descrizioneDataMinima.Font;
+            Size dim = TextRenderer.MeasureText(descrizioneDataMinima.Text, font);
+            posX += dim.Width;
+            posizioneDescrizioneDataMinima = posX;
+            dataMinima.Text = newDataMinima;
+            dataMinima.Location = new Point(posizioneDescrizioneDataMinima, this.dataMinima.Location.Y);
+
+            font = aDuepunti.Font;
+            dim = TextRenderer.MeasureText(aDuepunti.Text, font);
+            posX = posizioneDescrizioneDataMinima - dim.Width;
+            aDuepunti.Location = new Point(posX, aDuepunti.Location.Y);
+            dataMassima.Text = newDataMassima;
+            dataMassima.Location = new Point(posizioneDescrizioneDataMinima, dataMassima.Location.Y);
         }
         public void setnomeProposto(string name)
         {

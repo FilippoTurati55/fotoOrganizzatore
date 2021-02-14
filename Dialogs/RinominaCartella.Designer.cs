@@ -33,15 +33,17 @@ namespace FotoOrganizzatore.Dialogs
             this.dataMinima = new System.Windows.Forms.Label();
             this.nomeErratoCartella = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.accredita = new System.Windows.Forms.Button();
-            this.numeroDiSerie = new System.Windows.Forms.Label();
-            this.costruttore = new System.Windows.Forms.Label();
+            this.aDuepunti = new System.Windows.Forms.Label();
+            this.descrizioneDataMinima = new System.Windows.Forms.Label();
             this.disco = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nomeProposto = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataMassima
@@ -84,21 +86,9 @@ namespace FotoOrganizzatore.Dialogs
             this.label1.TabIndex = 16;
             this.label1.Text = "nome proposto:";
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(88, 618);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(573, 274);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Mantieni nome";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // accredita
             // 
-            this.accredita.BackColor = System.Drawing.Color.Lime;
+            this.accredita.BackColor = System.Drawing.Color.YellowGreen;
             this.accredita.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accredita.Location = new System.Drawing.Point(1552, 618);
             this.accredita.Name = "accredita";
@@ -108,25 +98,25 @@ namespace FotoOrganizzatore.Dialogs
             this.accredita.UseVisualStyleBackColor = false;
             this.accredita.Click += new System.EventHandler(this.accredita_Click);
             // 
-            // numeroDiSerie
+            // aDuepunti
             // 
-            this.numeroDiSerie.AutoSize = true;
-            this.numeroDiSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numeroDiSerie.Location = new System.Drawing.Point(1433, 211);
-            this.numeroDiSerie.Name = "numeroDiSerie";
-            this.numeroDiSerie.Size = new System.Drawing.Size(75, 64);
-            this.numeroDiSerie.TabIndex = 12;
-            this.numeroDiSerie.Text = "a:";
+            this.aDuepunti.AutoSize = true;
+            this.aDuepunti.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aDuepunti.Location = new System.Drawing.Point(1433, 211);
+            this.aDuepunti.Name = "aDuepunti";
+            this.aDuepunti.Size = new System.Drawing.Size(75, 64);
+            this.aDuepunti.TabIndex = 12;
+            this.aDuepunti.Text = "a:";
             // 
-            // costruttore
+            // descrizioneDataMinima
             // 
-            this.costruttore.AutoSize = true;
-            this.costruttore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.costruttore.Location = new System.Drawing.Point(45, 127);
-            this.costruttore.Name = "costruttore";
-            this.costruttore.Size = new System.Drawing.Size(1463, 64);
-            this.costruttore.TabIndex = 11;
-            this.costruttore.Text = "all\'interno sono presenti fotografie con date che vanno da:";
+            this.descrizioneDataMinima.AutoSize = true;
+            this.descrizioneDataMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descrizioneDataMinima.Location = new System.Drawing.Point(45, 127);
+            this.descrizioneDataMinima.Name = "descrizioneDataMinima";
+            this.descrizioneDataMinima.Size = new System.Drawing.Size(1463, 64);
+            this.descrizioneDataMinima.TabIndex = 11;
+            this.descrizioneDataMinima.Text = "all\'interno sono presenti fotografie con date che vanno da:";
             // 
             // disco
             // 
@@ -142,7 +132,7 @@ namespace FotoOrganizzatore.Dialogs
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1039, 31);
+            this.label2.Location = new System.Drawing.Point(1334, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(500, 64);
             this.label2.TabIndex = 20;
@@ -152,7 +142,7 @@ namespace FotoOrganizzatore.Dialogs
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(457, 536);
+            this.label3.Location = new System.Drawing.Point(339, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(627, 64);
             this.label3.TabIndex = 22;
@@ -166,17 +156,38 @@ namespace FotoOrganizzatore.Dialogs
             this.nomeProposto.Size = new System.Drawing.Size(1060, 72);
             this.nomeProposto.TabIndex = 23;
             // 
-            // button2
+            // button3
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(735, 618);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(573, 274);
-            this.button2.TabIndex = 24;
-            this.button2.Text = "Nuovo nome speciale";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.button3.BackColor = System.Drawing.Color.Coral;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(72, 618);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(573, 274);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "Mantieni nome";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Coral;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(719, 618);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(573, 274);
+            this.button4.TabIndex = 24;
+            this.button4.Text = "Nuovo nome speciale";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(34, 511);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1361, 408);
+            this.panel1.TabIndex = 25;
             // 
             // RinominaCartella
             // 
@@ -184,21 +195,23 @@ namespace FotoOrganizzatore.Dialogs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2359, 921);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.nomeProposto);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataMassima);
             this.Controls.Add(this.dataMinima);
             this.Controls.Add(this.nomeErratoCartella);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.accredita);
-            this.Controls.Add(this.numeroDiSerie);
-            this.Controls.Add(this.costruttore);
+            this.Controls.Add(this.aDuepunti);
+            this.Controls.Add(this.descrizioneDataMinima);
             this.Controls.Add(this.disco);
+            this.Controls.Add(this.panel1);
             this.Name = "RinominaCartella";
             this.Text = "RinominaCartella";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,14 +223,15 @@ namespace FotoOrganizzatore.Dialogs
         private System.Windows.Forms.Label dataMinima;
         private System.Windows.Forms.Label nomeErratoCartella;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button accredita;
-        private System.Windows.Forms.Label numeroDiSerie;
-        private System.Windows.Forms.Label costruttore;
+        private System.Windows.Forms.Label aDuepunti;
+        private System.Windows.Forms.Label descrizioneDataMinima;
         private System.Windows.Forms.Label disco;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox nomeProposto;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Panel panel1;
     }
 }
