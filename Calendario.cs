@@ -69,8 +69,8 @@ namespace FotoOrganizzatore
             {
                 // il nome della foto potrebbe non contenere la data
                 DateTime dataFoto = new DateTime();
-                dataFoto = FileImmagini.CalcolaMomentoScattoFoto(pathCompletoFoto);
-                FileImmagini.VerificaDataFotoConPath(dataFoto, pathCompletoFoto);
+                if (FileImmagini.CalcolaMomentoScattoFoto(pathCompletoFoto, ref dataFoto))
+                    FileImmagini.VerificaDataFotoConPath(dataFoto, pathCompletoFoto);
             }
         }
         public void MostraCalendarioFoto(Panel pannello, bool soloDateNuove)

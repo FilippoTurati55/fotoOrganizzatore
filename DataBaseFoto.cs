@@ -28,7 +28,7 @@ namespace FotoOrganizzatore
         void ProcessDirectory(string dir, Calendario calendario)
         {
             string[] fileEntries;
-            DateTime dataTime;
+            DateTime dataTime = new DateTime();
             string nomeProposto = "";
             // verifica correttezza nome cartella
             string[] dirScomposto = dir.Replace("/", "\\").Split('\\');
@@ -51,8 +51,7 @@ namespace FotoOrganizzatore
                     DateTime dataMassima = new DateTime(1,1,1);
                     foreach (string fileName in fileEntries)
                     {
-                        dataTime = Utility.CalcolaDateTimeFileImmagine(fileName);
-                        if (dataTime != null)
+                        if (Utility.CalcolaDateTimeFileImmagine(fileName, ref dataTime))
                         {
                             if (dataTime > dataMassima)
                                 dataMassima = dataTime;
@@ -75,6 +74,9 @@ namespace FotoOrganizzatore
                     if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
                     {
                         // correggi
+                        string nomeCompleto = pathBase + "\\" + dirScomposto[2] + "\\" + nomeProposto;
+                        ;
+                        Directory.Move(dir, nomeCompleto);
                     }
                     else
                     {

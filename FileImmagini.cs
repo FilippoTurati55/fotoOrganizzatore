@@ -115,20 +115,19 @@ namespace FotoOrganizzatore
             throw new ArgumentException(errorMessage, "binaryReader");
         }
         #region DATE_TIME
-        public static DateTime CalcolaDataFoto(string fileName)
+        public static bool CalcolaDataFoto(string fileName, ref DateTime dt)
         {
-            DateTime errore = new DateTime(0);
-            DateTime risultato = errore;
-            risultato = CalcolaDataFotoDaNomeFile(fileName);
-            if (risultato == errore)
+            bool res = false;
+            if (!CalcolaDataFotoDaNomeFile(fileName, ref dt))
+            {
                 // calcola data da file
-                risultato = CalcolaMomentoScattoFoto(fileName);
-            ;
-            return risultato;
+                res = CalcolaMomentoScattoFoto(fileName, ref dt);
+            }
+            return res;
         }
-        static DateTime CalcolaDataFotoDaNomeFile(string fileName)
+        static bool CalcolaDataFotoDaNomeFile(string fileName, ref DateTime dt)
         {
-            DateTime risultato = new DateTime(0);
+            bool res = false;
             try
             {
                 string[] fotoScomposta = fileName.Split('\\');
@@ -142,19 +141,24 @@ namespace FotoOrganizzatore
                 int giornoi = Int16.Parse(giorno);
                 if ((annoi > 1900) && (annoi < 2100) && (mesei < 13) && (giornoi < 32))
                 {
-                    risultato = new DateTime(annoi, mesei, giornoi);
+                    dt = new DateTime(annoi, mesei, giornoi);
+                    res = true;
                 }
             }
             catch { }
             //risultato = new DateTime()
-            return risultato;
+            return res;
         }
-        static public DateTime CalcolaMomentoScattoFoto(string foto)
+        static public bool CalcolaMomentoScattoFoto(string foto, ref DateTime dt)
         {
-            DateTime dt = new DateTime();
-            if (!CalcolaMomentoScattoDaProprietaFoto(foto, ref dt))
-                dt = CalcolaMomentoScattoDaInfoFile(foto);
-            return dt;
+            bool res = false;
+            if (IsImage(foto))
+            {
+                if (!CalcolaMomentoScattoDaProprietaFoto(foto, ref dt))
+                    dt = CalcolaMomentoScattoDaInfoFile(foto);
+                res = true;
+            }
+            return res;
         }
         static public DateTime CalcolaMomentoScattoDaInfoFile(string foto)
         {
@@ -172,37 +176,40 @@ namespace FotoOrganizzatore
             {
                 //System.Drawing.Image image = new Bitmap(foto);
                 System.Drawing.Image image = System.Drawing.Image.FromFile(foto);
-
-                PropertyItem propItem1 = image.GetPropertyItem(0x132);
-                PropertyItem propItem2 = null;
-                PropertyItem propItem3 = null;
-                PropertyItem propItem4 = null;
                 try
                 {
-                    propItem2 = image.GetPropertyItem(0x9003);
-                    propItem3 = image.GetPropertyItem(0x9004);
-                    propItem4 = image.GetPropertyItem(0x112);
+                    PropertyItem propItem1 = image.GetPropertyItem(0x132);
+                    PropertyItem propItem2 = null;
+                    PropertyItem propItem3 = null;
+                    PropertyItem propItem4 = null;
+                    try
+                    {
+                        propItem2 = image.GetPropertyItem(0x9003);
+                        propItem3 = image.GetPropertyItem(0x9004);
+                        propItem4 = image.GetPropertyItem(0x112);
+                    }
+                    catch { };
+                    System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                    string data1 = encoding.GetString(propItem1.Value);
+                    string data2 = "";
+                    string data3 = "";
+                    if (propItem2 != null)
+                        data2 = encoding.GetString(propItem2.Value);
+                    if (propItem3 != null)
+                        data3 = encoding.GetString(propItem3.Value);
+                    if ((data1 != data2) && (data1 != data3))
+                    {
+                        // temporaneo Variabili.DiversitaInRicercaDataScatto++;
+                    }
+                    int anni = System.Int32.Parse(data1.Substring(0, 4));
+                    dt.AddYears(anni);
+                    int mesi = System.Int32.Parse(data1.Substring(5, 2));
+                    int giorni = System.Int32.Parse(data1.Substring(8, 2));
+                    DateTime dattim = new DateTime(anni, mesi, giorni);
+                    dt = dattim;
+                    result = true;
                 }
-                catch { };
-                System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-                string data1 = encoding.GetString(propItem1.Value);
-                string data2 = "";
-                string data3 = "";
-                if (propItem2 != null)
-                    data2 = encoding.GetString(propItem2.Value);
-                if (propItem3 != null)
-                    data3 = encoding.GetString(propItem3.Value);
-                if ((data1 != data2) && (data1 != data3))
-                {
-                    // temporaneo Variabili.DiversitaInRicercaDataScatto++;
-                }
-                int anni = System.Int32.Parse(data1.Substring(0, 4));
-                dt.AddYears(anni);
-                int mesi = System.Int32.Parse(data1.Substring(5, 2));
-                int giorni = System.Int32.Parse(data1.Substring(8, 2));
-                DateTime dattim = new DateTime(anni, mesi, giorni);
-                dt = dattim;
-                result = true;
+                catch { }
                 image.Dispose();
             }
             catch { }

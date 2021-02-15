@@ -216,17 +216,19 @@ namespace FotoOrganizzatore
         }
         #endregion
         #region DATA_DA_FILE_IMMAGINE
-        public static DateTime CalcolaDateTimeFileImmagine(string nomeFile)
+        public static bool CalcolaDateTimeFileImmagine(string nomeFile, ref DateTime dt)
         {
-            DateTime dateTime = new DateTime();
+            bool res = false;
             string conclusione = "",
                 commento = "";
-            if (!Utility.CalcolaDateTimeDaStringa(nomeFile, ref dateTime, ref conclusione, ref commento))
+            res = Utility.CalcolaDateTimeDaStringa(nomeFile, ref dt, ref conclusione, ref commento);
+            if (!res)
             {
                 // il nome della foto potrebbe non contenere la data
-                dateTime = FileImmagini.CalcolaMomentoScattoFoto(nomeFile);
+                if (FileImmagini.CalcolaMomentoScattoFoto(nomeFile, ref dt))
+                    res = true;
             }
-            return dateTime;
+            return res;
         }
         #endregion
         #region NOME_CARTELLA_DA_DATA
