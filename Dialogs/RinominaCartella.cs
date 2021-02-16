@@ -47,12 +47,30 @@ namespace FotoOrganizzatore.Dialogs
             dataMassima.Text = newDataMassima;
             dataMassima.Location = new Point(posizioneDescrizioneDataMinima, dataMassima.Location.Y);
         }
-        public void setnomeProposto(string name)
+        public void setnomeCommentoProposto(string name, string commento)
         {
+            int posX = label1.Location.X;
+            Font font = label1.Font;
+            Size dim = TextRenderer.MeasureText(label1.Text, font);
+            posX += dim.Width;
             nomeProposto.Text = name;
+            nomeProposto.Location = new Point(posX, nomeProposto.Location.Y);
+            commentoProposto.Text = name;
+            //font = nomeProposto.Font;
+            //dim = TextRenderer.MeasureText(nomeProposto.Text, font);
+            posX += nomeProposto.Width;
+            label4.Location = new Point(posX, label4.Location.Y);
+            font = label4.Font;
+            dim = TextRenderer.MeasureText(label4.Text, font);
+            posX += dim.Width;
+            commentoProposto.Location = new Point(posX, commentoProposto.Location.Y);
+            commentoProposto.Text = commento;
+        }
+        public string getCommento()
+        {
+            return commentoProposto.Text;
         }
         #endregion
-
         private void accredita_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;

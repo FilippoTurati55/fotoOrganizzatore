@@ -338,5 +338,10 @@ namespace FotoOrganizzatore
             }
             return nomeSenzaCommento;
         }
+        public static bool isNumber(string nome)
+        {
+            int valore;
+            return Int32.TryParse(nome, out valore);
+        }
     }
 }

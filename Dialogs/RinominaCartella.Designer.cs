@@ -43,6 +43,8 @@ namespace FotoOrganizzatore.Dialogs
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.commentoProposto = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,9 +153,9 @@ namespace FotoOrganizzatore.Dialogs
             // nomeProposto
             // 
             this.nomeProposto.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nomeProposto.Location = new System.Drawing.Point(479, 362);
+            this.nomeProposto.Location = new System.Drawing.Point(479, 369);
             this.nomeProposto.Name = "nomeProposto";
-            this.nomeProposto.Size = new System.Drawing.Size(1060, 72);
+            this.nomeProposto.Size = new System.Drawing.Size(390, 72);
             this.nomeProposto.TabIndex = 23;
             // 
             // button3
@@ -189,12 +191,32 @@ namespace FotoOrganizzatore.Dialogs
             this.panel1.Size = new System.Drawing.Size(1361, 408);
             this.panel1.TabIndex = 25;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(911, 369);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(539, 64);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "commento proposto:";
+            // 
+            // commentoProposto
+            // 
+            this.commentoProposto.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.commentoProposto.Location = new System.Drawing.Point(1469, 369);
+            this.commentoProposto.Name = "commentoProposto";
+            this.commentoProposto.Size = new System.Drawing.Size(820, 72);
+            this.commentoProposto.TabIndex = 27;
+            // 
             // RinominaCartella
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2359, 921);
+            this.Controls.Add(this.commentoProposto);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.nomeProposto);
             this.Controls.Add(this.label2);
@@ -233,5 +255,7 @@ namespace FotoOrganizzatore.Dialogs
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox commentoProposto;
     }
 }

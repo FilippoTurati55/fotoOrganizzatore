@@ -30,6 +30,7 @@ namespace FotoOrganizzatore
             string[] fileEntries;
             DateTime dataTime = new DateTime();
             string nomeProposto = "";
+            string commentoProposto = "";
             // verifica correttezza nome cartella
             string[] dirScomposto = dir.Replace("/", "\\").Split('\\');
             if (dirScomposto.Length == 4)
@@ -59,24 +60,38 @@ namespace FotoOrganizzatore
                                 dataMinima = dataTime;
                         }
                     }
+                    // calcola commento proposto
+                    string[] commento = dirScomposto[3].Split(' ');
+                    for (int n = 0; n < commento.Length; n++)
+                    {
+                        if (!Utility.isNumber(commento[n]))
+                        {
+                            if (commentoProposto != "")
+                                commentoProposto += " ";
+                            commentoProposto += commento[n];
+                        }
+                    }
                     RinominaCartella aub = new RinominaCartella();
                     aub.setnomeErratoCartella(dir);
                     string dataMin = dataMinima.ToShortDateString();
                     string dataMax = dataMassima.ToShortDateString();
                     aub.setdataMinimaMassima(dataMin, dataMax);
                     nomeProposto = Utility.CalcolaNomeCartella(dataMinima, dataMassima);
-                    aub.setnomeProposto(nomeProposto);
+                    aub.setnomeCommentoProposto(nomeProposto,commentoProposto);
                     // aub.inizializza(drive, label, numeroDiSerie);
                     DialogResult dr;
-                    aub.Size = new Size(650, 300);
+                    //aub.Size = new Size(650, 300);
                     //aub.Size = new System.Drawing.Size(480, 370);
                     dr = aub.ShowDialog();
                     if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
                     {
                         // correggi
                         string nomeCompleto = pathBase + "\\" + dirScomposto[2] + "\\" + nomeProposto;
-                        ;
+                        string commentoFinale = aub.getCommento();
+                        if (commentoFinale != "")
+                            nomeCompleto += " " + commentoFinale;
                         Directory.Move(dir, nomeCompleto);
+                        dir = nomeCompleto;
                     }
                     else
                     {
