@@ -71,6 +71,9 @@ namespace FotoOrganizzatore
                             commentoProposto += commento[n];
                         }
                     }
+                    // verificare se le foto sono nell'anno giusto!
+                    // per es. la cartella c:\foto\2005\brescia 18-6-05\
+                    // contiene foto con data 2002
                     RinominaCartella aub = new RinominaCartella();
                     aub.setnomeErratoCartella(dir);
                     string dataMin = dataMinima.ToShortDateString();
@@ -90,12 +93,12 @@ namespace FotoOrganizzatore
                         string commentoFinale = aub.getCommento();
                         if (commentoFinale != "")
                             nomeCompleto += " " + commentoFinale;
-                        Directory.Move(dir, nomeCompleto);
+                        Utility.MuoviCartella(dir, nomeCompleto);
                         dir = nomeCompleto;
                     }
                     else
                     {
-                        // crea cartella speciale
+                        ; // crea cartella speciale
                     }
                 }
             }
