@@ -12,6 +12,8 @@ namespace FotoOrganizzatore.Dialogs
 {
     public partial class RinominaCartella : Form
     {
+        int annoCartellaIniziale;
+        bool annoModificato;
         int posizioneDescrizioneDataMinima;
         public RinominaCartella()
         {
@@ -25,6 +27,9 @@ namespace FotoOrganizzatore.Dialogs
             Size dim =  TextRenderer.MeasureText(disco.Text, font);
             posX += dim.Width;
             nomeErratoCartella.Text = name;
+            string[] nomeSplit = name.Split('\\');
+            annoCartellaIniziale = 0;
+            Int32.TryParse(nomeSplit[2], out annoCartellaIniziale);
             font = nomeErratoCartella.Font;
             dim = TextRenderer.MeasureText(nomeErratoCartella.Text, font);
             posX += dim.Width;
@@ -47,17 +52,27 @@ namespace FotoOrganizzatore.Dialogs
             dataMassima.Text = newDataMassima;
             dataMassima.Location = new Point(posizioneDescrizioneDataMinima, dataMassima.Location.Y);
         }
-        public void setnomeCommentoProposto(string name, string commento)
+        public void setnomeCommentoProposto(DateTime dataMinima, DateTime dataMassima, string commento)
         {
             int posX = label1.Location.X;
             Font font = label1.Font;
             Size dim = TextRenderer.MeasureText(label1.Text, font);
             posX += dim.Width;
-            nomeProposto.Text = name;
+            string name = Utility.CalcolaNomeCartella(dataMinima, dataMassima);
+            if (annoCartellaIniziale != dataMinima.Year)
+            {
+                // le foto presenti nella cartella sono di un altro anno!
+                nomeProposto.Text = dataMinima.Year.ToString("D4") + @"\" + name;
+                nomeProposto.BackColor = Color.Yellow;
+                annoModificato = true;
+            }
+            else
+            {
+                nomeProposto.Text = name;
+                nomeProposto.BackColor = SystemColors.Window;
+                annoModificato = false;
+            }
             nomeProposto.Location = new Point(posX, nomeProposto.Location.Y);
-            commentoProposto.Text = name;
-            //font = nomeProposto.Font;
-            //dim = TextRenderer.MeasureText(nomeProposto.Text, font);
             posX += nomeProposto.Width;
             label4.Location = new Point(posX, label4.Location.Y);
             font = label4.Font;
@@ -69,6 +84,14 @@ namespace FotoOrganizzatore.Dialogs
         public string getCommento()
         {
             return commentoProposto.Text;
+        }
+        public string getNome()
+        {
+            return nomeProposto.Text;
+        }
+        public bool getAnnoModificato()
+        {
+            return annoModificato;
         }
         #endregion
         private void accredita_Click(object sender, EventArgs e)

@@ -281,14 +281,17 @@ namespace FotoOrganizzatore
         }
         public static bool MuoviCartella(string sorgente, string destinazione)
         {
-            if (!Directory.Exists(destinazione))
+            if (sorgente != destinazione)
             {
-                Directory.Move(sorgente, destinazione);
-            }
-            else
-            {
-                MuoviCartellainEsistente(sorgente, destinazione);
-                Directory.Delete(sorgente);
+                if (!Directory.Exists(destinazione))
+                {
+                    Directory.Move(sorgente, destinazione);
+                }
+                else
+                {
+                    MuoviCartellainEsistente(sorgente, destinazione);
+                    Directory.Delete(sorgente);
+                }
             }
             return true;
         }

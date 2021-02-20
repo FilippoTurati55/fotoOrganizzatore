@@ -29,7 +29,6 @@ namespace FotoOrganizzatore
         {
             string[] fileEntries;
             DateTime dataTime = new DateTime();
-            string nomeProposto = "";
             string commentoProposto = "";
             // verifica correttezza nome cartella
             string[] dirScomposto = dir.Replace("/", "\\").Split('\\');
@@ -62,10 +61,13 @@ namespace FotoOrganizzatore
                     }
                     // calcola commento proposto
                     string[] commento = dirScomposto[3].Split(' ');
+                    bool notNumber = false;
                     for (int n = 0; n < commento.Length; n++)
                     {
-                        if (!Utility.isNumber(commento[n]))
+                        if ((!Utility.isNumber(commento[n])) ||
+                            (notNumber))
                         {
+                            notNumber = true;
                             if (commentoProposto != "")
                                 commentoProposto += " ";
                             commentoProposto += commento[n];
@@ -79,8 +81,7 @@ namespace FotoOrganizzatore
                     string dataMin = dataMinima.ToShortDateString();
                     string dataMax = dataMassima.ToShortDateString();
                     aub.setdataMinimaMassima(dataMin, dataMax);
-                    nomeProposto = Utility.CalcolaNomeCartella(dataMinima, dataMassima);
-                    aub.setnomeCommentoProposto(nomeProposto,commentoProposto);
+                    aub.setnomeCommentoProposto(dataMinima, dataMassima,commentoProposto);
                     // aub.inizializza(drive, label, numeroDiSerie);
                     DialogResult dr;
                     //aub.Size = new Size(650, 300);
@@ -89,11 +90,22 @@ namespace FotoOrganizzatore
                     if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
                     {
                         // correggi
-                        string nomeCompleto = pathBase + "\\" + dirScomposto[2] + "\\" + nomeProposto;
+                        string nomeCompleto;
+                        if (aub.getAnnoModificato())
+                        {
+                            nomeCompleto = pathBase + "\\" + aub.getNome();
+                        }
+                        else
+                        {
+                            nomeCompleto = pathBase + "\\" + dirScomposto[2] + "\\" + aub.getNome();
+                        }
                         string commentoFinale = aub.getCommento();
                         if (commentoFinale != "")
                             nomeCompleto += " " + commentoFinale;
-                        Utility.MuoviCartella(dir, nomeCompleto);
+                        if (!Utility.MuoviCartella(dir, nomeCompleto))
+                        {
+                            ;  // errore
+                        }
                         dir = nomeCompleto;
                     }
                     else
