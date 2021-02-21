@@ -102,10 +102,7 @@ namespace FotoOrganizzatore
                         string commentoFinale = aub.getCommento();
                         if (commentoFinale != "")
                             nomeCompleto += " " + commentoFinale;
-                        if (!Utility.MuoviCartella(dir, nomeCompleto))
-                        {
-                            ;  // errore
-                        }
+                        Utility.MuoviCartella(dir, nomeCompleto);
                         dir = nomeCompleto;
                     }
                     else
@@ -131,9 +128,10 @@ namespace FotoOrganizzatore
         }
         void ProcessFile(string path)
         {
+            controllaNormalizzaNomeFile(path);
             aggiungiFoto(path);
         }
-        public bool aggiungiFoto(string path)
+        bool aggiungiFoto(string path)
         {
             bool result = false;
             if (File.Exists(path))
@@ -144,7 +142,7 @@ namespace FotoOrganizzatore
             }
             return result;
         }
-        public bool aggiungiFoto(long dimensione, string path)
+        bool aggiungiFoto(long dimensione, string path)
         {
             bool result = false;
             if (!elencoFoto.ContainsKey(dimensione))
@@ -167,6 +165,27 @@ namespace FotoOrganizzatore
                 string[] array4 = elencoFoto[dimensione];
             }
             return result;
+        }
+        string controllaNormalizzaNomeFile(string fileName)
+        {
+            string nome = fileName;
+            if (!verificaNomeFile(fileName))
+            {
+                nome = normalizzaNomeFile(fileName);
+            }
+            return nome;
+        }
+        bool verificaNomeFile(string fileName)
+        {
+            bool result = false;
+            DateTime dt = new DateTime();
+            string conclusione = "", commento = "";
+            result = Utility.CalcolaDateTimeDaStringa(fileName, ref dt, ref conclusione, ref commento);
+            return result;
+        }
+        string normalizzaNomeFile(string fileName)
+        {
+            return fileName;
         }
     }
 }

@@ -25,7 +25,6 @@ namespace FotoOrganizzatore
                 if (File.Exists(path))
                 {
                     // Image = (Bitmap)System.Drawing.Image.FromFile(path);
-
                     FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
                     //Image myImage = Image.FromStream(stream);
                     //creo il bitmap dallo stream
@@ -33,6 +32,7 @@ namespace FotoOrganizzatore
                     //creo un nuovo bitmap ridimensionandolo
                     // Bitmap img = new Bitmap(bmpStream, new Size(Width, Height));
                     Image = Image.FromStream(stream);
+                    res = true;
                     try
                     {
                         propItem4 = Image.GetPropertyItem(0x112);
@@ -51,7 +51,6 @@ namespace FotoOrganizzatore
                             default:
                                 break;
                         }
-                        res = true;
                     }
                     catch { };
                     stream.Close();

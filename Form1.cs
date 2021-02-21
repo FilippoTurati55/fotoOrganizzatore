@@ -104,21 +104,31 @@ namespace FotoOrganizzatore
                         try
                         {
                             src = elencoFotiDaMostrareInVignetta[numeroFotoMostrate];
-                            if (vignetta.leggiImmagineDaFile(src))
+                            if (FileImmagini.IsImage(src))
                             {
-                                splitContainer1.Panel2.Controls.Add(vignetta);
-                                vignetta.Location = new Point(posX, posY);
-                                posX += vignetta.Width;
-                                if (posX > vignetta.Width * 4)
+                                if (vignetta.leggiImmagineDaFile(src))
                                 {
-                                    posX = 0;
-                                    posY += vignetta.Height;
+                                    splitContainer1.Panel2.Controls.Add(vignetta);
+                                    vignetta.Location = new Point(posX, posY);
+                                    posX += vignetta.Width;
+                                    if (posX > vignetta.Width * 4)
+                                    {
+                                        posX = 0;
+                                        posY += vignetta.Height;
+                                    }
+                                    numeroFotoMostrate++;
                                 }
-                                numeroFotoMostrate++;
+                                else
+                                {
+                                    ritardoErroreLettura = 20;
+                                }
                             }
                             else
                             {
-                                ritardoErroreLettura = 20;
+                                // è presente un file non immagine,
+                                // potrebbe essere mostrato in un altro modo
+                                // todo
+                                numeroFotoMostrate++;
                             }
                         }
                         catch
