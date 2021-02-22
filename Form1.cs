@@ -83,7 +83,7 @@ namespace FotoOrganizzatore
             {
                 Variabili.MostraFotoInGiornoPrevValue = Variabili.MostraFotoInGiorno;
                 numeroFotoMostrate = 0;
-                splitContainer1.Panel2.Controls.Clear();
+                vignette.Controls.Clear();
                 System.GC.Collect();
                 SetDataOraBase puntato = Variabili.MostraFotoSetDataOra;
                 nomeCartella = puntato.nomeCompletoCartella;
@@ -108,7 +108,7 @@ namespace FotoOrganizzatore
                             {
                                 if (vignetta.leggiImmagineDaFile(src))
                                 {
-                                    splitContainer1.Panel2.Controls.Add(vignetta);
+                                    vignette.Controls.Add(vignetta);
                                     vignetta.Location = new Point(posX, posY);
                                     posX += vignetta.Width;
                                     if (posX > vignetta.Width * 4)
@@ -149,8 +149,19 @@ namespace FotoOrganizzatore
                     {
                         this.Controls.Add(Variabili.codePopup);
                     }//splitContainer1.Panel1.Controls.Add(Variabili.codePopup);
-                    int larghezza = splitContainer1.Panel1.Size.Width;
-                    int altezza = splitContainer1.Panel1.Size.Height;
+                    int larghezza;
+                    int altezza;
+                    if (Variabili.showFoto)
+                    {
+                        // è una prova
+                        larghezza = splitContainer1.Size.Width;
+                        altezza = splitContainer1.Size.Height;
+                    }
+                    else
+                    {
+                        larghezza = splitContainer1.Panel1.Size.Width;
+                        altezza = splitContainer1.Panel1.Size.Height;
+                    }
                     //Variabili.codePopup.Size = new Size(larghezza, 400);
                     Variabili.codePopup.Location = new Point(1, 1);
                     //Variabili.codePopup.Dock = DockStyle.Fill;
@@ -175,6 +186,12 @@ namespace FotoOrganizzatore
                 }
             }
         }
+
+        private void show_Click(object sender, EventArgs e)
+        {
+            Variabili.showFoto = !Variabili.showFoto;
+        }
+
         void taskCercaDispositivi()
         {
             while (!Variabili.fermaTaskRicercaDispositivi)
