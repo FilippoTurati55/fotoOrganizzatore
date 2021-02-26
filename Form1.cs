@@ -84,6 +84,7 @@ namespace FotoOrganizzatore
                 Variabili.MostraFotoInGiornoPrevValue = Variabili.MostraFotoInGiorno;
                 numeroFotoMostrate = 0;
                 vignette.Controls.Clear();
+                Variabili.show.resetImmagini();
                 System.GC.Collect();
                 SetDataOraBase puntato = Variabili.MostraFotoSetDataOra;
                 nomeCartella = puntato.nomeCompletoCartella;
@@ -109,6 +110,7 @@ namespace FotoOrganizzatore
                                 if (vignetta.leggiImmagineDaFile(src))
                                 {
                                     vignette.Controls.Add(vignetta);
+                                    Variabili.show.associaImmagine(vignetta);
                                     vignetta.Location = new Point(posX, posY);
                                     posX += vignetta.Width;
                                     if (posX > vignetta.Width * 4)
@@ -140,6 +142,12 @@ namespace FotoOrganizzatore
                 {
                     ritardoErroreLettura--;
                 }
+            }
+            if (Variabili.showFoto)
+            {
+                Show show = new Show();
+                DialogResult dr;
+                dr = show.ShowDialog();
             }
             if (Variabili.mostraFoto)
             {
@@ -189,7 +197,11 @@ namespace FotoOrganizzatore
 
         private void show_Click(object sender, EventArgs e)
         {
-            Variabili.showFoto = !Variabili.showFoto;
+            //Variabili.showFoto = !Variabili.showFoto;
+            //Show show = new Show();
+            Variabili.show.SetDesktopLocation(0, 0);
+            DialogResult dr;
+            dr = Variabili.show.ShowDialog();
         }
 
         void taskCercaDispositivi()
