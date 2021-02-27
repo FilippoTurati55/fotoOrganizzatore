@@ -27,6 +27,8 @@ namespace FotoOrganizzatore
         public Form1()
         {
             InitializeComponent();
+            this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            this.Location = new Point(1, 1);
             Preferenze.LeggiPreferenze();
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
@@ -159,17 +161,17 @@ namespace FotoOrganizzatore
                     }//splitContainer1.Panel1.Controls.Add(Variabili.codePopup);
                     int larghezza;
                     int altezza;
-                    if (Variabili.showFoto)
+                    /*if (Variabili.showFoto)
                     {
                         // è una prova
                         larghezza = splitContainer1.Size.Width;
                         altezza = splitContainer1.Size.Height;
                     }
                     else
-                    {
+                    {*/
                         larghezza = splitContainer1.Panel1.Size.Width;
                         altezza = splitContainer1.Panel1.Size.Height;
-                    }
+                    //}
                     //Variabili.codePopup.Size = new Size(larghezza, 400);
                     Variabili.codePopup.Location = new Point(1, 1);
                     //Variabili.codePopup.Dock = DockStyle.Fill;
@@ -203,7 +205,14 @@ namespace FotoOrganizzatore
             DialogResult dr;
             dr = Variabili.show.ShowDialog();
         }
-
+        public int getLarghezza()
+        {
+            return this.Size.Width;
+        }
+        public int getAltezza()
+        {
+            return this.Size.Height;
+        }
         void taskCercaDispositivi()
         {
             while (!Variabili.fermaTaskRicercaDispositivi)

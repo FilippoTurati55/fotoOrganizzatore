@@ -26,6 +26,11 @@ namespace FotoOrganizzatore
             nomeFile = path;
             return (immagine.leggiImmagineDaFile(path));
         }
+
+        public Image getImmagine()
+        {
+            return immagine.Image;
+        }
         #region EVENTI
 
         private void button1_Click(object sender, EventArgs e)

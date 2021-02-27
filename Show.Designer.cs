@@ -52,20 +52,23 @@ namespace FotoOrganizzatore
             // 
             // immagine1
             // 
-            this.immagine1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.immagine1.Location = new System.Drawing.Point(0, 0);
             this.immagine1.Name = "immagine1";
             this.immagine1.Size = new System.Drawing.Size(1755, 900);
+            this.immagine1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.immagine1.TabIndex = 1;
             this.immagine1.TabStop = false;
+            this.immagine1.Click += new System.EventHandler(this.immagine1_Click);
             // 
             // Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1755, 900);
             this.Controls.Add(this.immagine1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Show";
             this.Text = "Show";
             this.Shown += new System.EventHandler(this.Show_Shown);
