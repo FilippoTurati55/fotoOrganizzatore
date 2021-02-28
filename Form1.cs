@@ -112,7 +112,7 @@ namespace FotoOrganizzatore
                                 if (vignetta.leggiImmagineDaFile(src))
                                 {
                                     vignette.Controls.Add(vignetta);
-                                    Variabili.show.associaImmagine(vignetta);
+                                    Variabili.show.associaImmagineENome(vignetta,src);
                                     vignetta.Location = new Point(posX, posY);
                                     posX += vignetta.Width;
                                     if (posX > vignetta.Width * 4)

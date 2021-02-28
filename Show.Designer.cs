@@ -33,6 +33,7 @@ namespace FotoOrganizzatore
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.immagine1 = new FotoOrganizzatore.Immagine();
+            this.labelNome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.immagine1)).BeginInit();
             this.SuspendLayout();
@@ -60,12 +61,25 @@ namespace FotoOrganizzatore
             this.immagine1.TabStop = false;
             this.immagine1.Click += new System.EventHandler(this.immagine1_Click);
             // 
+            // labelNome
+            // 
+            this.labelNome.AutoSize = true;
+            this.labelNome.BackColor = System.Drawing.Color.Transparent;
+            this.labelNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNome.ForeColor = System.Drawing.Color.Red;
+            this.labelNome.Location = new System.Drawing.Point(1, 1);
+            this.labelNome.Name = "labelNome";
+            this.labelNome.Size = new System.Drawing.Size(178, 64);
+            this.labelNome.TabIndex = 2;
+            this.labelNome.Text = "label1";
+            // 
             // Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1755, 900);
+            this.Controls.Add(this.labelNome);
             this.Controls.Add(this.immagine1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -75,6 +89,7 @@ namespace FotoOrganizzatore
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.immagine1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -83,5 +98,6 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
         private Immagine immagine1;
+        private System.Windows.Forms.Label labelNome;
     }
 }

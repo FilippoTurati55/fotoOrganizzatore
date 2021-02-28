@@ -12,7 +12,7 @@ namespace FotoOrganizzatore
 {
     public partial class Show : Form
     {
-        SortedList<int, BoxImmagine> elencoImmagini = new SortedList<int, BoxImmagine>();
+        SortedList<int, ImmagineShow> elencoImmagini = new SortedList<int, ImmagineShow>();
         int indice;
         public Show()
         {
@@ -21,9 +21,12 @@ namespace FotoOrganizzatore
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             this.Location = new Point(1, 1);
         }
-        public void associaImmagine(BoxImmagine immagine)
+        public void associaImmagineENome(BoxImmagine immagine, string nome)
         {
-            elencoImmagini.Add(elencoImmagini.Count, immagine);
+            ImmagineShow immShow = new ImmagineShow();
+            immShow.boxImmagine = immagine;
+            immShow.nome = nome;
+            elencoImmagini.Add(elencoImmagini.Count, immShow);
         }
         public void resetImmagini()
         {
@@ -45,8 +48,10 @@ namespace FotoOrganizzatore
                 {
                     indice = 0;
                 }
-                BoxImmagine bi = elencoImmagini[indice++];
-                immagine1.Image = bi.getImmagine();
+                ImmagineShow ish = elencoImmagini[indice++];
+                // BoxImmagine bi = ish.boxImmagine; // elencoImmagini[indice++].boxImmagine;
+                immagine1.Image = ish.boxImmagine.getImmagine(); // bi.getImmagine();
+                labelNome.Text = ish.nome;
                 resize();
             }
         }
@@ -83,5 +88,10 @@ namespace FotoOrganizzatore
         {
             this.Close();
         }
+    }
+    class ImmagineShow
+    {
+        public BoxImmagine boxImmagine;
+        public string nome;
     }
 }
