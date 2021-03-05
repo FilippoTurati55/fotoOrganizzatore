@@ -52,6 +52,13 @@
   <ItemGroup>
     <Compile Include="ArchivioLocale.cs" />
     <Compile Include="Backup.cs" />
+    <Compile Include="Cartella.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cartella.Designer.cs">
+      <DependentUpon>Cartella.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CartellaBase.cs" />
     <Compile Include="Dialogs\RinominaCartella.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +116,9 @@
       <DependentUpon>Show.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="Cartella.resx">
+      <DependentUpon>Cartella.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RinominaCartella.resx">
       <DependentUpon>RinominaCartella.cs</DependentUpon>
     </EmbeddedResource>

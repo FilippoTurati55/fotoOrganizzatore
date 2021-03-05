@@ -14,6 +14,7 @@ namespace FotoOrganizzatore
     class Calendario
     {
         public SortedList<DateTime, SetDataOraBase> elencoDateFotiAsync = new SortedList<DateTime, SetDataOraBase>();
+        public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         Panel SceltaCalendario;
         public List<string> elencoDateDoppie = new List<string>();
         #region QUERY
@@ -45,6 +46,14 @@ namespace FotoOrganizzatore
                 }
             }
         }*/
+        public void AggiungiCartellaSpeciale(string pathCompleto)
+        {
+            CartellaBase cb = new CartellaBase();
+            if (!cartelleSpeciali.ContainsKey(pathCompleto))
+            {
+                cartelleSpeciali.Add(pathCompleto, cb);
+            }
+        }
         public void AggiungiData(string pathCompletoFoto, string cartella)
         {
             //SetDataOra nuovoEvento = null;
@@ -76,7 +85,9 @@ namespace FotoOrganizzatore
         public void MostraCalendarioFoto(Panel pannello, bool soloDateNuove)
         {
             Avvenimento avvenimento;
+            Cartella cartellaSpeciale;
             SetDataOraBase sdob;
+            CartellaBase cb;
             SceltaCalendario = pannello;
             pannello.Controls.Clear();
             int location = 0;
@@ -126,6 +137,22 @@ namespace FotoOrganizzatore
                 avvenimento.resize();
                 avvenimento.Location = new Point(0, location);
                 location += avvenimento.Height;
+            }
+            foreach (var caspe in cartelleSpeciali)
+            {
+                cb = caspe.Value;
+                if (cb.cartella == null)
+                {
+                    cartellaSpeciale = cb.creaCartella();
+                }
+                else
+                {
+                    cartellaSpeciale = cb.cartella;
+                }
+                SceltaCalendario.Controls.Add(cartellaSpeciale);
+                cartellaSpeciale.resize();
+                cartellaSpeciale.Location = new Point(0, location);
+                location += cartellaSpeciale.Height;
             }
         }
         #region AZIONI_EVENTI

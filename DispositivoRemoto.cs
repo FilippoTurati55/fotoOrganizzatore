@@ -33,8 +33,8 @@ namespace FotoOrganizzatore
         public DateTime DataUltimaLettura;
         public SortedList<string, Foto> DateTrovateVecchie = new SortedList<String, Foto>();
         public SortedList<string, Foto> DateTrovateNuove = new SortedList<String, Foto>();
-        public SortedList<DateTime, Avvenimento> elencoDateFotiCompleta = new SortedList<DateTime, Avvenimento>();
-        public SortedList<DateTime, Avvenimento> elencoDateFotiNuove = new SortedList<DateTime, Avvenimento>();
+        //public SortedList<DateTime, Avvenimento> elencoDateFotiCompleta = new SortedList<DateTime, Avvenimento>();
+        //public SortedList<DateTime, Avvenimento> elencoDateFotiNuove = new SortedList<DateTime, Avvenimento>();
         public CartellaFoti(DateTime dataUltimaLettura)
         { DataUltimaLettura = dataUltimaLettura; }
     }
