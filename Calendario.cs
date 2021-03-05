@@ -49,6 +49,7 @@ namespace FotoOrganizzatore
         public void AggiungiCartellaSpeciale(string pathCompleto)
         {
             CartellaBase cb = new CartellaBase();
+            cb.setNomeCartella(pathCompleto);
             if (!cartelleSpeciali.ContainsKey(pathCompleto))
             {
                 cartelleSpeciali.Add(pathCompleto, cb);

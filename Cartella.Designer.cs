@@ -29,17 +29,17 @@ namespace FotoOrganizzatore
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataInizio = new System.Windows.Forms.TextBox();
+            this.nomeCartella = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // dataInizio
+            // nomeCartella
             // 
-            this.dataInizio.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataInizio.Location = new System.Drawing.Point(171, 24);
-            this.dataInizio.Name = "dataInizio";
-            this.dataInizio.Size = new System.Drawing.Size(865, 72);
-            this.dataInizio.TabIndex = 2;
-            this.dataInizio.Text = "2017 07 14 mercoledì";
+            this.nomeCartella.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nomeCartella.Location = new System.Drawing.Point(171, 24);
+            this.nomeCartella.Name = "nomeCartella";
+            this.nomeCartella.Size = new System.Drawing.Size(865, 72);
+            this.nomeCartella.TabIndex = 2;
+            this.nomeCartella.Text = "2017 07 14 mercoledì";
             // 
             // Cartella
             // 
@@ -48,7 +48,7 @@ namespace FotoOrganizzatore
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.dataInizio);
+            this.Controls.Add(this.nomeCartella);
             this.Name = "Cartella";
             this.Size = new System.Drawing.Size(1039, 99);
             this.ResumeLayout(false);
@@ -58,6 +58,6 @@ namespace FotoOrganizzatore
 
         #endregion
 
-        private System.Windows.Forms.TextBox dataInizio;
+        private System.Windows.Forms.TextBox nomeCartella;
     }
 }
