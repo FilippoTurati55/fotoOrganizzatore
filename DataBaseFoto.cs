@@ -23,128 +23,139 @@ namespace FotoOrganizzatore
         }
         public bool creaDataBase(Calendario calendario)
         {
+            return creaDataBase(calendario, 0);
+        }
+        public bool creaDataBase(Calendario calendario, int saltaGiri)
+        {
             bool res = false;
-            ProcessDirectory(pathBase,calendario);
+            ProcessDirectory(pathBase,calendario,saltaGiri);
             return res;
         }
-        void ProcessDirectory(string dir, Calendario calendario)
+        void ProcessDirectory(string dir, Calendario calendario, int saltaGiri)
         {
             string[] fileEntries;
             DateTime dataTime = new DateTime();
             string commentoProposto = "";
             // verifica correttezza nome cartella
             string[] dirScomposto = dir.Replace("/", "\\").Split('\\');
-            switch (dirScomposto.Length)
+            if (saltaGiri <= 0)
             {
-                case 3:   // a questo livello possono esserci anni o cartelle speciali
-                    // verifica cosa è
-                    int annoForse;
-                    if (Int32.TryParse(dirScomposto[2], out annoForse))
-                    {
-                        // anno
-                        if (!anni.ContainsKey(annoForse))
-                            anni.Add(annoForse,dirScomposto[2]);
-                    }
-                    else
-                    {
-                        // cartella speciale
-                        if (dirScomposto[2] != "InfoFotografo")
+                switch (dirScomposto.Length)
+                {
+                    case 3:   // a questo livello possono esserci anni o cartelle speciali
+                              // verifica cosa è
+                        int annoForse;
+                        if (Int32.TryParse(dirScomposto[2], out annoForse))
                         {
-                            //if (!cartelleSpeciali.ContainsKey(dirScomposto[2]))
-                            //{
-                                //CartellaBase cb = new CartellaBase();
-                                //cartelleSpeciali.Add(dirScomposto[2], cb);
-                                calendario.AggiungiCartellaSpeciale(dirScomposto[2]);
-                            //}
-                        }
-                    }
-                    break;
-                case 4:   // a questo livello possono esserci avvenimenti (date e commento) 
-                          // o altro se si parte da vcartella speciale
-                    DateTime inizio = new DateTime(),
-                             fine = new DateTime();
-                    string b = "";
-                    if (Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b))
-                    {
-                        // nome cartella corretto
-                        ;
-                    }
-                    else
-                    {
-                        // nome cartella errato, cerca le date dei file presenti in cartella
-                        // todo : considerare il caso di cartella vuota
-                        fileEntries = Directory.GetFiles(dir);
-                        DateTime dataMinima = new DateTime(3000,1,1);
-                        DateTime dataMassima = new DateTime(1,1,1);
-                        foreach (string fileName in fileEntries)
-                        {
-                            if (Utility.CalcolaDateTimeFileImmagine(fileName, ref dataTime))
-                            {
-                                if (dataTime > dataMassima)
-                                    dataMassima = dataTime;
-                                if (dataTime < dataMinima)
-                                    dataMinima = dataTime;
-                            }
-                        }
-                        // calcola commento proposto
-                        string[] commento = dirScomposto[3].Split(' ');
-                        bool notNumber = false;
-                        for (int n = 0; n < commento.Length; n++)
-                        {
-                            if ((!Utility.isNumber(commento[n])) ||
-                                (notNumber))
-                            {
-                                notNumber = true;
-                                if (commentoProposto != "")
-                                    commentoProposto += " ";
-                                commentoProposto += commento[n];
-                            }
-                        }
-                        // verificare se le foto sono nell'anno giusto!
-                        // per es. la cartella c:\foto\2005\brescia 18-6-05\
-                        // contiene foto con data 2002
-                        RinominaCartella aub = new RinominaCartella();
-                        aub.setnomeErratoCartella(dir);
-                        string dataMin = dataMinima.ToShortDateString();
-                        string dataMax = dataMassima.ToShortDateString();
-                        aub.setdataMinimaMassima(dataMin, dataMax);
-                        aub.setnomeCommentoProposto(dataMinima, dataMassima,commentoProposto);
-                        // aub.inizializza(drive, label, numeroDiSerie);
-                        DialogResult dr;
-                        //aub.Size = new Size(650, 300);
-                        //aub.Size = new System.Drawing.Size(480, 370);
-                        dr = aub.ShowDialog();
-                        if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
-                        {
-                            // correggi
-                            string nomeCompleto;
-                            if (aub.getAnnoModificato())
-                            {
-                                nomeCompleto = pathBase + "\\" + aub.getNome();
-                            }
-                            else
-                            {
-                                nomeCompleto = pathBase + "\\" + dirScomposto[2] + "\\" + aub.getNome();
-                            }
-                            string commentoFinale = aub.getCommento();
-                            if (commentoFinale != "")
-                                nomeCompleto += " " + commentoFinale;
-                            Utility.MuoviCartella(dir, nomeCompleto);
-                            dir = nomeCompleto;
+                            // anno
+                            if (!anni.ContainsKey(annoForse))
+                                anni.Add(annoForse, dirScomposto[2]);
                         }
                         else
                         {
-                            ; // crea cartella speciale
+                            // cartella speciale
+                            if (dirScomposto[2] != "InfoFotografo")
+                            {
+                                //if (!cartelleSpeciali.ContainsKey(dirScomposto[2]))
+                                //{
+                                //CartellaBase cb = new CartellaBase();
+                                //cartelleSpeciali.Add(dirScomposto[2], cb);
+                                calendario.AggiungiCartellaSpeciale(dirScomposto[2], dir);
+                                return;
+                                //}
+                            }
                         }
-                    }
-                    break;
+                        break;
+                    case 4:   // a questo livello possono esserci avvenimenti (date e commento) 
+                              // o altro se si parte da vcartella speciale
+                        DateTime inizio = new DateTime(),
+                                 fine = new DateTime();
+                        string b = "";
+                        if (Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b))
+                        {
+                            // nome cartella corretto
+                            ;
+                        }
+                        else
+                        {
+                            // nome cartella errato, cerca le date dei file presenti in cartella
+                            // todo : considerare il caso di cartella vuota
+                            fileEntries = Directory.GetFiles(dir);
+                            DateTime dataMinima = new DateTime(3000, 1, 1);
+                            DateTime dataMassima = new DateTime(1, 1, 1);
+                            foreach (string fileName in fileEntries)
+                            {
+                                if (Utility.CalcolaDateTimeFileImmagine(fileName, ref dataTime))
+                                {
+                                    if (dataTime > dataMassima)
+                                        dataMassima = dataTime;
+                                    if (dataTime < dataMinima)
+                                        dataMinima = dataTime;
+                                }
+                            }
+                            // calcola commento proposto
+                            string[] commento = dirScomposto[3].Split(' ');
+                            bool notNumber = false;
+                            for (int n = 0; n < commento.Length; n++)
+                            {
+                                if ((!Utility.isNumber(commento[n])) ||
+                                    (notNumber))
+                                {
+                                    notNumber = true;
+                                    if (commentoProposto != "")
+                                        commentoProposto += " ";
+                                    commentoProposto += commento[n];
+                                }
+                            }
+                            // verificare se le foto sono nell'anno giusto!
+                            // per es. la cartella c:\foto\2005\brescia 18-6-05\
+                            // contiene foto con data 2002
+                            RinominaCartella aub = new RinominaCartella();
+                            aub.setnomeErratoCartella(dir);
+                            string dataMin = dataMinima.ToShortDateString();
+                            string dataMax = dataMassima.ToShortDateString();
+                            aub.setdataMinimaMassima(dataMin, dataMax);
+                            aub.setnomeCommentoProposto(dataMinima, dataMassima, commentoProposto);
+                            // aub.inizializza(drive, label, numeroDiSerie);
+                            DialogResult dr;
+                            //aub.Size = new Size(650, 300);
+                            //aub.Size = new System.Drawing.Size(480, 370);
+                            dr = aub.ShowDialog();
+                            if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
+                            {
+                                // correggi
+                                string nomeCompleto;
+                                if (aub.getAnnoModificato())
+                                {
+                                    nomeCompleto = pathBase + "\\" + aub.getNome();
+                                }
+                                else
+                                {
+                                    nomeCompleto = pathBase + "\\" + dirScomposto[2] + "\\" + aub.getNome();
+                                }
+                                string commentoFinale = aub.getCommento();
+                                if (commentoFinale != "")
+                                    nomeCompleto += " " + commentoFinale;
+                                Utility.MuoviCartella(dir, nomeCompleto);
+                                dir = nomeCompleto;
+                            }
+                            else
+                            {
+                                ; // crea cartella speciale
+                            }
+                        }
+                        break;
+                }
             }
             fileEntries = Directory.GetFiles(dir);
-            if (fileEntries.Length != 0)
+            if (saltaGiri <= 0)
             {
-                // crea calendario
-                // Variabili.Calendario.AggiungiData(fileEntries[0], dir);
-                calendario.AggiungiData(fileEntries[0], dir);
+                if (fileEntries.Length != 0)
+                {
+                    // crea calendario
+                    // Variabili.Calendario.AggiungiData(fileEntries[0], dir);
+                    calendario.AggiungiData(fileEntries[0], dir);
+                }
             }
             foreach (string fileName in fileEntries)
                 ProcessFile(fileName);
@@ -152,7 +163,7 @@ namespace FotoOrganizzatore
             // Recurse into subdirectories of this directory.
             string[] subdirectoryEntries = Directory.GetDirectories(dir);
             foreach (string subdirectory in subdirectoryEntries)
-                ProcessDirectory(subdirectory,calendario);
+                ProcessDirectory(subdirectory,calendario,saltaGiri - 1);
         }
         void ProcessFile(string path)
         {
@@ -213,6 +224,7 @@ namespace FotoOrganizzatore
         }
         string normalizzaNomeFile(string fileName)
         {
+            // todo
             return fileName;
         }
     }

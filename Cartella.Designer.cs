@@ -35,11 +35,12 @@ namespace FotoOrganizzatore
             // nomeCartella
             // 
             this.nomeCartella.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nomeCartella.Location = new System.Drawing.Point(171, 24);
+            this.nomeCartella.Location = new System.Drawing.Point(1, 1);
             this.nomeCartella.Name = "nomeCartella";
-            this.nomeCartella.Size = new System.Drawing.Size(865, 72);
+            this.nomeCartella.Size = new System.Drawing.Size(400, 72);
             this.nomeCartella.TabIndex = 2;
-            this.nomeCartella.Text = "2017 07 14 mercoledì";
+            this.nomeCartella.Text = "cartella speciale";
+            this.nomeCartella.Click += new System.EventHandler(this.nomeCartella_Click);
             // 
             // Cartella
             // 
@@ -50,7 +51,7 @@ namespace FotoOrganizzatore
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.nomeCartella);
             this.Name = "Cartella";
-            this.Size = new System.Drawing.Size(1039, 99);
+            this.Size = new System.Drawing.Size(404, 76);
             this.ResumeLayout(false);
             this.PerformLayout();
 

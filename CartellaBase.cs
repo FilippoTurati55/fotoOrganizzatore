@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FotoOrganizzatore
 {
@@ -10,6 +11,8 @@ namespace FotoOrganizzatore
     {
         public Cartella cartella = null;
         string nomeCartella = "";
+        string pathCompleto = "";
+        SplitterPanel panel = null;
         #region COMPONENTE_VISUALE
         public Cartella creaCartella()
         {
@@ -24,6 +27,26 @@ namespace FotoOrganizzatore
             nomeCartella = nome;
             if (cartella != null)
                 cartella.setNomeCartella(nomeCartella);
+        }
+        public string getNomeCartella()
+        {
+            return nomeCartella;
+        }
+        public void setPathCompleto(string path)
+        {
+            pathCompleto = path;
+        }
+        public string getPathCompleto()
+        {
+            return pathCompleto;
+        }
+        public void setSplitterPanel(SplitterPanel sp)
+        {
+            panel = sp;
+        }
+        public SplitterPanel getSplitterPanel()
+        {
+            return panel;
         }
         #endregion
     }

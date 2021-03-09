@@ -195,6 +195,11 @@ namespace FotoOrganizzatore
                     aspettaSpegnimentoFoto--;
                 }
             }
+            if (Variabili.mostraCartellaSpeciale)
+            {
+                // Calendario va messo nelle variabili globali
+                // Calendario.MostraCalendarioFoto(pan, false);
+            }
         }
 
         private void show_Click(object sender, EventArgs e)

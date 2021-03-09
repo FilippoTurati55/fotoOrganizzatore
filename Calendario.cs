@@ -46,13 +46,14 @@ namespace FotoOrganizzatore
                 }
             }
         }*/
-        public void AggiungiCartellaSpeciale(string pathCompleto)
+        public void AggiungiCartellaSpeciale(string nome, string pathCompleto)
         {
             CartellaBase cb = new CartellaBase();
-            cb.setNomeCartella(pathCompleto);
-            if (!cartelleSpeciali.ContainsKey(pathCompleto))
+            cb.setNomeCartella(nome);
+            cb.setPathCompleto(pathCompleto);
+            if (!cartelleSpeciali.ContainsKey(nome))
             {
-                cartelleSpeciali.Add(pathCompleto, cb);
+                cartelleSpeciali.Add(nome, cb);
             }
         }
         public void AggiungiData(string pathCompletoFoto, string cartella)
