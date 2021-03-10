@@ -45,12 +45,8 @@ namespace FotoOrganizzatore
         private void nomeCartella_Click(object sender, EventArgs e)
         {
             // todo
-            calendario e dataBaseFotoLocali vanno messi nelle variabili statiche
-            string nomeCartella = Cab.getPathCompleto();
-            Calendario calendario = new Calendario();
-            // Panel pan = Cab.getSplitterPanel();
-            DataBaseFoto dataBaseFotoLocali = new DataBaseFoto(nomeCartella);
-            dataBaseFotoLocali.creaDataBase(calendario,1);
+            // calendario e dataBaseFotoLocali vanno messi nelle variabili statiche
+            Variabili.nomeCartellaSpeciale = Cab.getPathCompleto();
             Variabili.mostraCartellaSpeciale = true;
         }
     }

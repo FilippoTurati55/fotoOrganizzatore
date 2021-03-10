@@ -23,6 +23,7 @@ namespace FotoOrganizzatore
         public static int mostraFotoCount = 0;
         public static bool mostraFoto = false;
         public static bool mostraCartellaSpeciale = false;
+        public static string nomeCartellaSpeciale = "";
         public static int comandi;
         public static bool showFoto;
         public static bool fermaTaskRicercaDispositivi;

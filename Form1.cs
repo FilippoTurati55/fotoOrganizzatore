@@ -198,7 +198,19 @@ namespace FotoOrganizzatore
             if (Variabili.mostraCartellaSpeciale)
             {
                 // Calendario va messo nelle variabili globali
-                // Calendario.MostraCalendarioFoto(pan, false);
+                Calendario calendario = new Calendario();
+                DataBaseFoto dataBaseFotoLocali = new DataBaseFoto(Variabili.nomeCartellaSpeciale);
+                dataBaseFotoLocali.creaDataBase(calendario, 1);
+                calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
+                elencoFotiDaMostrareInVignetta = Directory.GetFiles(Variabili.nomeCartellaSpeciale);
+                numeroFotoDaMostrare = elencoFotiDaMostrareInVignetta.Count();
+                posX = posY = 0;
+                numeroFotoMostrate = 0;
+                vignette.Controls.Clear();
+                Variabili.show.resetImmagini();
+                System.GC.Collect();
+
+                Variabili.mostraCartellaSpeciale = false;
             }
         }
 
