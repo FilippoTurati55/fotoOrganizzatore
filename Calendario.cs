@@ -91,7 +91,7 @@ namespace FotoOrganizzatore
             SetDataOraBase sdob;
             CartellaBase cb;
             SceltaCalendario = pannello;
-            pannello.Controls.Clear();
+            SceltaCalendario.Controls.Clear();
             int location = 0;
             foreach (var dt in elencoDateFotiAsync)
             {

@@ -36,7 +36,7 @@ namespace FotoOrganizzatore
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne();
-                Variabili.Calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
+                Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
                 // Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();
                 i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
@@ -61,7 +61,7 @@ namespace FotoOrganizzatore
 
         private void splitContainer1_Panel1_Resize(object sender, EventArgs e)
         {
-            foreach (Control c in splitContainer1.Panel1.Controls)
+            /*foreach (Control c in splitContainer1.Panel1.Controls)
             {
                 try
                 {
@@ -69,7 +69,7 @@ namespace FotoOrganizzatore
                     a.resize();
                 }
                 catch { }
-            }
+            }*/
         }
 
         private void timerBase_Tick(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace FotoOrganizzatore
             switch (Variabili.comandi)
             {
                 case 1:
-                    Variabili.Calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
+                    Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
                     Variabili.comandi = 0;
                     break;
             }
@@ -169,8 +169,8 @@ namespace FotoOrganizzatore
                     }
                     else
                     {*/
-                        larghezza = splitContainer1.Panel1.Size.Width;
-                        altezza = splitContainer1.Panel1.Size.Height;
+                    larghezza = avvenimenti.Size.Width; // splitContainer1.Panel1.Size.Width;
+                    altezza = avvenimenti.Size.Height; // splitContainer1.Panel1.Size.Height;
                     //}
                     //Variabili.codePopup.Size = new Size(larghezza, 400);
                     Variabili.codePopup.Location = new Point(1, 1);
@@ -201,7 +201,7 @@ namespace FotoOrganizzatore
                 Calendario calendario = new Calendario();
                 DataBaseFoto dataBaseFotoLocali = new DataBaseFoto(Variabili.nomeCartellaSpeciale);
                 dataBaseFotoLocali.creaDataBase(calendario, 1);
-                calendario.MostraCalendarioFoto(splitContainer1.Panel1, false);
+                calendario.MostraCalendarioFoto(avvenimenti, false);
                 elencoFotiDaMostrareInVignetta = Directory.GetFiles(Variabili.nomeCartellaSpeciale);
                 numeroFotoDaMostrare = elencoFotiDaMostrareInVignetta.Count();
                 posX = posY = 0;
@@ -230,6 +230,38 @@ namespace FotoOrganizzatore
         {
             return this.Size.Height;
         }
+
+        private void avvenimenti_Resize(object sender, EventArgs e)
+        {
+            Panel contenitore = (Panel)sender;
+            foreach (Control c in contenitore.Controls)
+            {
+                try
+                {
+                    Avvenimento a = (Avvenimento)c;
+                    a.resize();
+                }
+                catch { }
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string pathAttuale = Variabili.nomeCartellaSpeciale;
+            string[] pathSplit = pathAttuale.Split('\\');
+            int livelloRicorsione = pathSplit.Length;
+            ;
+            if (livelloRicorsione == 3)
+            {
+                // ritorniamo a mostrare il calendario di eventi base
+                Variabili.nomeCartellaSpeciale = "";
+                Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
+                vignette.Controls.Clear();
+                nomeCartella = "";
+            }
+        }
+
         void taskCercaDispositivi()
         {
             while (!Variabili.fermaTaskRicercaDispositivi)
