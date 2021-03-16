@@ -163,7 +163,18 @@ namespace FotoOrganizzatore
             // Recurse into subdirectories of this directory.
             string[] subdirectoryEntries = Directory.GetDirectories(dir);
             foreach (string subdirectory in subdirectoryEntries)
-                ProcessDirectory(subdirectory,calendario,saltaGiri - 1);
+            {
+                if (saltaGiri > 0)
+                {
+                    string[] dirSplit = subdirectory.Split('\\');
+                    string nome = dirSplit[dirSplit.Length - 1];
+                    calendario.AggiungiCartellaSpeciale(nome, subdirectory);
+                }
+                else
+                {
+                    ProcessDirectory(subdirectory, calendario, saltaGiri - 1);
+                }
+            }
         }
         void ProcessFile(string path)
         {

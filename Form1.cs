@@ -260,6 +260,15 @@ namespace FotoOrganizzatore
                 vignette.Controls.Clear();
                 nomeCartella = "";
             }
+            else
+            {
+                if (livelloRicorsione > 3)
+                {
+                    string accorcia = Variabili.nomeCartellaSpeciale.Substring(0, Variabili.nomeCartellaSpeciale.LastIndexOf('\\'));
+                    Variabili.nomeCartellaSpeciale = accorcia;
+                    Variabili.mostraCartellaSpeciale = true;
+                }
+            }
         }
 
         void taskCercaDispositivi()
