@@ -29,18 +29,18 @@ namespace FotoOrganizzatore
         /// </summary>
         private void InitializeComponent()
         {
-            this.nomeCartella = new System.Windows.Forms.TextBox();
+            this.buttonNomeCartella = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // nomeCartella
+            // buttonNomeCartella
             // 
-            this.nomeCartella.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nomeCartella.Location = new System.Drawing.Point(1, 1);
-            this.nomeCartella.Name = "nomeCartella";
-            this.nomeCartella.Size = new System.Drawing.Size(400, 72);
-            this.nomeCartella.TabIndex = 2;
-            this.nomeCartella.Text = "cartella speciale";
-            this.nomeCartella.Click += new System.EventHandler(this.nomeCartella_Click);
+            this.buttonNomeCartella.Location = new System.Drawing.Point(1, 1);
+            this.buttonNomeCartella.Name = "buttonNomeCartella";
+            this.buttonNomeCartella.Size = new System.Drawing.Size(480, 60);
+            this.buttonNomeCartella.TabIndex = 3;
+            this.buttonNomeCartella.Text = "cartellaSpeciale";
+            this.buttonNomeCartella.UseVisualStyleBackColor = true;
+            this.buttonNomeCartella.MouseClick += new System.Windows.Forms.MouseEventHandler(this.buttonNomeCartella_Click);
             // 
             // Cartella
             // 
@@ -49,16 +49,15 @@ namespace FotoOrganizzatore
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.nomeCartella);
+            this.Controls.Add(this.buttonNomeCartella);
             this.Name = "Cartella";
-            this.Size = new System.Drawing.Size(404, 76);
+            this.Size = new System.Drawing.Size(484, 64);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox nomeCartella;
+        private System.Windows.Forms.Button buttonNomeCartella;
     }
 }

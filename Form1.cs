@@ -209,7 +209,7 @@ namespace FotoOrganizzatore
                 vignette.Controls.Clear();
                 Variabili.show.resetImmagini();
                 System.GC.Collect();
-
+                buttonRoot.Text = Variabili.nomeCartellaSpeciale;
                 Variabili.mostraCartellaSpeciale = false;
             }
         }
@@ -246,7 +246,7 @@ namespace FotoOrganizzatore
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonRoot_Click(object sender, EventArgs e)
         {
             string pathAttuale = Variabili.nomeCartellaSpeciale;
             string[] pathSplit = pathAttuale.Split('\\');
@@ -257,6 +257,7 @@ namespace FotoOrganizzatore
                 // ritorniamo a mostrare il calendario di eventi base
                 Variabili.nomeCartellaSpeciale = "";
                 Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
+                buttonRoot.Text = "[...]";
                 vignette.Controls.Clear();
                 nomeCartella = "";
             }
@@ -267,6 +268,7 @@ namespace FotoOrganizzatore
                     string accorcia = Variabili.nomeCartellaSpeciale.Substring(0, Variabili.nomeCartellaSpeciale.LastIndexOf('\\'));
                     Variabili.nomeCartellaSpeciale = accorcia;
                     Variabili.mostraCartellaSpeciale = true;
+                    buttonRoot.Text = accorcia;
                 }
             }
         }

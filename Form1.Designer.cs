@@ -31,19 +31,19 @@ namespace FotoOrganizzatore
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.avvenimenti = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonRoot = new System.Windows.Forms.Button();
             this.vignette = new System.Windows.Forms.Panel();
             this.comandi = new System.Windows.Forms.Panel();
             this.show = new System.Windows.Forms.Button();
             this.timerBase = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.avvenimenti = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.comandi.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.comandi.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -68,6 +68,40 @@ namespace FotoOrganizzatore
             this.splitContainer1.Size = new System.Drawing.Size(3012, 1070);
             this.splitContainer1.SplitterDistance = 1780;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // avvenimenti
+            // 
+            this.avvenimenti.AutoScroll = true;
+            this.avvenimenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.avvenimenti.Location = new System.Drawing.Point(0, 57);
+            this.avvenimenti.Name = "avvenimenti";
+            this.avvenimenti.Size = new System.Drawing.Size(1778, 1011);
+            this.avvenimenti.TabIndex = 2;
+            this.avvenimenti.Resize += new System.EventHandler(this.avvenimenti_Resize);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.BackColor = System.Drawing.SystemColors.Info;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.buttonRoot);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1778, 57);
+            this.panel1.TabIndex = 1;
+            // 
+            // buttonRoot
+            // 
+            this.buttonRoot.AutoSize = true;
+            this.buttonRoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonRoot.Location = new System.Drawing.Point(2, -2);
+            this.buttonRoot.Name = "buttonRoot";
+            this.buttonRoot.Size = new System.Drawing.Size(85, 54);
+            this.buttonRoot.TabIndex = 0;
+            this.buttonRoot.Text = "[...]";
+            this.buttonRoot.UseVisualStyleBackColor = true;
+            this.buttonRoot.Click += new System.EventHandler(this.buttonRoot_Click);
             // 
             // vignette
             // 
@@ -104,38 +138,6 @@ namespace FotoOrganizzatore
             // 
             this.timerBase.Tick += new System.EventHandler(this.timerBase_Tick);
             // 
-            // panel1
-            // 
-            this.panel1.AutoSize = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.Info;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1778, 93);
-            this.panel1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(2, -2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(171, 90);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "[...]";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // avvenimenti
-            // 
-            this.avvenimenti.AutoScroll = true;
-            this.avvenimenti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.avvenimenti.Location = new System.Drawing.Point(0, 93);
-            this.avvenimenti.Name = "avvenimenti";
-            this.avvenimenti.Size = new System.Drawing.Size(1778, 975);
-            this.avvenimenti.TabIndex = 2;
-            this.avvenimenti.Resize += new System.EventHandler(this.avvenimenti_Resize);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -150,8 +152,9 @@ namespace FotoOrganizzatore
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.comandi.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.comandi.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -164,7 +167,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Button show;
         private System.Windows.Forms.Panel vignette;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonRoot;
         private System.Windows.Forms.Panel avvenimenti;
     }
 }

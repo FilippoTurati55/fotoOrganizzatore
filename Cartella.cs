@@ -27,27 +27,27 @@ namespace FotoOrganizzatore
         {
             int larghezza = Parent.Width - 25;
             int posX = 1;
-            nomeCartella.Location = new Point(2,2);
+            buttonNomeCartella.Location = new Point(2,2);
             Font font = new Font("Times new roman", 12);
             Size occupazioneStringaInizio = TextRenderer.MeasureText("0000 00 00 mercoledì", font);
-            nomeCartella.Width = occupazioneStringaInizio.Width;
-            posX += nomeCartella.Width + 1;
+            buttonNomeCartella.Width = occupazioneStringaInizio.Width;
+            posX += buttonNomeCartella.Width + 1;
             return true;
         }
         #endregion
         #region ACCESSO
         public void setNomeCartella(string nome)
         {
-            nomeCartella.Text = nome;
+            buttonNomeCartella.Text = nome;
         }
         #endregion
 
-        private void nomeCartella_Click(object sender, EventArgs e)
+        private void buttonNomeCartella_Click(object sender, MouseEventArgs e)
         {
-            // todo
             // calendario e dataBaseFotoLocali vanno messi nelle variabili statiche
             Variabili.nomeCartellaSpeciale = Cab.getPathCompleto();
             Variabili.mostraCartellaSpeciale = true;
+
         }
     }
 }
