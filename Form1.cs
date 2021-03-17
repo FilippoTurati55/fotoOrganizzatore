@@ -37,6 +37,7 @@ namespace FotoOrganizzatore
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne();
                 Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
+                aggiungiAnni();
                 // Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();
                 i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
@@ -304,5 +305,20 @@ namespace FotoOrganizzatore
                 Thread.Sleep(1000);
             }
         }
+        #region PROCEDURE
+        void aggiungiAnni()
+        {
+            int posizione = buttonRoot.Width;
+            foreach ( var anni in Variabili.dataBaseFotoLocali.anni)
+            {
+                // SortedList<int, String>
+                Anno anno = new Anno();
+                anno.setNomeAnno(anni.Value);
+                panel1.Controls.Add(anno);
+                anno.Location = new Point(posizione, 1);
+                posizione += anno.Width;
+            }
+        }
+        #endregion
     }
 }

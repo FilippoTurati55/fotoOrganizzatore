@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="anno.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="anno.Designer.cs">
+      <DependentUpon>anno.cs</DependentUpon>
+    </Compile>
     <Compile Include="ArchivioLocale.cs" />
     <Compile Include="Backup.cs" />
     <Compile Include="Cartella.cs">
@@ -116,6 +122,9 @@
       <DependentUpon>Show.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="anno.resx">
+      <DependentUpon>anno.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cartella.resx">
       <DependentUpon>Cartella.cs</DependentUpon>
     </EmbeddedResource>
