@@ -36,7 +36,8 @@ namespace FotoOrganizzatore
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne();
-                Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
+                // Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
+                Variabili.comandi = Comandi.mostraCalendarioFoto;
                 aggiungiAnni();
                 // Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();
@@ -77,9 +78,11 @@ namespace FotoOrganizzatore
         {
             switch (Variabili.comandi)
             {
-                case 1:
+                case Comandi.mostraCalendarioFoto:
                     Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
-                    Variabili.comandi = 0;
+                    nomeCartella = "";
+                    vignette.Controls.Clear();
+                    Variabili.comandi = Comandi.nessuno;
                     break;
             }
             if (Variabili.MostraFotoInGiorno != Variabili.MostraFotoInGiornoPrevValue)
@@ -211,6 +214,7 @@ namespace FotoOrganizzatore
                 Variabili.show.resetImmagini();
                 System.GC.Collect();
                 buttonRoot.Text = Variabili.nomeCartellaSpeciale;
+                aggiornaSplitContinerAnni();
                 Variabili.mostraCartellaSpeciale = false;
             }
         }
@@ -249,10 +253,7 @@ namespace FotoOrganizzatore
 
         private void buttonRoot_Click(object sender, EventArgs e)
         {
-            string pathAttuale = Variabili.nomeCartellaSpeciale;
-            string[] pathSplit = pathAttuale.Split('\\');
-            int livelloRicorsione = pathSplit.Length;
-            ;
+            int livelloRicorsione = getLivelloRicorsione();
             if (livelloRicorsione == 3)
             {
                 // ritorniamo a mostrare il calendario di eventi base
@@ -260,6 +261,7 @@ namespace FotoOrganizzatore
                 Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
                 buttonRoot.Text = "[...]";
                 vignette.Controls.Clear();
+                aggiornaSplitContinerAnni();
                 nomeCartella = "";
             }
             else
@@ -306,18 +308,45 @@ namespace FotoOrganizzatore
             }
         }
         #region PROCEDURE
+        void aggiornaSplitContinerAnni()
+        {
+            //Button broot = buttonRoot;
+            if (getLivelloRicorsione() > 2)
+            {
+                // stiamo mostrando una cartella speciale
+                if (panelAnni.Controls.Count > 1)
+                {
+                    panelAnni.Controls.Clear();
+                    panelAnni.Controls.Add(buttonRoot);
+                }
+            }
+            else
+            {
+                if (panelAnni.Controls.Count < 3)
+                {
+                    aggiungiAnni();
+                }
+            }
+        }
         void aggiungiAnni()
         {
             int posizione = buttonRoot.Width;
-            foreach ( var anni in Variabili.dataBaseFotoLocali.anni)
+            //foreach ( var anni in Variabili.dataBaseFotoLocali.anni)
+            foreach (var elemento in Variabili.dataBaseFotoLocali.anniComponenti)
             {
-                // SortedList<int, String>
-                Anno anno = new Anno();
-                anno.setNomeAnno(anni.Value);
-                panel1.Controls.Add(anno);
+                //Anno anno = new Anno();
+                //anno.setNomeAnno(anni.Value);
+                Anno anno = elemento.Value;
+                panelAnni.Controls.Add(anno);
                 anno.Location = new Point(posizione, 1);
                 posizione += anno.Width;
             }
+        }
+        int getLivelloRicorsione()
+        {
+            string pathAttuale = Variabili.nomeCartellaSpeciale;
+            string[] pathSplit = pathAttuale.Split('\\');
+            return(pathSplit.Length);
         }
         #endregion
     }

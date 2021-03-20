@@ -15,6 +15,7 @@ namespace FotoOrganizzatore
         int doppie = 0;
         public SortedList<long, String[]> elencoFoto = new SortedList<long, String[]>();
         public SortedList<int, String> anni = new SortedList<int, string>();
+        public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
         //public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         public string pathBase;
         public DataBaseFoto(string path)
@@ -49,7 +50,12 @@ namespace FotoOrganizzatore
                         {
                             // anno
                             if (!anni.ContainsKey(annoForse))
+                            {
                                 anni.Add(annoForse, dirScomposto[2]);
+                                Anno anno = new Anno();
+                                anno.setNomeAnno(dirScomposto[2]);
+                                anniComponenti.Add(annoForse, anno);
+                            }
                         }
                         else
                         {

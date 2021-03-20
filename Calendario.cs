@@ -95,50 +95,61 @@ namespace FotoOrganizzatore
             int location = 0;
             foreach (var dt in elencoDateFotiAsync)
             {
-                sdob = dt.Value;
-                if (sdob.avvenimento == null)
+                bool scarta = false;
+                if (Variabili.selezioneAnno != 0)
                 {
-                    avvenimento = sdob.creaAvvenimento();
-                }
-                else
-                {
-                    avvenimento = sdob.avvenimento;
-                }
-                avvenimento.resetEventiClick();
-                avvenimento.EventoClick += EventoSelezionaData;
-                avvenimento.EventoModificaCommento += EventoModificaCommento;
-                /*sdo.resetEventiClick();
-                //if (dt.Value.GiorniEstesi)
-                if (sdo.GiorniEstesi)
-                {
-                    // dt.Value.EventoClick += EventoSciogliRaggruppamento;
-                    sdo.EventoClick += EventoSciogliRaggruppamento;
-                }
-                else
-                {
-                    // dt.Value.EventoClick += EventoSelezionaData;
-                    sdo.EventoClick += EventoSelezionaData;
-                }
-                sdo.EventoModificaCommento += EventoModificaCommento;
-                if ((Variabili.SelezioneCosaMostrareTutto) && (Variabili.elencoDateDiFotoNuove.ContainsKey(dt.Key)))
-                {
-                    sdo.dataInizio.Background =
-                        sdo.dataFine.Background =
-                        sdo.Evento.Background = new SolidColorBrush(Colors.Yellow);
-
-                }
-                if ((Variabili.SelezioneCosaMostrareTutto) || (Variabili.elencoDateDiFotoNuove.ContainsKey(dt.Key)))
-                {
-                    if ((!soloDateNuove) || (dt.Key > Variabili.DataLetturaFotoPrecedente))
+                    if (dt.Value.DateTimeInizio.Year != Variabili.selezioneAnno)
                     {
-                        _ = SceltaCalendario.Children.Add(sdo);
+                        scarta = true;
                     }
                 }
-                */
-                SceltaCalendario.Controls.Add(avvenimento);
-                avvenimento.resize();
-                avvenimento.Location = new Point(0, location);
-                location += avvenimento.Height;
+                if (!scarta)
+                {
+                    sdob = dt.Value;
+                    if (sdob.avvenimento == null)
+                    {
+                        avvenimento = sdob.creaAvvenimento();
+                    }
+                    else
+                    {
+                        avvenimento = sdob.avvenimento;
+                    }
+                    avvenimento.resetEventiClick();
+                    avvenimento.EventoClick += EventoSelezionaData;
+                    avvenimento.EventoModificaCommento += EventoModificaCommento;
+                    /*sdo.resetEventiClick();
+                    //if (dt.Value.GiorniEstesi)
+                    if (sdo.GiorniEstesi)
+                    {
+                        // dt.Value.EventoClick += EventoSciogliRaggruppamento;
+                        sdo.EventoClick += EventoSciogliRaggruppamento;
+                    }
+                    else
+                    {
+                        // dt.Value.EventoClick += EventoSelezionaData;
+                        sdo.EventoClick += EventoSelezionaData;
+                    }
+                    sdo.EventoModificaCommento += EventoModificaCommento;
+                    if ((Variabili.SelezioneCosaMostrareTutto) && (Variabili.elencoDateDiFotoNuove.ContainsKey(dt.Key)))
+                    {
+                        sdo.dataInizio.Background =
+                            sdo.dataFine.Background =
+                            sdo.Evento.Background = new SolidColorBrush(Colors.Yellow);
+
+                    }
+                    if ((Variabili.SelezioneCosaMostrareTutto) || (Variabili.elencoDateDiFotoNuove.ContainsKey(dt.Key)))
+                    {
+                        if ((!soloDateNuove) || (dt.Key > Variabili.DataLetturaFotoPrecedente))
+                        {
+                            _ = SceltaCalendario.Children.Add(sdo);
+                        }
+                    }
+                    */
+                    SceltaCalendario.Controls.Add(avvenimento);
+                    avvenimento.resize();
+                    avvenimento.Location = new Point(0, location);
+                    location += avvenimento.Height;
+                }
             }
             foreach (var caspe in cartelleSpeciali)
             {
@@ -286,7 +297,7 @@ namespace FotoOrganizzatore
                             sdob.nomeCompletoCartella = nuovoNomeCartella;
                             sdob.SetDateTimeFine(sdob.DateTimeInizio);
                         }
-                        Variabili.comandi = 1;
+                        Variabili.comandi = Comandi.mostraCalendarioFoto;
                     }
                 }
             }
@@ -428,7 +439,7 @@ namespace FotoOrganizzatore
                 SetDataOraBase sdobinizio = elencoDateFoti[dataInizio];
                 sdobinizio.Stato = STATO_SELEZIONE_DATA.NIENTE;
             }
-            Variabili.comandi = 1;
+            Variabili.comandi = Comandi.mostraCalendarioFoto;
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento)
         {
