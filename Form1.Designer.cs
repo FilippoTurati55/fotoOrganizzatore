@@ -38,6 +38,7 @@ namespace FotoOrganizzatore
             this.comandi = new System.Windows.Forms.Panel();
             this.show = new System.Windows.Forms.Button();
             this.timerBase = new System.Windows.Forms.Timer(this.components);
+            this.buttonRuota = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -87,7 +88,7 @@ namespace FotoOrganizzatore
             this.panelAnni.Controls.Add(this.buttonRoot);
             this.panelAnni.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelAnni.Location = new System.Drawing.Point(0, 0);
-            this.panelAnni.MinimumSize = new System.Drawing.Size(0, 60);
+            this.panelAnni.MinimumSize = new System.Drawing.Size(2, 60);
             this.panelAnni.Name = "panelAnni";
             this.panelAnni.Size = new System.Drawing.Size(1778, 60);
             this.panelAnni.TabIndex = 1;
@@ -108,9 +109,9 @@ namespace FotoOrganizzatore
             // 
             this.vignette.AutoScroll = true;
             this.vignette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vignette.Location = new System.Drawing.Point(0, 93);
+            this.vignette.Location = new System.Drawing.Point(0, 94);
             this.vignette.Name = "vignette";
-            this.vignette.Size = new System.Drawing.Size(1226, 975);
+            this.vignette.Size = new System.Drawing.Size(1226, 974);
             this.vignette.TabIndex = 1;
             // 
             // comandi
@@ -118,11 +119,12 @@ namespace FotoOrganizzatore
             this.comandi.AutoSize = true;
             this.comandi.BackColor = System.Drawing.SystemColors.Info;
             this.comandi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.comandi.Controls.Add(this.buttonRuota);
             this.comandi.Controls.Add(this.show);
             this.comandi.Dock = System.Windows.Forms.DockStyle.Top;
             this.comandi.Location = new System.Drawing.Point(0, 0);
             this.comandi.Name = "comandi";
-            this.comandi.Size = new System.Drawing.Size(1226, 93);
+            this.comandi.Size = new System.Drawing.Size(1226, 94);
             this.comandi.TabIndex = 0;
             // 
             // show
@@ -138,6 +140,17 @@ namespace FotoOrganizzatore
             // timerBase
             // 
             this.timerBase.Tick += new System.EventHandler(this.timerBase_Tick);
+            // 
+            // buttonRuota
+            // 
+            this.buttonRuota.Location = new System.Drawing.Point(179, -1);
+            this.buttonRuota.Name = "buttonRuota";
+            this.buttonRuota.Size = new System.Drawing.Size(166, 90);
+            this.buttonRuota.TabIndex = 1;
+            this.buttonRuota.Text = "ruota";
+            this.buttonRuota.UseVisualStyleBackColor = true;
+            this.buttonRuota.Visible = false;
+            this.buttonRuota.Click += new System.EventHandler(this.buttonRuota_Click);
             // 
             // Form1
             // 
@@ -170,6 +183,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Panel panelAnni;
         private System.Windows.Forms.Button buttonRoot;
         private System.Windows.Forms.Panel avvenimenti;
+        private System.Windows.Forms.Button buttonRuota;
     }
 }
 

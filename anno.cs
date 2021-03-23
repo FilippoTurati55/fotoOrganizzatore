@@ -20,9 +20,18 @@ namespace FotoOrganizzatore
 
         private void buttonAnno_Click(object sender, EventArgs e)
         {
-            Variabili.selezioneAnno = valoreAnno;
+            if (Variabili.selezioneAnno != valoreAnno)
+            {
+                Variabili.selezioneAnno = valoreAnno;
+                cambiaColore(true);
+            }
+            else
+            {
+                Variabili.selezioneAnno = 0;
+                cambiaColore(false);
+
+            }
             Variabili.comandi = Comandi.mostraCalendarioFoto;
-            cambiaColore(true);
         }
 
         public void setNomeAnno(string valore)

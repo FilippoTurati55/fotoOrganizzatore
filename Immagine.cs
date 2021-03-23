@@ -12,6 +12,7 @@ namespace FotoOrganizzatore
 {
     class Immagine : PictureBox
     {
+        string nomeFile = "";
         public Immagine()
         {
             Image = null;
@@ -19,13 +20,14 @@ namespace FotoOrganizzatore
         public bool leggiImmagineDaFile(string path)
         {
             bool res = false;
+            nomeFile = path;
             PropertyItem propItem4 = null;
             try
             {
-                if (File.Exists(path))
+                if (File.Exists(nomeFile))
                 {
                     // Image = (Bitmap)System.Drawing.Image.FromFile(path);
-                    FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                    FileStream stream = new FileStream(nomeFile, FileMode.Open, FileAccess.Read);
                     //Image myImage = Image.FromStream(stream);
                     //creo il bitmap dallo stream
                     //System.Drawing.Image bmpStream = System.Drawing.Image.FromStream(stream);
@@ -66,6 +68,20 @@ namespace FotoOrganizzatore
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             }
             return res;
+        }
+        public void ruotaImmagine()
+        {
+            PropertyItem propItem4 = null;
+            propItem4 = Image.GetPropertyItem(0x112);
+            switch (propItem4.Value[0])
+            {
+                case 1:  // in origine è diritta
+                    Image.RotateFlip(RotateFlipType.Rotate90FlipX);
+                    Size = new System.Drawing.Size(183, 92);
+                    SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+                    Image.Save(nomeFile,ImageFormat.Jpeg);
+                    break;
+            }
         }
     }
 }

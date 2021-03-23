@@ -84,6 +84,20 @@ namespace FotoOrganizzatore
                     vignette.Controls.Clear();
                     Variabili.comandi = Comandi.nessuno;
                     break;
+                case Comandi.aggiornaMenuFoto:
+                    bool accendi = false;
+                    for (int n = 0; n < vignette.Controls.Count; n++)
+                    {
+                        BoxImmagine bi = (BoxImmagine) vignette.Controls[n];
+                        if (bi.getSselected())
+                        {
+                            accendi = true;
+                            break;
+                        }
+                    }
+                    buttonRuota.Visible = accendi;
+                    Variabili.comandi = Comandi.nessuno;
+                    break;
             }
             if (Variabili.MostraFotoInGiorno != Variabili.MostraFotoInGiornoPrevValue)
             {
@@ -342,6 +356,21 @@ namespace FotoOrganizzatore
                 posizione += anno.Width;
             }
         }
+        #region EVENTI
+        private void buttonRuota_Click(object sender, EventArgs e)
+        {
+            for (int n = 0; n < vignette.Controls.Count; n++)
+            {
+                BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
+                if (bi.getSselected())
+                {
+                    bi.ruotaImmagine();
+                    break;
+                }
+            }
+
+        }
+        #endregion
         int getLivelloRicorsione()
         {
             string pathAttuale = Variabili.nomeCartellaSpeciale;

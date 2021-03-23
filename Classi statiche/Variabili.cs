@@ -20,6 +20,7 @@ namespace FotoOrganizzatore
     enum Comandi
     {
         mostraCalendarioFoto,
+        aggiornaMenuFoto,
         nessuno
     }
     static class Variabili

@@ -26,11 +26,21 @@ namespace FotoOrganizzatore
             nomeFile = path;
             return (immagine.leggiImmagineDaFile(path));
         }
-
+        #region ACCESSO
         public Image getImmagine()
         {
             return immagine.Image;
         }
+        public void ruotaImmagine()
+        {
+            immagine.ruotaImmagine();
+           
+        }
+        public bool getSselected()
+        {
+            return selected;
+        }
+        #endregion
         #region EVENTI
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,6 +55,7 @@ namespace FotoOrganizzatore
                 button1.BackColor = Color.Red;
                 selected = true;
             }
+            Variabili.comandi = Comandi.aggiornaMenuFoto;
         }
         private void BoxImmagine_MouseEnter(object sender, EventArgs e)
         {
