@@ -327,6 +327,18 @@ namespace FotoOrganizzatore
             }
             return true;
         }
+        public static void cancellaFoto(string nomeFile)
+        {
+            // crea cartella cestino se non esistente
+            string nomeCestino = Preferenze.NomeCartellaFotoOrganizzate + @"\cestino";
+            if (!Directory.Exists(nomeCestino))
+            {
+                Directory.CreateDirectory(nomeCestino);
+            }
+            string nomeFilePulito = nomeFile.Substring(nomeFile.LastIndexOf('\\') + 1);
+            string nomeFileNuovo = nomeCestino + "\\" + nomeFilePulito;
+            File.Move(nomeFile, nomeFileNuovo);
+        }
         #endregion
         public static string togliCommentoDaNomeCartella(string nomeConCommento)
         {

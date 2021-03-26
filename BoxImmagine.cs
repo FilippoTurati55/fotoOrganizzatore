@@ -31,14 +31,20 @@ namespace FotoOrganizzatore
         {
             return immagine.Image;
         }
-        public void ruotaImmagine()
-        {
-            immagine.ruotaImmagine();
-           
-        }
         public bool getSselected()
         {
             return selected;
+        }
+        public string getNomeFile()
+        {
+            return nomeFile;
+        }
+        #endregion
+        #region AZIONI
+        public void ruotaImmagine()
+        {
+            immagine.ruotaImmagine();
+
         }
         #endregion
         #region EVENTI

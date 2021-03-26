@@ -95,7 +95,8 @@ namespace FotoOrganizzatore
                             break;
                         }
                     }
-                    buttonRuota.Visible = accendi;
+                    // buttonRuota.Visible = accendi;
+                    panelAzioniSuFoto.Visible = accendi;
                     Variabili.comandi = Comandi.nessuno;
                     break;
             }
@@ -368,9 +369,22 @@ namespace FotoOrganizzatore
                     break;
                 }
             }
-
         }
         #endregion
+        private void buttonCancella_Click(object sender, EventArgs e)
+        {
+            for (int n = 0; n < vignette.Controls.Count; n++)
+            {
+                BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
+                if (bi.getSselected())
+                {
+                    string nomeFile = bi.getNomeFile();
+                    Utility.cancellaFoto(nomeFile);
+                    break;
+                }
+            }
+        }
+
         int getLivelloRicorsione()
         {
             string pathAttuale = Variabili.nomeCartellaSpeciale;

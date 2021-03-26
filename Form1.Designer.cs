@@ -36,15 +36,18 @@ namespace FotoOrganizzatore
             this.buttonRoot = new System.Windows.Forms.Button();
             this.vignette = new System.Windows.Forms.Panel();
             this.comandi = new System.Windows.Forms.Panel();
+            this.buttonRuota = new System.Windows.Forms.Button();
             this.show = new System.Windows.Forms.Button();
             this.timerBase = new System.Windows.Forms.Timer(this.components);
-            this.buttonRuota = new System.Windows.Forms.Button();
+            this.buttonCancella = new System.Windows.Forms.Button();
+            this.panelAzioniSuFoto = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
             this.splitContainerAnni.SuspendLayout();
             this.panelAnni.SuspendLayout();
             this.comandi.SuspendLayout();
+            this.panelAzioniSuFoto.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerAnni
@@ -109,9 +112,9 @@ namespace FotoOrganizzatore
             // 
             this.vignette.AutoScroll = true;
             this.vignette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vignette.Location = new System.Drawing.Point(0, 94);
+            this.vignette.Location = new System.Drawing.Point(0, 124);
             this.vignette.Name = "vignette";
-            this.vignette.Size = new System.Drawing.Size(1226, 974);
+            this.vignette.Size = new System.Drawing.Size(1226, 944);
             this.vignette.TabIndex = 1;
             // 
             // comandi
@@ -119,13 +122,23 @@ namespace FotoOrganizzatore
             this.comandi.AutoSize = true;
             this.comandi.BackColor = System.Drawing.SystemColors.Info;
             this.comandi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.comandi.Controls.Add(this.buttonRuota);
+            this.comandi.Controls.Add(this.panelAzioniSuFoto);
             this.comandi.Controls.Add(this.show);
             this.comandi.Dock = System.Windows.Forms.DockStyle.Top;
             this.comandi.Location = new System.Drawing.Point(0, 0);
             this.comandi.Name = "comandi";
-            this.comandi.Size = new System.Drawing.Size(1226, 94);
+            this.comandi.Size = new System.Drawing.Size(1226, 124);
             this.comandi.TabIndex = 0;
+            // 
+            // buttonRuota
+            // 
+            this.buttonRuota.Location = new System.Drawing.Point(12, 3);
+            this.buttonRuota.Name = "buttonRuota";
+            this.buttonRuota.Size = new System.Drawing.Size(166, 90);
+            this.buttonRuota.TabIndex = 1;
+            this.buttonRuota.Text = "ruota";
+            this.buttonRuota.UseVisualStyleBackColor = true;
+            this.buttonRuota.Click += new System.EventHandler(this.buttonRuota_Click);
             // 
             // show
             // 
@@ -141,16 +154,25 @@ namespace FotoOrganizzatore
             // 
             this.timerBase.Tick += new System.EventHandler(this.timerBase_Tick);
             // 
-            // buttonRuota
+            // buttonCancella
             // 
-            this.buttonRuota.Location = new System.Drawing.Point(179, -1);
-            this.buttonRuota.Name = "buttonRuota";
-            this.buttonRuota.Size = new System.Drawing.Size(166, 90);
-            this.buttonRuota.TabIndex = 1;
-            this.buttonRuota.Text = "ruota";
-            this.buttonRuota.UseVisualStyleBackColor = true;
-            this.buttonRuota.Visible = false;
-            this.buttonRuota.Click += new System.EventHandler(this.buttonRuota_Click);
+            this.buttonCancella.Location = new System.Drawing.Point(184, 3);
+            this.buttonCancella.Name = "buttonCancella";
+            this.buttonCancella.Size = new System.Drawing.Size(196, 90);
+            this.buttonCancella.TabIndex = 2;
+            this.buttonCancella.Text = "cancella";
+            this.buttonCancella.UseVisualStyleBackColor = true;
+            this.buttonCancella.Click += new System.EventHandler(this.buttonCancella_Click);
+            // 
+            // panelAzioniSuFoto
+            // 
+            this.panelAzioniSuFoto.Controls.Add(this.buttonRuota);
+            this.panelAzioniSuFoto.Controls.Add(this.buttonCancella);
+            this.panelAzioniSuFoto.Location = new System.Drawing.Point(188, 10);
+            this.panelAzioniSuFoto.Name = "panelAzioniSuFoto";
+            this.panelAzioniSuFoto.Size = new System.Drawing.Size(446, 109);
+            this.panelAzioniSuFoto.TabIndex = 3;
+            this.panelAzioniSuFoto.Visible = false;
             // 
             // Form1
             // 
@@ -169,6 +191,7 @@ namespace FotoOrganizzatore
             this.panelAnni.ResumeLayout(false);
             this.panelAnni.PerformLayout();
             this.comandi.ResumeLayout(false);
+            this.panelAzioniSuFoto.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -184,6 +207,8 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Button buttonRoot;
         private System.Windows.Forms.Panel avvenimenti;
         private System.Windows.Forms.Button buttonRuota;
+        private System.Windows.Forms.Panel panelAzioniSuFoto;
+        private System.Windows.Forms.Button buttonCancella;
     }
 }
 

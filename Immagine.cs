@@ -72,15 +72,22 @@ namespace FotoOrganizzatore
         public void ruotaImmagine()
         {
             PropertyItem propItem4 = null;
-            propItem4 = Image.GetPropertyItem(0x112);
-            switch (propItem4.Value[0])
+            int[] elencoProprieta = Image.PropertyIdList;
+            List<int> ep = elencoProprieta.ToList();
+            if (ep.Contains(0x112))
             {
-                case 1:  // in origine è diritta
-                    Image.RotateFlip(RotateFlipType.Rotate90FlipX);
-                    Size = new System.Drawing.Size(183, 92);
-                    SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-                    Image.Save(nomeFile,ImageFormat.Jpeg);
-                    break;
+                propItem4 = Image.GetPropertyItem(0x112);
+                //EncoderParameters<EncoderParameter> epa = Image.GetEncoderParameterList();
+                switch (propItem4.Value[0])
+                {
+                    case 1:  // in origine è orizzontale
+                        Image.RotateFlip(RotateFlipType.Rotate90FlipX);
+                        Size = new System.Drawing.Size(183, 92);
+                        SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+                        Image.Save(nomeFile, ImageFormat.Jpeg);
+                        //Image.Save(nomeFile,Image.RawFormat\, Image.GetEncoderParameterList());
+                        break;
+                }
             }
         }
     }
