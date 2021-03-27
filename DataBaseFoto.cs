@@ -164,8 +164,9 @@ namespace FotoOrganizzatore
                 }
             }
             foreach (string fileName in fileEntries)
+            {
                 ProcessFile(fileName);
-
+            }
             // Recurse into subdirectories of this directory.
             string[] subdirectoryEntries = Directory.GetDirectories(dir);
             foreach (string subdirectory in subdirectoryEntries)
@@ -184,8 +185,12 @@ namespace FotoOrganizzatore
         }
         void ProcessFile(string path)
         {
-            controllaNormalizzaNomeFile(path);
-            aggiungiFoto(path);
+            string estensione = path.Substring(path.LastIndexOf('.') + 1);
+            if (estensione != "txt")
+            {
+                controllaNormalizzaNomeFile(path);
+                aggiungiFoto(path);
+            }
         }
         bool aggiungiFoto(string path)
         {

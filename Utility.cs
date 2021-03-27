@@ -330,14 +330,29 @@ namespace FotoOrganizzatore
         public static void cancellaFoto(string nomeFile)
         {
             // crea cartella cestino se non esistente
-            string nomeCestino = Preferenze.NomeCartellaFotoOrganizzate + @"\cestino";
-            if (!Directory.Exists(nomeCestino))
+            if (!Directory.Exists(Preferenze.NomeCestino))
             {
-                Directory.CreateDirectory(nomeCestino);
+                Directory.CreateDirectory(Preferenze.NomeCestino);
             }
             string nomeFilePulito = nomeFile.Substring(nomeFile.LastIndexOf('\\') + 1);
-            string nomeFileNuovo = nomeCestino + "\\" + nomeFilePulito;
+            string nomeFileNuovo = Preferenze.NomeCestino + "\\" + nomeFilePulito;
             File.Move(nomeFile, nomeFileNuovo);
+            tracciaInfoRipristiniFotoCancellata(nomeFile, nomeFileNuovo);
+        }
+        static void tracciaInfoRipristiniFotoCancellata(string originale, string nomeInCestino)
+        {
+            StreamWriter sw;
+            string nomeFileInfo = Preferenze.NomeCestino + @"\InfoResume.txt";
+            if (!File.Exists(nomeFileInfo))
+            {
+                sw = new StreamWriter(nomeFileInfo, false, Encoding.GetEncoding("iso-8859-1"));
+            }
+            else
+            {
+                sw = new StreamWriter(nomeFileInfo, true, Encoding.GetEncoding("iso-8859-1"));
+            }
+            sw.WriteLine(nomeInCestino + ";" + originale);
+            sw.Close();
         }
         #endregion
         public static string togliCommentoDaNomeCartella(string nomeConCommento)
