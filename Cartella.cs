@@ -47,7 +47,10 @@ namespace FotoOrganizzatore
             // calendario e dataBaseFotoLocali vanno messi nelle variabili statiche
             Variabili.nomeCartellaSpeciale = Cab.getPathCompleto();
             Variabili.mostraCartellaSpeciale = true;
-
+            string cercaCestino = Variabili.nomeCartellaSpeciale;
+            cercaCestino = cercaCestino.Substring(cercaCestino.LastIndexOf('\\') + 1);
+            Variabili.cestinoMostrato = (cercaCestino == "cestino");
+            Variabili.comandi = Comandi.aggiornaMenuFoto;
         }
     }
 }

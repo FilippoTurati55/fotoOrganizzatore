@@ -82,7 +82,8 @@ namespace FotoOrganizzatore
                     Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
                     nomeCartella = "";
                     vignette.Controls.Clear();
-                    Variabili.comandi = Comandi.nessuno;
+                    //Variabili.comandi = Comandi.nessuno;
+                    Variabili.comandi = Comandi.aggiornaMenuFoto;
                     break;
                 case Comandi.aggiornaMenuFoto:
                     bool accendi = false;
@@ -97,6 +98,17 @@ namespace FotoOrganizzatore
                     }
                     // buttonRuota.Visible = accendi;
                     panelAzioniSuFoto.Visible = accendi;
+                    if (accendi)
+                    {
+                        if (Variabili.cestinoMostrato)
+                        {
+                            buttonCancella.Text = "ripristina";
+                        }
+                        else
+                        {
+                            buttonCancella.Text = "cancella";
+                        }
+                    }
                     Variabili.comandi = Comandi.nessuno;
                     break;
             }
@@ -105,6 +117,7 @@ namespace FotoOrganizzatore
                 Variabili.MostraFotoInGiornoPrevValue = Variabili.MostraFotoInGiorno;
                 numeroFotoMostrate = 0;
                 vignette.Controls.Clear();
+                Variabili.comandi = Comandi.aggiornaMenuFoto;
                 Variabili.show.resetImmagini();
                 System.GC.Collect();
                 SetDataOraBase puntato = Variabili.MostraFotoSetDataOra;
@@ -277,6 +290,7 @@ namespace FotoOrganizzatore
                 buttonRoot.Text = "[...]";
                 vignette.Controls.Clear();
                 aggiornaSplitContinerAnni();
+                Variabili.comandi = Comandi.aggiornaMenuFoto;
                 nomeCartella = "";
             }
             else
@@ -379,7 +393,14 @@ namespace FotoOrganizzatore
                 if (bi.getSselected())
                 {
                     string nomeFile = bi.getNomeFile();
-                    Utility.cancellaFoto(nomeFile);
+                    if (buttonCancella.Text == "ripristina")
+                    {
+                        Utility.ripristinaFoto(nomeFile);
+                    }
+                    else
+                    {
+                        Utility.cancellaFoto(nomeFile);
+                    }
                     break;
                 }
             }

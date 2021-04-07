@@ -339,6 +339,30 @@ namespace FotoOrganizzatore
             File.Move(nomeFile, nomeFileNuovo);
             tracciaInfoRipristiniFotoCancellata(nomeFile, nomeFileNuovo);
         }
+        public static void ripristinaFoto(string nomeFile)
+        {
+            // crea cartella cestino se non esistente
+            if (Directory.Exists(Preferenze.NomeCestino))
+            {
+                if (File.Exists(nomeFile))
+                {
+                    string nomeFileOriginale = recuperaInfoRipristiniFotoCancellata(nomeFile);
+                    if (nomeFileOriginale != "")
+                    {
+                        /*string nomeFilePulito = nomeFile.Substring(nomeFile.LastIndexOf('\\') + 1);
+                        string nomeFileNuovo = Preferenze.NomeCestino + "\\" + nomeFilePulito;
+                        File.Move(nomeFile, nomeFileNuovo);*/
+                        cancellaInfoRipristiniFotoCancellata(nomeFile);
+                        File.Move(nomeFile, nomeFileOriginale);
+                        cancellaInfoRipristiniFotoCancellata(nomeFile);
+                    }
+                    else
+                    {
+                        // cataloga senza sapere dove
+                    }
+                }
+            }
+        }
         static void tracciaInfoRipristiniFotoCancellata(string originale, string nomeInCestino)
         {
             StreamWriter sw;
@@ -353,6 +377,63 @@ namespace FotoOrganizzatore
             }
             sw.WriteLine(nomeInCestino + ";" + originale);
             sw.Close();
+        }
+        static bool cancellaInfoRipristiniFotoCancellata(string nomeInCestino)
+        {
+            bool result = false;
+            string[] info = null;
+            string nomeFileInfo = Preferenze.NomeCestino + @"\InfoResume.txt";
+            if (File.Exists(nomeFileInfo))
+            {
+                info = File.ReadAllLines(nomeFileInfo);
+                ;
+                for (int n = 0; n < info.Length; n++)
+                {
+                    string[] infon = info[n].Split(';');
+                    if (infon[0] == nomeInCestino)
+                    {
+                        info[n] = "";
+                        result = true;
+                        break;
+                    }
+                }
+            }
+            if (result)
+            {
+                StreamWriter sw = new StreamWriter(nomeFileInfo, false, Encoding.GetEncoding("iso-8859-1"));
+                for (int n = 0; n < info.Length; n++)
+                {
+                    for (int m = 0; m < info.Length; m++)
+                    {
+                        if (info[n] != "")
+                        {
+                            sw.WriteLine(info[n]);
+                        }
+                    }
+                }
+                sw.Close();
+            }
+            return result;
+        }
+        static string recuperaInfoRipristiniFotoCancellata(string nomeInCestino)
+        {
+            string originale = "";
+            string nomeFileInfo = Preferenze.NomeCestino + @"\InfoResume.txt";
+            if (File.Exists(nomeFileInfo))
+            {
+                string[] info = File.ReadAllLines(nomeFileInfo);
+                ;
+                for (int n = 0; n < info.Length; n++)
+                {
+                    string[] infon = info[n].Split(';');
+                    if (infon[0] == nomeInCestino)
+                    {
+                        originale = infon[1];
+                        break;
+                    }
+                }
+            }
+            return originale;
         }
         #endregion
         public static string togliCommentoDaNomeCartella(string nomeConCommento)
