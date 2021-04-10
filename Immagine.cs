@@ -22,6 +22,7 @@ namespace FotoOrganizzatore
             bool res = false;
             nomeFile = path;
             PropertyItem propItem4 = null;
+            DateTime dt = new DateTime();
             try
             {
                 if (File.Exists(nomeFile))
@@ -55,6 +56,40 @@ namespace FotoOrganizzatore
                         }
                     }
                     catch { };
+                    // leggi momento scatto
+                    try
+                    {
+                        PropertyItem propItem1 = Image.GetPropertyItem(0x132);
+                        PropertyItem propItem2 = null;
+                        PropertyItem propItem3 = null;
+                        //PropertyItem propItem4 = null;
+                        try
+                        {
+                            propItem2 = Image.GetPropertyItem(0x9003);
+                            propItem3 = Image.GetPropertyItem(0x9004);
+                            propItem4 = Image.GetPropertyItem(0x112);
+                        }
+                        catch { };
+                        System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                        string data1 = encoding.GetString(propItem1.Value);
+                        string data2 = "";
+                        string data3 = "";
+                        if (propItem2 != null)
+                            data2 = encoding.GetString(propItem2.Value);
+                        if (propItem3 != null)
+                            data3 = encoding.GetString(propItem3.Value);
+                        if ((data1 != data2) && (data1 != data3))
+                        {
+                            // temporaneo Variabili.DiversitaInRicercaDataScatto++;
+                        }
+                        int anni = System.Int32.Parse(data1.Substring(0, 4));
+                        dt.AddYears(anni);
+                        int mesi = System.Int32.Parse(data1.Substring(5, 2));
+                        int giorni = System.Int32.Parse(data1.Substring(8, 2));
+                        DateTime dattim = new DateTime(anni, mesi, giorni);
+                        dt = dattim;
+                    }
+                    catch { }
                     stream.Close();
                 }
             }

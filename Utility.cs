@@ -1,4 +1,5 @@
-﻿using System;
+﻿using external_drive_lib.interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -327,6 +328,20 @@ namespace FotoOrganizzatore
             }
             return true;
         }
+        public static bool muoviFile(string sorgente, string destinazione)
+        {
+            bool res = false;
+            if (File.Exists(sorgente))
+            {
+                string cartellaDestinazione = destinazione.Substring(destinazione.LastIndexOf('\\'));
+                if (Directory.Exists(cartellaDestinazione))
+                {
+                    File.Move(sorgente, destinazione);
+                    res = true;
+                }
+            }
+            return res;
+        }
         public static void cancellaFoto(string nomeFile)
         {
             // crea cartella cestino se non esistente
@@ -353,12 +368,13 @@ namespace FotoOrganizzatore
                         string nomeFileNuovo = Preferenze.NomeCestino + "\\" + nomeFilePulito;
                         File.Move(nomeFile, nomeFileNuovo);*/
                         cancellaInfoRipristiniFotoCancellata(nomeFile);
-                        File.Move(nomeFile, nomeFileOriginale);
+                        muoviFile(nomeFile, nomeFileOriginale);
                         cancellaInfoRipristiniFotoCancellata(nomeFile);
                     }
                     else
                     {
                         // cataloga senza sapere dove
+                        classificaFoto(nomeFile);
                     }
                 }
             }
@@ -436,6 +452,40 @@ namespace FotoOrganizzatore
             return originale;
         }
         #endregion
+        public static bool classificaFoto(string nomeFile)
+        {
+            bool res = false;
+            string[] dirScomposto = nomeFile.Replace("/", "\\").Split('\\');
+            DateTime inizio = new DateTime(),
+                     fine = new DateTime();
+            string b = "";
+            if (Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b))
+            {
+                /*
+                Foto foto = fotoRemota.Value;
+                IFile fileFoto = foto.file;
+                DateTime data = foto.dateTime;
+                string pathTrovato = "";
+                SetDataOraBase sdob = Variabili.Calendario.getData(data);
+                string percorsoFoto;
+                if (sdob != null)
+                {
+                    // data già presente
+                    percorsoFoto = sdob.nomeCompletoCartella;
+                }
+                else
+                {
+                    percorsoFoto = Variabili.Calendario.CalcolaNomeCartella(data, "");
+                    if (!Directory.Exists(percorsoFoto))
+                    {
+                        Directory.CreateDirectory(percorsoFoto);
+                    }
+                }
+                fileFoto.copy_sync(percorsoFoto);
+                */
+            }
+            return res;
+        }
         public static string togliCommentoDaNomeCartella(string nomeConCommento)
         {
             string nomeSenzaCommento = "";
