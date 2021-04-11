@@ -146,8 +146,8 @@ namespace FotoOrganizzatore
                     string ncartella = scomposto[0];
                     for (int n = 1; n < scomposto.Length - 1; n++)
                         ncartella += @"\" + scomposto[n];
-
                     calendarioBackup.AggiungiData(nomeCompletoNuovaCartella + @"\nomeFileFinto.fnt", ncartella);
+                    Utility.CopiaCartella(nomeCartellaOriginale, nomeCompletoNuovaCartella);
                 }
                 /*
                 DateTime confronto = new DateTime(2020, 11, 11);

@@ -297,6 +297,18 @@ namespace FotoOrganizzatore
             }
             return nomeCompleto;
         }
+        public static bool CopiaCartella(string sorgente, string destinazione)
+        {
+            if (sorgente != destinazione)
+            {
+                if (!Directory.Exists(destinazione))
+                {
+                    Directory.CreateDirectory(sorgente);
+                }
+                CopiaCartellainEsistente(sorgente, destinazione);
+            }
+            return true;
+        }
         public static bool MuoviCartella(string sorgente, string destinazione)
         {
             if (sorgente != destinazione)
@@ -341,6 +353,28 @@ namespace FotoOrganizzatore
                 else
                 {
                     File.Move(file, fileDestinazione);
+                }
+            }
+            return true;
+        }
+        static bool CopiaCartellainEsistente(string sorgente, string destinazione)
+        {
+            bool result = false;
+            List<string> files = new List<string>(Directory.EnumerateFiles(sorgente));
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                string nomeCorto = fi.Name;
+                string fileDestinazione = destinazione + "\\" + nomeCorto;
+                if (File.Exists(fileDestinazione))
+                {
+                    // il file esiste già 
+                    // todo: si potrebbe verificare se sono uguali o diversi
+                    ;
+                }
+                else
+                {
+                    File.Copy(file, fileDestinazione);
                 }
             }
             return true;
