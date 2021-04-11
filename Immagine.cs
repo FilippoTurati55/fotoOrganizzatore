@@ -13,9 +13,14 @@ namespace FotoOrganizzatore
     class Immagine : PictureBox
     {
         string nomeFile = "";
+        DateTime data;
         public Immagine()
         {
             Image = null;
+        }
+        public DateTime getDate()
+        {
+            return data;
         }
         public bool leggiImmagineDaFile(string path)
         {
@@ -69,7 +74,7 @@ namespace FotoOrganizzatore
                             propItem3 = Image.GetPropertyItem(0x9004);
                             propItem4 = Image.GetPropertyItem(0x112);
                         }
-                        catch { };
+                        catch {; };
                         System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                         string data1 = encoding.GetString(propItem1.Value);
                         string data2 = "";
@@ -87,7 +92,7 @@ namespace FotoOrganizzatore
                         int mesi = System.Int32.Parse(data1.Substring(5, 2));
                         int giorni = System.Int32.Parse(data1.Substring(8, 2));
                         DateTime dattim = new DateTime(anni, mesi, giorni);
-                        dt = dattim;
+                        data = dattim;
                     }
                     catch { }
                     stream.Close();

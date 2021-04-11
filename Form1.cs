@@ -401,7 +401,6 @@ namespace FotoOrganizzatore
                     {
                         Utility.cancellaFoto(nomeFile);
                     }
-                    break;
                 }
             }
         }

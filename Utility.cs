@@ -25,6 +25,23 @@ namespace FotoOrganizzatore
             }
         }
         #region DATA_DA_STRINGA
+        public static bool CalcolaDateTimeDaNomeFile(string nomeFile, ref DateTime data)
+        {
+            bool res = false;
+            int anno, mese, giorno;
+            string[] nomeSplit = nomeFile.Split('_');
+            string annoS = nomeSplit[1].Substring(0, 4);
+            string meseS = nomeSplit[1].Substring(4, 2);
+            string giornoS = nomeSplit[1].Substring(6, 2);
+            if (Int32.TryParse(annoS, out anno) &&
+                Int32.TryParse(meseS,out mese) &&
+                Int32.TryParse(giornoS,out giorno))
+            {
+                data = new DateTime(anno, mese, giorno);
+                res = true;
+            }
+            return res;
+        }
         public static bool CalcolaDateTimeDaPath(string[] fileFotoSplit, ref DateTime inizio, ref DateTime fine, ref string commento)
         {
             int anno, mese, giorno = 1;
@@ -333,12 +350,13 @@ namespace FotoOrganizzatore
             bool res = false;
             if (File.Exists(sorgente))
             {
-                string cartellaDestinazione = destinazione.Substring(destinazione.LastIndexOf('\\'));
-                if (Directory.Exists(cartellaDestinazione))
+                string cartellaDestinazione = destinazione.Substring(0,destinazione.LastIndexOf('\\'));
+                if (!Directory.Exists(cartellaDestinazione))
                 {
-                    File.Move(sorgente, destinazione);
-                    res = true;
+                    Directory.CreateDirectory(cartellaDestinazione);
                 }
+                File.Move(sorgente, destinazione);
+                res = true;
             }
             return res;
         }
@@ -353,6 +371,7 @@ namespace FotoOrganizzatore
             string nomeFileNuovo = Preferenze.NomeCestino + "\\" + nomeFilePulito;
             File.Move(nomeFile, nomeFileNuovo);
             tracciaInfoRipristiniFotoCancellata(nomeFile, nomeFileNuovo);
+            Variabili.MostraFotoInGiorno++;
         }
         public static void ripristinaFoto(string nomeFile)
         {
@@ -369,13 +388,16 @@ namespace FotoOrganizzatore
                         File.Move(nomeFile, nomeFileNuovo);*/
                         cancellaInfoRipristiniFotoCancellata(nomeFile);
                         muoviFile(nomeFile, nomeFileOriginale);
-                        cancellaInfoRipristiniFotoCancellata(nomeFile);
+                        //cancellaInfoRipristiniFotoCancellata(nomeFile);
                     }
                     else
                     {
                         // cataloga senza sapere dove
                         classificaFoto(nomeFile);
+                        //cancellaInfoRipristiniFotoCancellata(nomeFile);
+                        //cancellaInfoRipristiniFotoCancellata(nomeFile);
                     }
+                    Variabili.mostraCartellaSpeciale = true;
                 }
             }
         }
@@ -419,12 +441,9 @@ namespace FotoOrganizzatore
                 StreamWriter sw = new StreamWriter(nomeFileInfo, false, Encoding.GetEncoding("iso-8859-1"));
                 for (int n = 0; n < info.Length; n++)
                 {
-                    for (int m = 0; m < info.Length; m++)
+                    if (info[n] != "")
                     {
-                        if (info[n] != "")
-                        {
-                            sw.WriteLine(info[n]);
-                        }
+                        sw.WriteLine(info[n]);
                     }
                 }
                 sw.Close();
@@ -456,16 +475,11 @@ namespace FotoOrganizzatore
         {
             bool res = false;
             string[] dirScomposto = nomeFile.Replace("/", "\\").Split('\\');
-            DateTime inizio = new DateTime(),
-                     fine = new DateTime();
+            DateTime data = new DateTime();
             string b = "";
-            if (Utility.CalcolaDateTimeDaPath(dirScomposto, ref inizio, ref fine, ref b))
+            string nome = nomeFile.Replace("/", "\\").Substring(nomeFile.LastIndexOf("\\") + 1);
+            if (Utility.CalcolaDateTimeDaNomeFile(nome, ref data))
             {
-                /*
-                Foto foto = fotoRemota.Value;
-                IFile fileFoto = foto.file;
-                DateTime data = foto.dateTime;
-                string pathTrovato = "";
                 SetDataOraBase sdob = Variabili.Calendario.getData(data);
                 string percorsoFoto;
                 if (sdob != null)
@@ -481,8 +495,8 @@ namespace FotoOrganizzatore
                         Directory.CreateDirectory(percorsoFoto);
                     }
                 }
-                fileFoto.copy_sync(percorsoFoto);
-                */
+                string nomeFileNuovo = percorsoFoto + "\\" + dirScomposto[dirScomposto.Length - 1];
+                File.Move(nomeFile, nomeFileNuovo);
             }
             return res;
         }
