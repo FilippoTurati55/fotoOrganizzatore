@@ -19,3 +19,4 @@ C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOr
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Show.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Cartella.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.anno.resources
+C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Cruscotto.resources

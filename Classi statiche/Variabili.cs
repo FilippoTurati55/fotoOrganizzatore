@@ -27,6 +27,7 @@ namespace FotoOrganizzatore
     {
         public static ImmagineIngrandita codePopup = new ImmagineIngrandita();
         public static Comandi comandi;
+        public static int nDispositiviCollegati;
         public static int mostraFotoCount = 0;
         public static bool mostraFoto = false;
         public static bool mostraCartellaSpeciale = false;
@@ -55,5 +56,6 @@ namespace FotoOrganizzatore
         public static Calendario Calendario = new Calendario();
 
         public static Show show = new Show();
+        public static Cruscotto cruscotto;
     }
 }

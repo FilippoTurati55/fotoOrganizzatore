@@ -41,6 +41,7 @@ namespace FotoOrganizzatore
             this.buttonCancella = new System.Windows.Forms.Button();
             this.show = new System.Windows.Forms.Button();
             this.timerBase = new System.Windows.Forms.Timer(this.components);
+            this.Cruscotto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -122,6 +123,7 @@ namespace FotoOrganizzatore
             this.comandi.AutoSize = true;
             this.comandi.BackColor = System.Drawing.SystemColors.Info;
             this.comandi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.comandi.Controls.Add(this.Cruscotto);
             this.comandi.Controls.Add(this.panelAzioniSuFoto);
             this.comandi.Controls.Add(this.show);
             this.comandi.Dock = System.Windows.Forms.DockStyle.Top;
@@ -176,6 +178,16 @@ namespace FotoOrganizzatore
             // 
             this.timerBase.Tick += new System.EventHandler(this.timerBase_Tick);
             // 
+            // Cruscotto
+            // 
+            this.Cruscotto.Location = new System.Drawing.Point(785, 10);
+            this.Cruscotto.Name = "Cruscotto";
+            this.Cruscotto.Size = new System.Drawing.Size(177, 78);
+            this.Cruscotto.TabIndex = 4;
+            this.Cruscotto.Text = "button1";
+            this.Cruscotto.UseVisualStyleBackColor = true;
+            this.Cruscotto.Click += new System.EventHandler(this.Cruscotto_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -212,6 +224,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Button buttonRuota;
         private System.Windows.Forms.Panel panelAzioniSuFoto;
         private System.Windows.Forms.Button buttonCancella;
+        private System.Windows.Forms.Button Cruscotto;
     }
 }
 

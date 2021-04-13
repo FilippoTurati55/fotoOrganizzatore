@@ -30,8 +30,11 @@ namespace FotoOrganizzatore
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             this.Location = new Point(1, 1);
             Preferenze.LeggiPreferenze();
+            Variabili.cruscotto = new Cruscotto(this);
+            Variabili.cruscotto.Show();
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
+
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
@@ -403,6 +406,11 @@ namespace FotoOrganizzatore
                     }
                 }
             }
+        }
+
+        private void Cruscotto_Click(object sender, EventArgs e)
+        {
+            Variabili.cruscotto.Focus();
         }
 
         int getLivelloRicorsione()
