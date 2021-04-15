@@ -11,6 +11,7 @@ namespace FotoOrganizzatore
 {
     class UnitaEsterna
     {
+        Discobackup interfaccia;
         public string idUnivoco;
         string format;
         string label;           // id costruttore o simile es. Lexar
@@ -29,6 +30,7 @@ namespace FotoOrganizzatore
             tipo = driveInfo.DriveType;
             if (driveInfo.IsReady)
             {
+                interfaccia = new Discobackup();
                 label = driveInfo.VolumeLabel;
                 format = driveInfo.DriveFormat;
                 spazioDisponibile = driveInfo.AvailableFreeSpace;
@@ -39,6 +41,8 @@ namespace FotoOrganizzatore
                 ManagementObject obj = new ManagementObject(messaggio);
                 obj.Get();
                 numeroDiSerie = obj["VolumeSerialNumber"].ToString();
+                interfaccia.setNumeroDiSerie(numeroDiSerie);
+                //Variabili.cruscotto.RegistraDiscoBackup(interfaccia);
                 res = true;
             }
             return res;
@@ -89,8 +93,10 @@ namespace FotoOrganizzatore
         UnitaEsterna disco;
         DataBaseFoto dataBaseFotoSuDiscoBackup;
         Calendario calendarioBackup = new Calendario();
-        public void CercaUnitaEsterne()
+        Form1 form1Ref;
+        public void CercaUnitaEsterne(Form1 form1)
         {
+            form1Ref = form1;
             DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (DriveInfo d in allDrives)
             {
@@ -100,7 +106,9 @@ namespace FotoOrganizzatore
                         disco = new UnitaEsterna();
                         if (disco.esaminaDisco(d))
                         {
+                            form1.AggiungiDiscoBackup();
                             Variabili.UnitaEsterne.Add(disco);
+
                             if (disco.accredita())
                             {
                                 //Variabili.UnitaEsterneAccreditate.Add(disco.idUnivoco, disco.identificatore);

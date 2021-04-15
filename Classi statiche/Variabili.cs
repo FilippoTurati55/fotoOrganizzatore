@@ -56,6 +56,6 @@ namespace FotoOrganizzatore
         public static Calendario Calendario = new Calendario();
 
         public static Show show = new Show();
-        public static Cruscotto cruscotto;
+        //public static Cruscotto cruscotto;
     }
 }

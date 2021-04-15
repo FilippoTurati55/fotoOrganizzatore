@@ -21,10 +21,17 @@ namespace FotoOrganizzatore
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             this.Location = new Point(1, 1);
         }
-
+        #region EVENTI
         private void button1_Click(object sender, EventArgs e)
         {
             form1.Focus();
         }
+        #endregion
+        #region INTERFACCIA
+        public void RegistraDiscoBackup(Discobackup db)
+        {
+            splitContainer3.Panel2.Controls.Add(db);
+        }
+        #endregion
     }
 }

@@ -27,18 +27,22 @@ namespace FotoOrganizzatore
         public Form1()
         {
             InitializeComponent();
+            splitContainerAnni.Dock = DockStyle.Fill;
+            splitContainerAnni.Visible = false;
+            splitContainerCruscotto.Dock = DockStyle.Fill;
+            splitContainerCruscotto.Visible = true;
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             this.Location = new Point(1, 1);
             Preferenze.LeggiPreferenze();
-            Variabili.cruscotto = new Cruscotto(this);
-            Variabili.cruscotto.Show();
+            //Variabili.cruscotto = new Cruscotto(this);
+            //Variabili.cruscotto.Show();
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
 
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
-                Variabili.Backup.CercaUnitaEsterne();
+                Variabili.Backup.CercaUnitaEsterne(this);
                 // Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
                 Variabili.comandi = Comandi.mostraCalendarioFoto;
                 aggiungiAnni();
@@ -374,6 +378,13 @@ namespace FotoOrganizzatore
                 posizione += anno.Width;
             }
         }
+        int getLivelloRicorsione()
+        {
+            string pathAttuale = Variabili.nomeCartellaSpeciale;
+            string[] pathSplit = pathAttuale.Split('\\');
+            return (pathSplit.Length);
+        }
+        #endregion
         #region EVENTI
         private void buttonRuota_Click(object sender, EventArgs e)
         {
@@ -387,7 +398,6 @@ namespace FotoOrganizzatore
                 }
             }
         }
-        #endregion
         private void buttonCancella_Click(object sender, EventArgs e)
         {
             for (int n = 0; n < vignette.Controls.Count; n++)
@@ -410,14 +420,22 @@ namespace FotoOrganizzatore
 
         private void Cruscotto_Click(object sender, EventArgs e)
         {
-            Variabili.cruscotto.Focus();
+            splitContainerAnni.Visible = false;
+            splitContainerCruscotto.Visible = true;
+            //Variabili.cruscotto.Focus();
         }
 
-        int getLivelloRicorsione()
+        private void button1_Click(object sender, EventArgs e)
         {
-            string pathAttuale = Variabili.nomeCartellaSpeciale;
-            string[] pathSplit = pathAttuale.Split('\\');
-            return(pathSplit.Length);
+            splitContainerCruscotto.Visible = false;
+            splitContainerAnni.Visible = true;
+        }
+        #endregion
+        #region CRUSCOTTO
+        public void AggiungiDiscoBackup()
+        {
+            Discobackup db = new Discobackup();
+            splitContainerUpDx.Panel2.Controls.Add(db);
         }
         #endregion
     }

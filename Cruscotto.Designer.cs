@@ -54,7 +54,11 @@ namespace FotoOrganizzatore
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(2234, 1266);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.splitContainer1.Size = new System.Drawing.Size(2585, 1266);
             this.splitContainer1.SplitterDistance = 744;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -64,11 +68,15 @@ namespace FotoOrganizzatore
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Info;
+            // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(2234, 744);
-            this.splitContainer2.SplitterDistance = 1120;
+            this.splitContainer2.Size = new System.Drawing.Size(2585, 744);
+            this.splitContainer2.SplitterDistance = 300;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -80,8 +88,8 @@ namespace FotoOrganizzatore
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.button1);
-            this.splitContainer3.Size = new System.Drawing.Size(1110, 744);
-            this.splitContainer3.SplitterDistance = 293;
+            this.splitContainer3.Size = new System.Drawing.Size(2281, 744);
+            this.splitContainer3.SplitterDistance = 104;
             this.splitContainer3.TabIndex = 0;
             // 
             // button1
@@ -89,7 +97,7 @@ namespace FotoOrganizzatore
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(293, 744);
+            this.button1.Size = new System.Drawing.Size(104, 744);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -99,7 +107,7 @@ namespace FotoOrganizzatore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2234, 1266);
+            this.ClientSize = new System.Drawing.Size(2585, 1266);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Cruscotto";
             this.Text = "Cruscotto";

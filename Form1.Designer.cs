@@ -36,12 +36,16 @@ namespace FotoOrganizzatore
             this.buttonRoot = new System.Windows.Forms.Button();
             this.vignette = new System.Windows.Forms.Panel();
             this.comandi = new System.Windows.Forms.Panel();
+            this.Cruscotto = new System.Windows.Forms.Button();
             this.panelAzioniSuFoto = new System.Windows.Forms.Panel();
             this.buttonRuota = new System.Windows.Forms.Button();
             this.buttonCancella = new System.Windows.Forms.Button();
             this.show = new System.Windows.Forms.Button();
             this.timerBase = new System.Windows.Forms.Timer(this.components);
-            this.Cruscotto = new System.Windows.Forms.Button();
+            this.splitContainerCruscotto = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.splitContainerUp = new System.Windows.Forms.SplitContainer();
+            this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -49,12 +53,20 @@ namespace FotoOrganizzatore
             this.panelAnni.SuspendLayout();
             this.comandi.SuspendLayout();
             this.panelAzioniSuFoto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCruscotto)).BeginInit();
+            this.splitContainerCruscotto.Panel1.SuspendLayout();
+            this.splitContainerCruscotto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUp)).BeginInit();
+            this.splitContainerUp.Panel2.SuspendLayout();
+            this.splitContainerUp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUpDx)).BeginInit();
+            this.splitContainerUpDx.Panel1.SuspendLayout();
+            this.splitContainerUpDx.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerAnni
             // 
             this.splitContainerAnni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainerAnni.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerAnni.Location = new System.Drawing.Point(0, 0);
             this.splitContainerAnni.Name = "splitContainerAnni";
             // 
@@ -70,8 +82,8 @@ namespace FotoOrganizzatore
             this.splitContainerAnni.Panel2.AutoScroll = true;
             this.splitContainerAnni.Panel2.Controls.Add(this.vignette);
             this.splitContainerAnni.Panel2.Controls.Add(this.comandi);
-            this.splitContainerAnni.Size = new System.Drawing.Size(3012, 1070);
-            this.splitContainerAnni.SplitterDistance = 1780;
+            this.splitContainerAnni.Size = new System.Drawing.Size(2503, 503);
+            this.splitContainerAnni.SplitterDistance = 1186;
             this.splitContainerAnni.TabIndex = 0;
             // 
             // avvenimenti
@@ -80,7 +92,7 @@ namespace FotoOrganizzatore
             this.avvenimenti.Dock = System.Windows.Forms.DockStyle.Fill;
             this.avvenimenti.Location = new System.Drawing.Point(0, 60);
             this.avvenimenti.Name = "avvenimenti";
-            this.avvenimenti.Size = new System.Drawing.Size(1778, 1008);
+            this.avvenimenti.Size = new System.Drawing.Size(1184, 441);
             this.avvenimenti.TabIndex = 2;
             this.avvenimenti.Resize += new System.EventHandler(this.avvenimenti_Resize);
             // 
@@ -94,7 +106,7 @@ namespace FotoOrganizzatore
             this.panelAnni.Location = new System.Drawing.Point(0, 0);
             this.panelAnni.MinimumSize = new System.Drawing.Size(2, 60);
             this.panelAnni.Name = "panelAnni";
-            this.panelAnni.Size = new System.Drawing.Size(1778, 60);
+            this.panelAnni.Size = new System.Drawing.Size(1184, 60);
             this.panelAnni.TabIndex = 1;
             // 
             // buttonRoot
@@ -115,7 +127,7 @@ namespace FotoOrganizzatore
             this.vignette.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vignette.Location = new System.Drawing.Point(0, 124);
             this.vignette.Name = "vignette";
-            this.vignette.Size = new System.Drawing.Size(1226, 944);
+            this.vignette.Size = new System.Drawing.Size(1311, 377);
             this.vignette.TabIndex = 1;
             // 
             // comandi
@@ -129,8 +141,18 @@ namespace FotoOrganizzatore
             this.comandi.Dock = System.Windows.Forms.DockStyle.Top;
             this.comandi.Location = new System.Drawing.Point(0, 0);
             this.comandi.Name = "comandi";
-            this.comandi.Size = new System.Drawing.Size(1226, 124);
+            this.comandi.Size = new System.Drawing.Size(1311, 124);
             this.comandi.TabIndex = 0;
+            // 
+            // Cruscotto
+            // 
+            this.Cruscotto.Location = new System.Drawing.Point(785, 10);
+            this.Cruscotto.Name = "Cruscotto";
+            this.Cruscotto.Size = new System.Drawing.Size(177, 78);
+            this.Cruscotto.TabIndex = 4;
+            this.Cruscotto.Text = "button1";
+            this.Cruscotto.UseVisualStyleBackColor = true;
+            this.Cruscotto.Click += new System.EventHandler(this.Cruscotto_Click);
             // 
             // panelAzioniSuFoto
             // 
@@ -178,21 +200,72 @@ namespace FotoOrganizzatore
             // 
             this.timerBase.Tick += new System.EventHandler(this.timerBase_Tick);
             // 
-            // Cruscotto
+            // splitContainerCruscotto
             // 
-            this.Cruscotto.Location = new System.Drawing.Point(785, 10);
-            this.Cruscotto.Name = "Cruscotto";
-            this.Cruscotto.Size = new System.Drawing.Size(177, 78);
-            this.Cruscotto.TabIndex = 4;
-            this.Cruscotto.Text = "button1";
-            this.Cruscotto.UseVisualStyleBackColor = true;
-            this.Cruscotto.Click += new System.EventHandler(this.Cruscotto_Click);
+            this.splitContainerCruscotto.Location = new System.Drawing.Point(130, 559);
+            this.splitContainerCruscotto.Name = "splitContainerCruscotto";
+            this.splitContainerCruscotto.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerCruscotto.Panel1
+            // 
+            this.splitContainerCruscotto.Panel1.Controls.Add(this.splitContainerUp);
+            // 
+            // splitContainerCruscotto.Panel2
+            // 
+            this.splitContainerCruscotto.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splitContainerCruscotto.Size = new System.Drawing.Size(1598, 359);
+            this.splitContainerCruscotto.SplitterDistance = 170;
+            this.splitContainerCruscotto.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(35, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(257, 76);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // splitContainerUp
+            // 
+            this.splitContainerUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerUp.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerUp.Name = "splitContainerUp";
+            // 
+            // splitContainerUp.Panel1
+            // 
+            this.splitContainerUp.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            // 
+            // splitContainerUp.Panel2
+            // 
+            this.splitContainerUp.Panel2.Controls.Add(this.splitContainerUpDx);
+            this.splitContainerUp.Size = new System.Drawing.Size(1598, 170);
+            this.splitContainerUp.SplitterDistance = 130;
+            this.splitContainerUp.TabIndex = 0;
+            // 
+            // splitContainerUpDx
+            // 
+            this.splitContainerUpDx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerUpDx.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerUpDx.Name = "splitContainerUpDx";
+            // 
+            // splitContainerUpDx.Panel1
+            // 
+            this.splitContainerUpDx.Panel1.Controls.Add(this.button1);
+            // 
+            // splitContainerUpDx.Panel2
+            // 
+            this.splitContainerUpDx.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitContainerUpDx.Size = new System.Drawing.Size(1464, 170);
+            this.splitContainerUpDx.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(3012, 1070);
+            this.Controls.Add(this.splitContainerCruscotto);
             this.Controls.Add(this.splitContainerAnni);
             this.Name = "Form1";
             this.Text = "Organizzatore fotografie";
@@ -207,6 +280,15 @@ namespace FotoOrganizzatore
             this.comandi.ResumeLayout(false);
             this.panelAzioniSuFoto.ResumeLayout(false);
             this.panelAzioniSuFoto.PerformLayout();
+            this.splitContainerCruscotto.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCruscotto)).EndInit();
+            this.splitContainerCruscotto.ResumeLayout(false);
+            this.splitContainerUp.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUp)).EndInit();
+            this.splitContainerUp.ResumeLayout(false);
+            this.splitContainerUpDx.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUpDx)).EndInit();
+            this.splitContainerUpDx.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -225,6 +307,10 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Panel panelAzioniSuFoto;
         private System.Windows.Forms.Button buttonCancella;
         private System.Windows.Forms.Button Cruscotto;
+        private System.Windows.Forms.SplitContainer splitContainerCruscotto;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SplitContainer splitContainerUp;
+        private System.Windows.Forms.SplitContainer splitContainerUpDx;
     }
 }
 

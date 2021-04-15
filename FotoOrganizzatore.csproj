@@ -77,6 +77,12 @@
     <Compile Include="Dialogs\RinominaCartella.Designer.cs">
       <DependentUpon>RinominaCartella.cs</DependentUpon>
     </Compile>
+    <Compile Include="Discobackup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Discobackup.Designer.cs">
+      <DependentUpon>Discobackup.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileImmagini.cs" />
     <Compile Include="ImmagineIngrandita.cs">
       <SubType>UserControl</SubType>
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RinominaCartella.resx">
       <DependentUpon>RinominaCartella.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Discobackup.resx">
+      <DependentUpon>Discobackup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImmagineIngrandita.resx">
       <DependentUpon>ImmagineIngrandita.cs</DependentUpon>
