@@ -44,8 +44,8 @@ namespace FotoOrganizzatore
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne(this);
                 // Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
-                Variabili.comandi = Comandi.mostraCalendarioFoto;
-                aggiungiAnni();
+                //Variabili.comandi = Comandi.mostraCalendarioFoto;
+                //aggiungiAnni();
                 // Variabili.Calendario.ElencaDateFotoCatalogate();
                 /*Immagine i = new Immagine();
                 i.leggiImmagineDaFile(@"c:\foto\2018\01 01\\WP_20180101_10_08_18_Rich.jpg");
@@ -86,7 +86,11 @@ namespace FotoOrganizzatore
             switch (Variabili.comandi)
             {
                 case Comandi.mostraCalendarioFoto:
-                    Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
+                    splitContainerCruscotto.Visible = false;
+                    splitContainerAnni.Visible = true;
+                    Variabili.getCalendarioAttivo().MostraCalendarioFoto(avvenimenti, false);
+                    aggiungiAnni();
+                    //aggiornaSplitContinerAnni();
                     nomeCartella = "";
                     vignette.Controls.Clear();
                     //Variabili.comandi = Comandi.nessuno;
@@ -367,15 +371,20 @@ namespace FotoOrganizzatore
         void aggiungiAnni()
         {
             int posizione = buttonRoot.Width;
+            panelAnni.Controls.Clear(); 
             //foreach ( var anni in Variabili.dataBaseFotoLocali.anni)
-            foreach (var elemento in Variabili.dataBaseFotoLocali.anniComponenti)
+            DataBaseFoto dbfoto = Variabili.getDataBaseFotoAttivo();
+            if (dbfoto != null)
             {
-                //Anno anno = new Anno();
-                //anno.setNomeAnno(anni.Value);
-                Anno anno = elemento.Value;
-                panelAnni.Controls.Add(anno);
-                anno.Location = new Point(posizione, 1);
-                posizione += anno.Width;
+                foreach (var elemento in dbfoto.anniComponenti)
+                {
+                    //Anno anno = new Anno();
+                    //anno.setNomeAnno(anni.Value);
+                    Anno anno = elemento.Value;
+                    panelAnni.Controls.Add(anno);
+                    anno.Location = new Point(posizione, 1);
+                    posizione += anno.Width;
+                }
             }
         }
         int getLivelloRicorsione()
@@ -427,14 +436,16 @@ namespace FotoOrganizzatore
 
         private void button1_Click(object sender, EventArgs e)
         {
-            splitContainerCruscotto.Visible = false;
-            splitContainerAnni.Visible = true;
+            Variabili.setCalendarioAttivo(Variabili.Calendario, Variabili.dataBaseFotoLocali);
+            //splitContainerCruscotto.Visible = false;
+            //splitContainerAnni.Visible = true;
+            Variabili.comandi = Comandi.mostraCalendarioFoto;
         }
         #endregion
         #region CRUSCOTTO
-        public void AggiungiDiscoBackup()
+        public void AggiungiDiscoBackup(Backup backup)
         {
-            Discobackup db = new Discobackup();
+            Discobackup db = new Discobackup(backup);
             splitContainerUpDx.Panel2.Controls.Add(db);
         }
         #endregion

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace FotoOrganizzatore
 {
-    class Calendario
+    public class Calendario
     {
         public SortedList<DateTime, SetDataOraBase> elencoDateFotiAsync = new SortedList<DateTime, SetDataOraBase>();
         public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();

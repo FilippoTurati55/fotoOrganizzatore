@@ -11,6 +11,7 @@ namespace FotoOrganizzatore
 {
     class UnitaEsterna
     {
+        Backup backup;
         Discobackup interfaccia;
         public string idUnivoco;
         string format;
@@ -22,7 +23,10 @@ namespace FotoOrganizzatore
         long spazioLibero, spazioDisponibile, spazioTotale;
         public string identificatore = "";     // identificatore utente es. copia sicurezza
         DriveType tipo;
+        public UnitaEsterna(Backup riferimento)
+        {
 
+        }
         public bool esaminaDisco(DriveInfo driveInfo)
         {
             bool res = false;
@@ -30,7 +34,7 @@ namespace FotoOrganizzatore
             tipo = driveInfo.DriveType;
             if (driveInfo.IsReady)
             {
-                interfaccia = new Discobackup();
+                interfaccia = new Discobackup(backup);
                 label = driveInfo.VolumeLabel;
                 format = driveInfo.DriveFormat;
                 spazioDisponibile = driveInfo.AvailableFreeSpace;
@@ -88,11 +92,11 @@ namespace FotoOrganizzatore
             return result;
         }
     }
-    class Backup
+    public class Backup
     {
         UnitaEsterna disco;
-        DataBaseFoto dataBaseFotoSuDiscoBackup;
-        Calendario calendarioBackup = new Calendario();
+        public DataBaseFoto dataBaseFotoSuDiscoBackup;
+        public Calendario calendarioBackup = new Calendario();
         Form1 form1Ref;
         public void CercaUnitaEsterne(Form1 form1)
         {
@@ -103,10 +107,10 @@ namespace FotoOrganizzatore
                 switch (d.DriveType)
                 {
                     case DriveType.Removable:
-                        disco = new UnitaEsterna();
+                        disco = new UnitaEsterna(this);
                         if (disco.esaminaDisco(d))
                         {
-                            form1.AggiungiDiscoBackup();
+                            form1.AggiungiDiscoBackup(this);
                             Variabili.UnitaEsterne.Add(disco);
 
                             if (disco.accredita())

@@ -12,9 +12,11 @@ namespace FotoOrganizzatore
 {
     public partial class Discobackup : UserControl
     {
-        public Discobackup()
+        Backup backup;
+        public Discobackup(Backup riferimento)
         {
             InitializeComponent();
+            backup = riferimento;
         }
         #region INTERFACCIA
         public void setNome(string Nome)
@@ -26,5 +28,18 @@ namespace FotoOrganizzatore
             numeroDiSerie.Text = ns;
         }
         #endregion
+
+        private void button1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Variabili.setCalendarioAttivo(backup.calendarioBackup, backup.dataBaseFotoSuDiscoBackup);
+            //splitContainerCruscotto.Visible = false;
+            //splitContainerAnni.Visible = true;
+            Variabili.comandi = Comandi.mostraCalendarioFoto;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Variabili.setCalendarioAttivo(backup.calendarioBackup, backup.dataBaseFotoSuDiscoBackup);
+        }
     }
 }

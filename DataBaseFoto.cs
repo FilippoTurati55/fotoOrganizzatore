@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FotoOrganizzatore
 {
-    class DataBaseFoto
+    public class DataBaseFoto
     {
         int doppie = 0;
         public SortedList<long, String[]> elencoFoto = new SortedList<long, String[]>();

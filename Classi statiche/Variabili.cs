@@ -35,7 +35,6 @@ namespace FotoOrganizzatore
         public static string nomeCartellaSpeciale = "";
         public static bool showFoto;
         public static bool fermaTaskRicercaDispositivi;
-        public static DataBaseFoto dataBaseFotoLocali;
         public static DateTime DataLetturaFotoPrecedente;
         public static Avvenimento DataOraEvidenziata;
         public static List<DispositivoRemoto> DispositiviRemoti = new List<DispositivoRemoto>();
@@ -54,7 +53,22 @@ namespace FotoOrganizzatore
         public static ArchivioLocale ArchivioLocale = new ArchivioLocale();
         public static Backup Backup = new Backup();
         public static Calendario Calendario = new Calendario();
-
+        static Calendario CalendarioAttivo = Calendario;
+        public static DataBaseFoto dataBaseFotoLocali;
+        static DataBaseFoto dataBaseFotoAttivo;
+        public static void setCalendarioAttivo(Calendario calendario, DataBaseFoto dataBaseFoto)
+        {
+            CalendarioAttivo = calendario;
+            dataBaseFotoAttivo = dataBaseFoto;
+        }
+        public static Calendario getCalendarioAttivo()
+        {
+            return CalendarioAttivo;
+        }
+        public static DataBaseFoto getDataBaseFotoAttivo()
+        {
+            return dataBaseFotoAttivo;
+        }
         public static Show show = new Show();
         //public static Cruscotto cruscotto;
     }
