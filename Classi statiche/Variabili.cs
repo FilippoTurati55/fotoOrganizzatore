@@ -25,8 +25,9 @@ namespace FotoOrganizzatore
     }
     static class Variabili
     {
+        public static Button buttonRoot;
         public static ImmagineIngrandita codePopup = new ImmagineIngrandita();
-        public static Comandi comandi;
+        static Comandi comandi = Comandi.nessuno;
         public static int nDispositiviCollegati;
         public static int mostraFotoCount = 0;
         public static bool mostraFoto = false;
@@ -56,10 +57,20 @@ namespace FotoOrganizzatore
         static Calendario CalendarioAttivo = Calendario;
         public static DataBaseFoto dataBaseFotoLocali;
         static DataBaseFoto dataBaseFotoAttivo;
+        public static Show show = new Show();
+        #region ACCESSO
         public static void setCalendarioAttivo(Calendario calendario, DataBaseFoto dataBaseFoto)
         {
             CalendarioAttivo = calendario;
             dataBaseFotoAttivo = dataBaseFoto;
+        }
+        static public void setComandi(Comandi comando)
+        {
+            comandi = comando;
+        }
+        static public Comandi getComandi()
+        {
+            return comandi;
         }
         public static Calendario getCalendarioAttivo()
         {
@@ -69,7 +80,7 @@ namespace FotoOrganizzatore
         {
             return dataBaseFotoAttivo;
         }
-        public static Show show = new Show();
+        #endregion
         //public static Cruscotto cruscotto;
     }
 }

@@ -50,7 +50,7 @@ namespace FotoOrganizzatore
             string cercaCestino = Variabili.nomeCartellaSpeciale;
             cercaCestino = cercaCestino.Substring(cercaCestino.LastIndexOf('\\') + 1);
             Variabili.cestinoMostrato = (cercaCestino == "cestino");
-            Variabili.comandi = Comandi.aggiornaMenuFoto;
+            Variabili.setComandi(Comandi.aggiornaMenuFoto);
         }
     }
 }

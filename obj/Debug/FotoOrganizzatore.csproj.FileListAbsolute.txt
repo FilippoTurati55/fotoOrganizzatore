@@ -21,3 +21,4 @@ C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOr
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.anno.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Cruscotto.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Discobackup.resources
+C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Dialogs.Classifica.resources

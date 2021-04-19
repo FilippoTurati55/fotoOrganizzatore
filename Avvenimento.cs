@@ -106,7 +106,7 @@ namespace FotoOrganizzatore
             // tb.BackColor = Color.Red;
             dataInizio.BackColor = dataFine.BackColor = commento.BackColor = Color.Red;
             Variabili.cestinoMostrato = false;
-            Variabili.comandi = Comandi.aggiornaMenuFoto;
+            Variabili.setComandi(Comandi.aggiornaMenuFoto);
         }
 
         private void Evento_KeyUp(object sender, KeyEventArgs e)

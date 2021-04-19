@@ -31,7 +31,7 @@ namespace FotoOrganizzatore
                 cambiaColore(false);
 
             }
-            Variabili.comandi = Comandi.mostraCalendarioFoto;
+            Variabili.setComandi(Comandi.mostraCalendarioFoto);
         }
 
         public void setNomeAnno(string valore)

@@ -61,7 +61,7 @@ namespace FotoOrganizzatore
                 button1.BackColor = Color.Red;
                 selected = true;
             }
-            Variabili.comandi = Comandi.aggiornaMenuFoto;
+            Variabili.setComandi(Comandi.aggiornaMenuFoto);
         }
         private void BoxImmagine_MouseEnter(object sender, EventArgs e)
         {

@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using external_drive_lib.interfaces;
+using FotoOrganizzatore.Dialogs;
 
 namespace FotoOrganizzatore
 {
@@ -27,6 +28,7 @@ namespace FotoOrganizzatore
         public Form1()
         {
             InitializeComponent();
+            Variabili.buttonRoot = buttonRoot;
             splitContainerAnni.Dock = DockStyle.Fill;
             splitContainerAnni.Visible = false;
             splitContainerCruscotto.Dock = DockStyle.Fill;
@@ -83,7 +85,7 @@ namespace FotoOrganizzatore
 
         private void timerBase_Tick(object sender, EventArgs e)
         {
-            switch (Variabili.comandi)
+            switch (Variabili.getComandi())
             {
                 case Comandi.mostraCalendarioFoto:
                     splitContainerCruscotto.Visible = false;
@@ -94,7 +96,7 @@ namespace FotoOrganizzatore
                     nomeCartella = "";
                     vignette.Controls.Clear();
                     //Variabili.comandi = Comandi.nessuno;
-                    Variabili.comandi = Comandi.aggiornaMenuFoto;
+                    Variabili.setComandi(Comandi.aggiornaMenuFoto);
                     break;
                 case Comandi.aggiornaMenuFoto:
                     bool accendi = false;
@@ -120,7 +122,7 @@ namespace FotoOrganizzatore
                             buttonCancella.Text = "cancella";
                         }
                     }
-                    Variabili.comandi = Comandi.nessuno;
+                    Variabili.setComandi(Comandi.nessuno);
                     break;
             }
             if (Variabili.MostraFotoInGiorno != Variabili.MostraFotoInGiornoPrevValue)
@@ -128,7 +130,7 @@ namespace FotoOrganizzatore
                 Variabili.MostraFotoInGiornoPrevValue = Variabili.MostraFotoInGiorno;
                 numeroFotoMostrate = 0;
                 vignette.Controls.Clear();
-                Variabili.comandi = Comandi.aggiornaMenuFoto;
+                Variabili.setComandi(Comandi.aggiornaMenuFoto);
                 Variabili.show.resetImmagini();
                 System.GC.Collect();
                 SetDataOraBase puntato = Variabili.MostraFotoSetDataOra;
@@ -301,7 +303,7 @@ namespace FotoOrganizzatore
                 buttonRoot.Text = "[...]";
                 vignette.Controls.Clear();
                 aggiornaSplitContinerAnni();
-                Variabili.comandi = Comandi.aggiornaMenuFoto;
+                Variabili.setComandi(Comandi.aggiornaMenuFoto);
                 nomeCartella = "";
             }
             else
@@ -371,7 +373,8 @@ namespace FotoOrganizzatore
         void aggiungiAnni()
         {
             int posizione = buttonRoot.Width;
-            panelAnni.Controls.Clear(); 
+            panelAnni.Controls.Clear();
+            panelAnni.Controls.Add(Variabili.buttonRoot);
             //foreach ( var anni in Variabili.dataBaseFotoLocali.anni)
             DataBaseFoto dbfoto = Variabili.getDataBaseFotoAttivo();
             if (dbfoto != null)
@@ -426,6 +429,25 @@ namespace FotoOrganizzatore
                 }
             }
         }
+        private void classifica_Click(object sender, EventArgs e)
+        {
+            Classifica aub = new Classifica();
+            DialogResult dr;
+            dr = aub.ShowDialog();
+            if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
+            {
+
+            }
+            for (int n = 0; n < vignette.Controls.Count; n++)
+            {
+                BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
+                if (bi.getSselected())
+                {
+                    bi.ruotaImmagine();
+                    break;
+                }
+            }
+        }
 
         private void Cruscotto_Click(object sender, EventArgs e)
         {
@@ -439,9 +461,11 @@ namespace FotoOrganizzatore
             Variabili.setCalendarioAttivo(Variabili.Calendario, Variabili.dataBaseFotoLocali);
             //splitContainerCruscotto.Visible = false;
             //splitContainerAnni.Visible = true;
-            Variabili.comandi = Comandi.mostraCalendarioFoto;
+            Variabili.setComandi(Comandi.mostraCalendarioFoto);
         }
+
         #endregion
+
         #region CRUSCOTTO
         public void AggiungiDiscoBackup(Backup backup)
         {

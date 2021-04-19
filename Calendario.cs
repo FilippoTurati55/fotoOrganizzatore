@@ -297,7 +297,7 @@ namespace FotoOrganizzatore
                             sdob.nomeCompletoCartella = nuovoNomeCartella;
                             sdob.SetDateTimeFine(sdob.DateTimeInizio);
                         }
-                        Variabili.comandi = Comandi.mostraCalendarioFoto;
+                        Variabili.setComandi(Comandi.mostraCalendarioFoto);
                     }
                 }
             }
@@ -439,7 +439,7 @@ namespace FotoOrganizzatore
                 SetDataOraBase sdobinizio = elencoDateFoti[dataInizio];
                 sdobinizio.Stato = STATO_SELEZIONE_DATA.NIENTE;
             }
-            Variabili.comandi = Comandi.mostraCalendarioFoto;
+            Variabili.setComandi(Comandi.mostraCalendarioFoto);
         }
         public string CalcolaNomeCartella(DateTime dateTime, string commento)
         {

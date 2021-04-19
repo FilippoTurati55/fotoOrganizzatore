@@ -71,6 +71,12 @@
     <Compile Include="Cruscotto.Designer.cs">
       <DependentUpon>Cruscotto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Classifica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Classifica.Designer.cs">
+      <DependentUpon>Classifica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\RinominaCartella.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cruscotto.resx">
       <DependentUpon>Cruscotto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Classifica.resx">
+      <DependentUpon>Classifica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RinominaCartella.resx">
       <DependentUpon>RinominaCartella.cs</DependentUpon>

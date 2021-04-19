@@ -34,7 +34,7 @@ namespace FotoOrganizzatore
             Variabili.setCalendarioAttivo(backup.calendarioBackup, backup.dataBaseFotoSuDiscoBackup);
             //splitContainerCruscotto.Visible = false;
             //splitContainerAnni.Visible = true;
-            Variabili.comandi = Comandi.mostraCalendarioFoto;
+            Variabili.setComandi(Comandi.mostraCalendarioFoto);
         }
 
         private void button1_Click(object sender, EventArgs e)

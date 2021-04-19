@@ -43,9 +43,10 @@ namespace FotoOrganizzatore
             this.show = new System.Windows.Forms.Button();
             this.timerBase = new System.Windows.Forms.Timer(this.components);
             this.splitContainerCruscotto = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
             this.splitContainerUp = new System.Windows.Forms.SplitContainer();
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.classifica = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -146,7 +147,7 @@ namespace FotoOrganizzatore
             // 
             // Cruscotto
             // 
-            this.Cruscotto.Location = new System.Drawing.Point(785, 10);
+            this.Cruscotto.Location = new System.Drawing.Point(1110, 19);
             this.Cruscotto.Name = "Cruscotto";
             this.Cruscotto.Size = new System.Drawing.Size(177, 78);
             this.Cruscotto.TabIndex = 4;
@@ -156,11 +157,12 @@ namespace FotoOrganizzatore
             // 
             // panelAzioniSuFoto
             // 
+            this.panelAzioniSuFoto.Controls.Add(this.classifica);
             this.panelAzioniSuFoto.Controls.Add(this.buttonRuota);
             this.panelAzioniSuFoto.Controls.Add(this.buttonCancella);
             this.panelAzioniSuFoto.Location = new System.Drawing.Point(188, 10);
             this.panelAzioniSuFoto.Name = "panelAzioniSuFoto";
-            this.panelAzioniSuFoto.Size = new System.Drawing.Size(446, 109);
+            this.panelAzioniSuFoto.Size = new System.Drawing.Size(916, 109);
             this.panelAzioniSuFoto.TabIndex = 3;
             this.panelAzioniSuFoto.Visible = false;
             // 
@@ -217,16 +219,6 @@ namespace FotoOrganizzatore
             this.splitContainerCruscotto.SplitterDistance = 170;
             this.splitContainerCruscotto.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(35, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(257, 76);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // splitContainerUp
             // 
             this.splitContainerUp.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -258,7 +250,29 @@ namespace FotoOrganizzatore
             // 
             this.splitContainerUpDx.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainerUpDx.Size = new System.Drawing.Size(1464, 170);
+            this.splitContainerUpDx.SplitterDistance = 488;
             this.splitContainerUpDx.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(35, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(257, 76);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // classifica
+            // 
+            this.classifica.AutoSize = true;
+            this.classifica.Location = new System.Drawing.Point(403, 3);
+            this.classifica.Name = "classifica";
+            this.classifica.Size = new System.Drawing.Size(196, 90);
+            this.classifica.TabIndex = 3;
+            this.classifica.Text = "classifica";
+            this.classifica.UseVisualStyleBackColor = true;
+            this.classifica.Click += new System.EventHandler(this.classifica_Click);
             // 
             // Form1
             // 
@@ -311,6 +325,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SplitContainer splitContainerUp;
         private System.Windows.Forms.SplitContainer splitContainerUpDx;
+        private System.Windows.Forms.Button classifica;
     }
 }
 
