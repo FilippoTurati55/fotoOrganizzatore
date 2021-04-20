@@ -13,6 +13,7 @@ namespace FotoOrganizzatore
     public class DataBaseFoto
     {
         int doppie = 0;
+        public SortedList<string, String> elencoNomiFoto = new SortedList<string, String>();
         public SortedList<long, String[]> elencoFoto = new SortedList<long, String[]>();
         public SortedList<int, String> anni = new SortedList<int, string>();
         public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
@@ -201,6 +202,18 @@ namespace FotoOrganizzatore
                 var info = new FileInfo(path);
                 long lunghezza = info.Length;
                 result = aggiungiFoto(lunghezza, path);
+                //result = aggiungiFoto(info.Name, path);
+                aggiungiFotoNomi(info.Name, path);
+            }
+            return result;
+        }
+        bool aggiungiFotoNomi(string nomeFile, string path)
+        {
+            bool result = false;
+            if (!elencoNomiFoto.ContainsKey(nomeFile))
+            {
+                elencoNomiFoto.Add(nomeFile, path);
+                result = true;
             }
             return result;
         }
@@ -215,7 +228,6 @@ namespace FotoOrganizzatore
             }
             else
             {
-                doppie++;
                 string[] array2 = elencoFoto[dimensione];
                 string[] array3 = new string[array2.Length + 1];
                 for (int i = 0; i < array2.Length; i++)
