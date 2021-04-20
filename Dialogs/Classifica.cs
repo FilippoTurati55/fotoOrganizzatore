@@ -19,7 +19,22 @@ namespace FotoOrganizzatore.Dialogs
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
+            TextBox tb = (TextBox)sender;
+            switch (e.KeyValue)
+            {
+                case 13:    // enter
+                    aggiungiClassificazione(tb.Text);
+                    break;
+            }
+        }
 
+        void aggiungiClassificazione(string nuovo)
+        {
+            DataBaseFoto dbf = Variabili.getDataBaseFotoAttivo();
+            if (!dbf.classificazioni.ContainsKey(nuovo))
+            {
+                dbf.classificazioni.Add(nuovo, nuovo);
+            }
         }
     }
 }
