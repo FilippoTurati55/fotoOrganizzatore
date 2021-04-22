@@ -65,6 +65,7 @@
       <DependentUpon>Cartella.cs</DependentUpon>
     </Compile>
     <Compile Include="CartellaBase.cs" />
+    <Compile Include="Classi statiche\Funzioni.cs" />
     <Compile Include="Cruscotto.cs">
       <SubType>Form</SubType>
     </Compile>

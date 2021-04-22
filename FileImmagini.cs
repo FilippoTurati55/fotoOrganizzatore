@@ -178,36 +178,55 @@ namespace FotoOrganizzatore
                 System.Drawing.Image image = System.Drawing.Image.FromFile(foto);
                 try
                 {
-                    PropertyItem propItem1 = image.GetPropertyItem(0x132);
-                    PropertyItem propItem2 = null;
-                    PropertyItem propItem3 = null;
-                    PropertyItem propItem4 = null;
-                    try
-                    {
-                        propItem2 = image.GetPropertyItem(0x9003);
-                        propItem3 = image.GetPropertyItem(0x9004);
-                        propItem4 = image.GetPropertyItem(0x112);
-                    }
-                    catch { };
+                    PropertyItem propItem20624;
+                    PropertyItem propItem20625;
+                    string data20624;
+                    string data20625;
                     System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-                    string data1 = encoding.GetString(propItem1.Value);
-                    string data2 = "";
-                    string data3 = "";
-                    if (propItem2 != null)
-                        data2 = encoding.GetString(propItem2.Value);
-                    if (propItem3 != null)
-                        data3 = encoding.GetString(propItem3.Value);
-                    if ((data1 != data2) && (data1 != data3))
+                    if (image.PropertyIdList.Contains(20624))
                     {
-                        // temporaneo Variabili.DiversitaInRicercaDataScatto++;
+                        propItem20624 = image.GetPropertyItem(20624);
+                        data20624 = encoding.GetString(propItem20624.Value);
                     }
-                    int anni = System.Int32.Parse(data1.Substring(0, 4));
-                    dt.AddYears(anni);
-                    int mesi = System.Int32.Parse(data1.Substring(5, 2));
-                    int giorni = System.Int32.Parse(data1.Substring(8, 2));
-                    DateTime dattim = new DateTime(anni, mesi, giorni);
-                    dt = dattim;
-                    result = true;
+                    if (image.PropertyIdList.Contains(20625))
+                    {
+                        propItem20625 = image.GetPropertyItem(20625);
+                        data20625 = encoding.GetString(propItem20625.Value);
+                    }
+
+                    if (image.PropertyIdList.Contains(0x132))
+                    {
+                        PropertyItem propItem1 = image.GetPropertyItem(0x132);
+                        PropertyItem propItem2 = null;
+                        PropertyItem propItem3 = null;
+                        PropertyItem propItem4 = null;
+                        try
+                        {
+                            propItem2 = image.GetPropertyItem(0x9003);
+                            propItem3 = image.GetPropertyItem(0x9004);
+                            propItem4 = image.GetPropertyItem(0x112);
+                        }
+                        catch { };
+                        //System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                        string data1 = encoding.GetString(propItem1.Value);
+                        string data2 = "";
+                        string data3 = "";
+                        if (propItem2 != null)
+                            data2 = encoding.GetString(propItem2.Value);
+                        if (propItem3 != null)
+                            data3 = encoding.GetString(propItem3.Value);
+                        if ((data1 != data2) && (data1 != data3))
+                        {
+                            // temporaneo Variabili.DiversitaInRicercaDataScatto++;
+                        }
+                        int anni = System.Int32.Parse(data1.Substring(0, 4));
+                        dt.AddYears(anni);
+                        int mesi = System.Int32.Parse(data1.Substring(5, 2));
+                        int giorni = System.Int32.Parse(data1.Substring(8, 2));
+                        DateTime dattim = new DateTime(anni, mesi, giorni);
+                        dt = dattim;
+                        result = true;
+                    }
                 }
                 catch { }
                 image.Dispose();

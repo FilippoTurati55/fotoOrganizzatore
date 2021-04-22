@@ -1,4 +1,5 @@
-﻿using FotoOrganizzatore.Dialogs;
+﻿using FotoOrganizzatore.Classi_statiche;
+using FotoOrganizzatore.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -243,13 +244,18 @@ namespace FotoOrganizzatore
         string controllaNormalizzaNomeFile(string fileName)
         {
             string nome = fileName;
-            if (!verificaNomeFile(fileName))
+            string nomeTrattato = "";
+            if (Funzioni.normalizzaNomeFile(ref nomeTrattato, nome))
+            {
+
+            }
+            if (!verificaDateTimeInPath(fileName))
             {
                 nome = normalizzaNomeFile(fileName);
             }
             return nome;
         }
-        bool verificaNomeFile(string fileName)
+        bool verificaDateTimeInPath(string fileName)
         {
             bool result = false;
             DateTime dt = new DateTime();
