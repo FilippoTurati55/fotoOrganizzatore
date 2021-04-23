@@ -11,6 +11,7 @@ namespace FotoOrganizzatore.Classi_statiche
         static public bool normalizzaNomeFile(ref string nomeFile, string nomePath)
         {
             bool res = false;
+            string[] nome = null;
             try { 
                 string nomeSoloFile = nomePath.Substring(nomePath.LastIndexOf('\\') + 1); 
                 // verifica se il nome va bene
@@ -19,7 +20,7 @@ namespace FotoOrganizzatore.Classi_statiche
                 // la prima parte fino al primo _ non conta
                 // la parte numerica tra il primo e il secondo _ conta
                 // idem per la pafrte numerica tra il secondo _ e il .
-                string[] nome = nomeSoloFile.Split('.');
+                nome = nomeSoloFile.Split('.');
                 string[] dataScomposta = nome[1].Split('_');
                 string anno = dataScomposta[1].Substring(0, 4);
                 string mese = dataScomposta[1].Substring(4, 2);
@@ -40,15 +41,28 @@ namespace FotoOrganizzatore.Classi_statiche
                 }
             }
             catch { }
-            if (res == false)
+            try
             {
-                // nome file errato: ricostruisci!
-                DateTime dt = new DateTime();
-                if (FileImmagini.CalcolaMomentoScattoFoto(nomePath, ref dt))
+                if (res == false)
                 {
-                    ;
+                    // nome file errato: ricostruisci!
+                    DateTime dt = new DateTime();
+                    if (FileImmagini.CalcolaMomentoScattoFoto(nomePath, ref dt))
+                    {
+                        string nomeNuovo = "IMG_";
+                        nomeNuovo += dt.Year.ToString("D4") +
+                                         dt.Month.ToString("D2") +
+                                         dt.Day.ToString("D2");
+                        nomeNuovo += "_" + dt.Hour.ToString("D2") +
+                                        dt.Minute.ToString("D2") +
+                                        dt.Second.ToString("D2");
+                        nomeNuovo += "." + nome[1];
+                        nomeFile = nomeNuovo;
+                        res = true;
+                    }
                 }
             }
+            catch { }
             return res;
         }
     }

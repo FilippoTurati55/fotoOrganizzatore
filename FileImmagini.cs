@@ -166,6 +166,9 @@ namespace FotoOrganizzatore
             FileInfo fi = new FileInfo(foto);
             // dt = fi.CreationTime;
             dt = fi.LastWriteTime;
+            DateTime dt1 = fi.CreationTime;
+            if (dt1 < dt)
+                return dt1;
             return dt;
         }
         static public bool CalcolaMomentoScattoDaProprietaFoto(string foto, ref DateTime dt)
@@ -178,11 +181,11 @@ namespace FotoOrganizzatore
                 System.Drawing.Image image = System.Drawing.Image.FromFile(foto);
                 try
                 {
-                    PropertyItem propItem20624;
+                    System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                    /*PropertyItem propItem20624;
                     PropertyItem propItem20625;
                     string data20624;
                     string data20625;
-                    System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                     if (image.PropertyIdList.Contains(20624))
                     {
                         propItem20624 = image.GetPropertyItem(20624);
@@ -192,7 +195,7 @@ namespace FotoOrganizzatore
                     {
                         propItem20625 = image.GetPropertyItem(20625);
                         data20625 = encoding.GetString(propItem20625.Value);
-                    }
+                    } */
 
                     if (image.PropertyIdList.Contains(0x132))
                     {
