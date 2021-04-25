@@ -14,7 +14,7 @@ namespace FotoOrganizzatore
     public class DataBaseFoto
     {
         int doppie = 0;
-        public SortedList<string, String> elencoNomiFoto = new SortedList<string, String>();
+        public SortedList<DateTime, string> elencoFotoPerData = new SortedList<DateTime, string>();
         public SortedList<long, String[]> elencoFoto = new SortedList<long, String[]>();
         public SortedList<int, String> anni = new SortedList<int, string>();
         public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
@@ -191,11 +191,13 @@ namespace FotoOrganizzatore
             string estensione = path.Substring(path.LastIndexOf('.') + 1);
             if (estensione != "txt")
             {
-                controllaNormalizzaNomeFile(path);
-                aggiungiFoto(path);
+                //controllaNormalizzaNomeFile(path);
+                //aggiungiFoto(path);
+                DateTime dt = new DateTime();
+                controllaNormalizzaNomeFile(path, ref dt);
             }
         }
-        bool aggiungiFoto(string path)
+        bool aggiungiFoto(DateTime dt, string path)
         {
             bool result = false;
             if (File.Exists(path))
@@ -204,16 +206,16 @@ namespace FotoOrganizzatore
                 long lunghezza = info.Length;
                 result = aggiungiFoto(lunghezza, path);
                 //result = aggiungiFoto(info.Name, path);
-                aggiungiFotoNomi(info.Name, path);
+                aggiungiFotoNomi(dt, path);
             }
             return result;
         }
-        bool aggiungiFotoNomi(string nomeFile, string path)
+        bool aggiungiFotoNomi(DateTime dataFoto, string path)
         {
             bool result = false;
-            if (!elencoNomiFoto.ContainsKey(nomeFile))
+            if (!elencoFotoPerData.ContainsKey(dataFoto))
             {
-                elencoNomiFoto.Add(nomeFile, path);
+                elencoFotoPerData.Add(dataFoto, path);
                 result = true;
             }
             return result;
@@ -241,19 +243,42 @@ namespace FotoOrganizzatore
             }
             return result;
         }
-        string controllaNormalizzaNomeFile(string fileName)
+        void controllaNormalizzaNomeFile(string fileName, ref DateTime dt)
         {
-            string nome = fileName;
             string nomeTrattato = "";
-            if (Funzioni.normalizzaNomeFile(ref nomeTrattato, nome))
+            string nomeSoloFile = fileName.Substring(fileName.LastIndexOf('\\') + 1);
+            string[] nome = nomeSoloFile.Split('.');
+            bool nomeFileCorretto = false;
+            nomeFileCorretto = Funzioni.verificaCorrettezzaNomeFile(nome[0], ref dt);
+            if (!nomeFileCorretto)
             {
-
+                FileImmagini.CalcolaMomentoScattoFoto(fileName, ref dt);
             }
-            if (!verificaDateTimeInPath(fileName))
+            // verifica se la data è univoca
+            if (elencoFotoPerData.ContainsKey(dt))
             {
-                nome = normalizzaNomeFile(fileName);
+                nomeFileCorretto = false;
+                bool fine = false;
+                DateTime dt1 = dt;
+                while (fine == false)
+                {
+                    dt1 = dt1.AddSeconds(1);
+                    if (!elencoFotoPerData.ContainsKey(dt1))
+                    {
+                        dt = dt1;
+                        fine = true;
+                    }
+                }
             }
-            return nome;
+            if (!nomeFileCorretto)
+            {
+                string nomeNuovo = Funzioni.nomeFileDaDateTime(dt);
+                string inizio = fileName.Substring(0, fileName.LastIndexOf('\\'));
+                string estensione = fileName.Substring(fileName.LastIndexOf('.'));
+                fileName = inizio + "\\" + nomeNuovo + estensione;
+                // rinominare il file!
+            }
+            elencoFotoPerData.Add(dt, fileName);
         }
         bool verificaDateTimeInPath(string fileName)
         {
