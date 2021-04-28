@@ -275,8 +275,11 @@ namespace FotoOrganizzatore
                 string nomeNuovo = Funzioni.nomeFileDaDateTime(dt);
                 string inizio = fileName.Substring(0, fileName.LastIndexOf('\\'));
                 string estensione = fileName.Substring(fileName.LastIndexOf('.'));
-                fileName = inizio + "\\" + nomeNuovo + estensione;
+                string nuovoNome = inizio + "\\" + nomeNuovo + estensione;
                 // rinominare il file!
+                // tracciare nel file di report
+                File.Move(fileName, nuovoNome);
+                fileName = nuovoNome;
             }
             elencoFotoPerData.Add(dt, fileName);
         }

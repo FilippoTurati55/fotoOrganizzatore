@@ -52,9 +52,11 @@ namespace FotoOrganizzatore
                                 Image.RotateFlip(RotateFlipType.Rotate180FlipY);
                                 break;
                             case 8:
+                                Image.RotateFlip(RotateFlipType.Rotate270FlipX);
                                 break;
                             case 3:
                                 Image.RotateFlip(RotateFlipType.Rotate180FlipX);
+                                Image.RotateFlip(RotateFlipType.Rotate180FlipY);
                                 break;
                             default:
                                 break;
