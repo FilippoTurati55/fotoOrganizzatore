@@ -38,6 +38,7 @@ namespace FotoOrganizzatore
             this.comandi = new System.Windows.Forms.Panel();
             this.Cruscotto = new System.Windows.Forms.Button();
             this.panelAzioniSuFoto = new System.Windows.Forms.Panel();
+            this.classifica = new System.Windows.Forms.Button();
             this.buttonRuota = new System.Windows.Forms.Button();
             this.buttonCancella = new System.Windows.Forms.Button();
             this.show = new System.Windows.Forms.Button();
@@ -46,7 +47,7 @@ namespace FotoOrganizzatore
             this.splitContainerUp = new System.Windows.Forms.SplitContainer();
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
-            this.classifica = new System.Windows.Forms.Button();
+            this.buttonCambiaData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -157,6 +158,7 @@ namespace FotoOrganizzatore
             // 
             // panelAzioniSuFoto
             // 
+            this.panelAzioniSuFoto.Controls.Add(this.buttonCambiaData);
             this.panelAzioniSuFoto.Controls.Add(this.classifica);
             this.panelAzioniSuFoto.Controls.Add(this.buttonRuota);
             this.panelAzioniSuFoto.Controls.Add(this.buttonCancella);
@@ -165,6 +167,17 @@ namespace FotoOrganizzatore
             this.panelAzioniSuFoto.Size = new System.Drawing.Size(916, 109);
             this.panelAzioniSuFoto.TabIndex = 3;
             this.panelAzioniSuFoto.Visible = false;
+            // 
+            // classifica
+            // 
+            this.classifica.AutoSize = true;
+            this.classifica.Location = new System.Drawing.Point(403, 3);
+            this.classifica.Name = "classifica";
+            this.classifica.Size = new System.Drawing.Size(196, 90);
+            this.classifica.TabIndex = 3;
+            this.classifica.Text = "classifica";
+            this.classifica.UseVisualStyleBackColor = true;
+            this.classifica.Click += new System.EventHandler(this.classifica_Click);
             // 
             // buttonRuota
             // 
@@ -263,16 +276,16 @@ namespace FotoOrganizzatore
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // classifica
+            // buttonCambiaData
             // 
-            this.classifica.AutoSize = true;
-            this.classifica.Location = new System.Drawing.Point(403, 3);
-            this.classifica.Name = "classifica";
-            this.classifica.Size = new System.Drawing.Size(196, 90);
-            this.classifica.TabIndex = 3;
-            this.classifica.Text = "classifica";
-            this.classifica.UseVisualStyleBackColor = true;
-            this.classifica.Click += new System.EventHandler(this.classifica_Click);
+            this.buttonCambiaData.AutoSize = true;
+            this.buttonCambiaData.Location = new System.Drawing.Point(615, 9);
+            this.buttonCambiaData.Name = "buttonCambiaData";
+            this.buttonCambiaData.Size = new System.Drawing.Size(238, 90);
+            this.buttonCambiaData.TabIndex = 4;
+            this.buttonCambiaData.Text = "cambia data";
+            this.buttonCambiaData.UseVisualStyleBackColor = true;
+            this.buttonCambiaData.Click += new System.EventHandler(this.buttonCambiaData_Click);
             // 
             // Form1
             // 
@@ -326,6 +339,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.SplitContainer splitContainerUp;
         private System.Windows.Forms.SplitContainer splitContainerUpDx;
         private System.Windows.Forms.Button classifica;
+        private System.Windows.Forms.Button buttonCambiaData;
     }
 }
 

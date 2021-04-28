@@ -282,6 +282,7 @@ namespace FotoOrganizzatore
                 fileName = nuovoNome;
             }
             elencoFotoPerData.Add(dt, fileName);
+            aggiungiFoto(dt, fileName);
         }
         bool verificaDateTimeInPath(string fileName)
         {

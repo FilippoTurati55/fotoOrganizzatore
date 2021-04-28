@@ -464,6 +464,18 @@ namespace FotoOrganizzatore
             Variabili.setComandi(Comandi.mostraCalendarioFoto);
         }
 
+        private void buttonCambiaData_Click(object sender, EventArgs e)
+        {
+            for (int n = 0; n < vignette.Controls.Count; n++)
+            {
+                BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
+                if (bi.getSselected())
+                {
+                    break;
+                }
+            }
+        }
+
         #endregion
 
         #region CRUSCOTTO
