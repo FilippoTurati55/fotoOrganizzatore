@@ -25,6 +25,7 @@ namespace FotoOrganizzatore
     }
     static class Variabili
     {
+        public static BoxImmagine primoBoxSelezionato;
         public static Button buttonRoot;
         public static ImmagineIngrandita codePopup = new ImmagineIngrandita();
         static Comandi comandi = Comandi.nessuno;

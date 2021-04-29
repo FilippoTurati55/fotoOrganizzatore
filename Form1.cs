@@ -471,7 +471,19 @@ namespace FotoOrganizzatore
                 BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
                 if (bi.getSselected())
                 {
-                    break;
+                    //ModificaDataOra aub = new ModificaDataOra();
+                    //RinominaCartella aub = new RinominaCartella();
+                    CambiaDataOra aub = new CambiaDataOra();
+                    if (Variabili.primoBoxSelezionato != null)
+                    {
+                        BoxImmagine bisel = Variabili.primoBoxSelezionato;
+                        DateTime dtsel = bisel.getDateTime();
+                        aub.setDateTime(dtsel);
+                    }
+                    DialogResult dr;
+                    dr = aub.ShowDialog();
+                    if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
+                        break;
                 }
             }
         }

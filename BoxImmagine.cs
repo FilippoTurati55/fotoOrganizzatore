@@ -14,6 +14,7 @@ namespace FotoOrganizzatore
     {
         bool selected = false;
         string nomeFile = "";
+        DateTime dt;
         bool selezionato = false;
         bool ingresso = false;
         public BoxImmagine()
@@ -27,6 +28,15 @@ namespace FotoOrganizzatore
             return (immagine.leggiImmagineDaFile(path));
         }
         #region ACCESSO
+        public DateTime getDateTime()
+        {
+            DataBaseFoto dbf = Variabili.getDataBaseFotoAttivo();
+            if (dbf.elencoFotoPerNome.ContainsKey(nomeFile))
+            {
+                dt = dbf.elencoFotoPerNome[nomeFile];
+            }
+            return dt;
+        }
         public Image getImmagine()
         {
             return immagine.Image;
@@ -58,6 +68,8 @@ namespace FotoOrganizzatore
             }
             else
             {
+                if (Variabili.primoBoxSelezionato == null)
+                    Variabili.primoBoxSelezionato = this;
                 button1.BackColor = Color.Red;
                 selected = true;
             }

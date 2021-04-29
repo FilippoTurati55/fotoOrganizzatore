@@ -15,6 +15,7 @@ namespace FotoOrganizzatore
     {
         int doppie = 0;
         public SortedList<DateTime, string> elencoFotoPerData = new SortedList<DateTime, string>();
+        public SortedList<string , DateTime> elencoFotoPerNome = new SortedList<string, DateTime>();
         public SortedList<long, String[]> elencoFoto = new SortedList<long, String[]>();
         public SortedList<int, String> anni = new SortedList<int, string>();
         public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
@@ -216,6 +217,7 @@ namespace FotoOrganizzatore
             if (!elencoFotoPerData.ContainsKey(dataFoto))
             {
                 elencoFotoPerData.Add(dataFoto, path);
+                elencoFotoPerNome.Add(path, dataFoto);
                 result = true;
             }
             return result;
@@ -282,6 +284,7 @@ namespace FotoOrganizzatore
                 fileName = nuovoNome;
             }
             elencoFotoPerData.Add(dt, fileName);
+            elencoFotoPerNome.Add(fileName, dt);
             aggiungiFoto(dt, fileName);
         }
         bool verificaDateTimeInPath(string fileName)

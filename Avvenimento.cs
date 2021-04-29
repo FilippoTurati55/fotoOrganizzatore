@@ -93,6 +93,7 @@ namespace FotoOrganizzatore
         {
             Variabili.MostraFotoInGiorno++; // = true;
             Variabili.MostraFotoSetDataOra = this.Sdob;
+            Variabili.primoBoxSelezionato = null;
             TextBox tb = (TextBox)sender;
             if (Variabili.DataOraEvidenziata != null)
             {
