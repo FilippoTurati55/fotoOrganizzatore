@@ -466,24 +466,26 @@ namespace FotoOrganizzatore
 
         private void buttonCambiaData_Click(object sender, EventArgs e)
         {
-            for (int n = 0; n < vignette.Controls.Count; n++)
+            CambiaDataOra aub = new CambiaDataOra();
+            if (Variabili.primoBoxSelezionato != null)
             {
-                BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
-                if (bi.getSselected())
+                BoxImmagine bisel = Variabili.primoBoxSelezionato;
+                DateTime dtsel = bisel.getDateTime();
+                aub.setDateTime(dtsel);
+            }
+            DialogResult dr;
+            dr = aub.ShowDialog();
+            if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
+            {
+                DateTime dt = aub.getDateTime();
+                for (int n = 0; n < vignette.Controls.Count; n++)
                 {
-                    //ModificaDataOra aub = new ModificaDataOra();
-                    //RinominaCartella aub = new RinominaCartella();
-                    CambiaDataOra aub = new CambiaDataOra();
-                    if (Variabili.primoBoxSelezionato != null)
+                    BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
+                    if (bi.getSselected())
                     {
-                        BoxImmagine bisel = Variabili.primoBoxSelezionato;
-                        DateTime dtsel = bisel.getDateTime();
-                        aub.setDateTime(dtsel);
+                        //ModificaDataOra aub = new ModificaDataOra();
+                        //RinominaCartella aub = new RinominaCartella();
                     }
-                    DialogResult dr;
-                    dr = aub.ShowDialog();
-                    if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
-                        break;
                 }
             }
         }
