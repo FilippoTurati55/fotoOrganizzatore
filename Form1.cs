@@ -488,6 +488,16 @@ namespace FotoOrganizzatore
                         //RinominaCartella aub = new RinominaCartella();
                     }
                 }
+                for (int n = 0; n < vignette.Controls.Count; n++)
+                {
+                    BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
+                    if (bi.getSselected())
+                    {
+                        string nuovoNome = Variabili.getDataBaseFotoAttivo().rinominaFotoInserisciInDB(dt, bi.getNomeFile());
+                        bi.setDateTime(dt);
+                        bi.setNomeFile(nuovoNome);
+                    }
+                }
             }
         }
 

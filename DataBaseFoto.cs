@@ -308,6 +308,39 @@ namespace FotoOrganizzatore
             elencoFotoPerNome.Add(fileName, dt);
             aggiungiFoto(dt, fileName);
         }
+        public string rinominaFotoInserisciInDB(DateTime dt, string nomeVecchio)
+        {
+            if (elencoFotoPerData.ContainsKey(dt))
+            {
+                //nomeFileCorretto = false;
+                bool fine = false;
+                DateTime dt1 = dt;
+                while (fine == false)
+                {
+                    dt1 = dt1.AddSeconds(1);
+                    if (!elencoFotoPerData.ContainsKey(dt1))
+                    {
+                        dt = dt1;
+                        fine = true;
+                    }
+                }
+            }
+            //if (!nomeFileCorretto)
+            //{
+                string nomeNuovo = Funzioni.nomeFileDaDateTime(dt);
+                string inizio = nomeVecchio.Substring(0, nomeVecchio.LastIndexOf('\\'));
+                string estensione = nomeVecchio.Substring(nomeVecchio.LastIndexOf('.'));
+                string nuovoNome = inizio + "\\" + nomeNuovo + estensione;
+                // rinominare il file!
+                // tracciare nel file di report
+                File.Move(nomeVecchio, nuovoNome);
+                nomeVecchio = nuovoNome;
+            //}
+            elencoFotoPerData.Add(dt, nomeVecchio);
+            elencoFotoPerNome.Add(nomeVecchio, dt);
+            aggiungiFoto(dt, nomeVecchio);
+            return nomeVecchio;
+        }
         bool verificaDateTimeInPath(string fileName)
         {
             bool result = false;

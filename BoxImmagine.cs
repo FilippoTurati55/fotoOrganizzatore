@@ -37,6 +37,14 @@ namespace FotoOrganizzatore
             }
             return dt;
         }
+        public void setDateTime(DateTime nuovoDt)
+        {
+            dt = nuovoDt;
+        }
+        public void setNomeFile(string nuovoNome)
+        {
+            nomeFile = nuovoNome;
+        }
         public Image getImmagine()
         {
             return immagine.Image;
