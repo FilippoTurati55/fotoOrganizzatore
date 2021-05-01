@@ -16,7 +16,7 @@ namespace FotoOrganizzatore
         int doppie = 0;
         public SortedList<DateTime, string> elencoFotoPerData = new SortedList<DateTime, string>();
         public SortedList<string , DateTime> elencoFotoPerNome = new SortedList<string, DateTime>();
-        public SortedList<long, String[]> elencoFoto = new SortedList<long, String[]>();
+        public SortedList<long, List<string>> elencoFotoPerDimensione = new SortedList<long, List<string>>();
         public SortedList<int, String> anni = new SortedList<int, string>();
         public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
         public SortedList<string, string> classificazioni = new SortedList<string, string>();
@@ -225,25 +225,46 @@ namespace FotoOrganizzatore
         bool aggiungiFoto(long dimensione, string path)
         {
             bool result = false;
-            if (!elencoFoto.ContainsKey(dimensione))
+            List<string> lista1;
+            if (!elencoFotoPerDimensione.ContainsKey(dimensione))
             {
-                string[] array1 = new string[1];
-                array1[0] = path;
-                elencoFoto.Add(dimensione, array1);
+                lista1 = new List<string>();
+                elencoFotoPerDimensione.Add(dimensione, lista1);
             }
             else
             {
-                string[] array2 = elencoFoto[dimensione];
-                string[] array3 = new string[array2.Length + 1];
-                for (int i = 0; i < array2.Length; i++)
-                {
-                    array3[i] = array2[i];
-                }
-                array3[array2.Length] = path;
-                elencoFoto[dimensione] = array3;
-                string[] array4 = elencoFoto[dimensione];
+                lista1 = elencoFotoPerDimensione[dimensione];
             }
+            lista1.Add(path);
             return result;
+        }
+        public bool togliFoto(DateTime dt, string nome)
+        {
+            bool res = false;
+            long dimensione;
+            if (elencoFotoPerData.ContainsKey(dt))
+            {
+                elencoFotoPerData.Remove(dt);
+            }
+            if (elencoFotoPerNome.ContainsKey(nome))
+            {
+                elencoFotoPerNome.Remove(nome);
+            }
+            var info = new FileInfo(nome);
+            dimensione = info.Length;
+            if (elencoFotoPerDimensione.ContainsKey(dimensione))
+            {
+                List<string> elenco = elencoFotoPerDimensione[dimensione];
+                if (elenco.Contains(nome))
+                {
+                    elenco.Remove(nome);
+                    if (elenco.Count == 0)
+                    {
+                        elencoFotoPerDimensione.Remove(dimensione);
+                    }
+                }
+            }
+            return res;
         }
         void controllaNormalizzaNomeFile(string fileName, ref DateTime dt)
         {

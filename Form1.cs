@@ -483,6 +483,7 @@ namespace FotoOrganizzatore
                     BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
                     if (bi.getSselected())
                     {
+                        Variabili.getDataBaseFotoAttivo().togliFoto(bi.getDateTime(), bi.getNomeFile());
                         //ModificaDataOra aub = new ModificaDataOra();
                         //RinominaCartella aub = new RinominaCartella();
                     }
