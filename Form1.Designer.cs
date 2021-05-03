@@ -38,6 +38,7 @@ namespace FotoOrganizzatore
             this.comandi = new System.Windows.Forms.Panel();
             this.Cruscotto = new System.Windows.Forms.Button();
             this.panelAzioniSuFoto = new System.Windows.Forms.Panel();
+            this.buttonCambiaData = new System.Windows.Forms.Button();
             this.classifica = new System.Windows.Forms.Button();
             this.buttonRuota = new System.Windows.Forms.Button();
             this.buttonCancella = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@ namespace FotoOrganizzatore
             this.splitContainerUp = new System.Windows.Forms.SplitContainer();
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonCambiaData = new System.Windows.Forms.Button();
+            this.buttonSelezionaTutti = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -84,8 +85,8 @@ namespace FotoOrganizzatore
             this.splitContainerAnni.Panel2.AutoScroll = true;
             this.splitContainerAnni.Panel2.Controls.Add(this.vignette);
             this.splitContainerAnni.Panel2.Controls.Add(this.comandi);
-            this.splitContainerAnni.Size = new System.Drawing.Size(2503, 503);
-            this.splitContainerAnni.SplitterDistance = 1186;
+            this.splitContainerAnni.Size = new System.Drawing.Size(3239, 503);
+            this.splitContainerAnni.SplitterDistance = 1534;
             this.splitContainerAnni.TabIndex = 0;
             // 
             // avvenimenti
@@ -94,7 +95,7 @@ namespace FotoOrganizzatore
             this.avvenimenti.Dock = System.Windows.Forms.DockStyle.Fill;
             this.avvenimenti.Location = new System.Drawing.Point(0, 60);
             this.avvenimenti.Name = "avvenimenti";
-            this.avvenimenti.Size = new System.Drawing.Size(1184, 441);
+            this.avvenimenti.Size = new System.Drawing.Size(1532, 441);
             this.avvenimenti.TabIndex = 2;
             this.avvenimenti.Resize += new System.EventHandler(this.avvenimenti_Resize);
             // 
@@ -108,7 +109,7 @@ namespace FotoOrganizzatore
             this.panelAnni.Location = new System.Drawing.Point(0, 0);
             this.panelAnni.MinimumSize = new System.Drawing.Size(2, 60);
             this.panelAnni.Name = "panelAnni";
-            this.panelAnni.Size = new System.Drawing.Size(1184, 60);
+            this.panelAnni.Size = new System.Drawing.Size(1532, 60);
             this.panelAnni.TabIndex = 1;
             // 
             // buttonRoot
@@ -129,7 +130,7 @@ namespace FotoOrganizzatore
             this.vignette.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vignette.Location = new System.Drawing.Point(0, 124);
             this.vignette.Name = "vignette";
-            this.vignette.Size = new System.Drawing.Size(1311, 377);
+            this.vignette.Size = new System.Drawing.Size(1699, 377);
             this.vignette.TabIndex = 1;
             // 
             // comandi
@@ -143,12 +144,12 @@ namespace FotoOrganizzatore
             this.comandi.Dock = System.Windows.Forms.DockStyle.Top;
             this.comandi.Location = new System.Drawing.Point(0, 0);
             this.comandi.Name = "comandi";
-            this.comandi.Size = new System.Drawing.Size(1311, 124);
+            this.comandi.Size = new System.Drawing.Size(1699, 124);
             this.comandi.TabIndex = 0;
             // 
             // Cruscotto
             // 
-            this.Cruscotto.Location = new System.Drawing.Point(1110, 19);
+            this.Cruscotto.Location = new System.Drawing.Point(1471, 25);
             this.Cruscotto.Name = "Cruscotto";
             this.Cruscotto.Size = new System.Drawing.Size(177, 78);
             this.Cruscotto.TabIndex = 4;
@@ -158,15 +159,27 @@ namespace FotoOrganizzatore
             // 
             // panelAzioniSuFoto
             // 
+            this.panelAzioniSuFoto.Controls.Add(this.buttonSelezionaTutti);
             this.panelAzioniSuFoto.Controls.Add(this.buttonCambiaData);
             this.panelAzioniSuFoto.Controls.Add(this.classifica);
             this.panelAzioniSuFoto.Controls.Add(this.buttonRuota);
             this.panelAzioniSuFoto.Controls.Add(this.buttonCancella);
             this.panelAzioniSuFoto.Location = new System.Drawing.Point(188, 10);
             this.panelAzioniSuFoto.Name = "panelAzioniSuFoto";
-            this.panelAzioniSuFoto.Size = new System.Drawing.Size(916, 109);
+            this.panelAzioniSuFoto.Size = new System.Drawing.Size(1173, 109);
             this.panelAzioniSuFoto.TabIndex = 3;
             this.panelAzioniSuFoto.Visible = false;
+            // 
+            // buttonCambiaData
+            // 
+            this.buttonCambiaData.AutoSize = true;
+            this.buttonCambiaData.Location = new System.Drawing.Point(615, 3);
+            this.buttonCambiaData.Name = "buttonCambiaData";
+            this.buttonCambiaData.Size = new System.Drawing.Size(238, 90);
+            this.buttonCambiaData.TabIndex = 4;
+            this.buttonCambiaData.Text = "cambia data";
+            this.buttonCambiaData.UseVisualStyleBackColor = true;
+            this.buttonCambiaData.Click += new System.EventHandler(this.buttonCambiaData_Click);
             // 
             // classifica
             // 
@@ -276,22 +289,22 @@ namespace FotoOrganizzatore
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // buttonCambiaData
+            // buttonSelezionaTutti
             // 
-            this.buttonCambiaData.AutoSize = true;
-            this.buttonCambiaData.Location = new System.Drawing.Point(615, 9);
-            this.buttonCambiaData.Name = "buttonCambiaData";
-            this.buttonCambiaData.Size = new System.Drawing.Size(238, 90);
-            this.buttonCambiaData.TabIndex = 4;
-            this.buttonCambiaData.Text = "cambia data";
-            this.buttonCambiaData.UseVisualStyleBackColor = true;
-            this.buttonCambiaData.Click += new System.EventHandler(this.buttonCambiaData_Click);
+            this.buttonSelezionaTutti.AutoSize = true;
+            this.buttonSelezionaTutti.Location = new System.Drawing.Point(869, 3);
+            this.buttonSelezionaTutti.Name = "buttonSelezionaTutti";
+            this.buttonSelezionaTutti.Size = new System.Drawing.Size(264, 90);
+            this.buttonSelezionaTutti.TabIndex = 5;
+            this.buttonSelezionaTutti.Text = "seleziona tutti";
+            this.buttonSelezionaTutti.UseVisualStyleBackColor = true;
+            this.buttonSelezionaTutti.Click += new System.EventHandler(this.buttonSelezionaTutti_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(3012, 1070);
+            this.ClientSize = new System.Drawing.Size(3431, 1070);
             this.Controls.Add(this.splitContainerCruscotto);
             this.Controls.Add(this.splitContainerAnni);
             this.Name = "Form1";
@@ -340,6 +353,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.SplitContainer splitContainerUpDx;
         private System.Windows.Forms.Button classifica;
         private System.Windows.Forms.Button buttonCambiaData;
+        private System.Windows.Forms.Button buttonSelezionaTutti;
     }
 }
 

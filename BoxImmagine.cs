@@ -64,6 +64,11 @@ namespace FotoOrganizzatore
             immagine.ruotaImmagine();
 
         }
+        public void seleziona()
+        {
+            button1.BackColor = Color.Red;
+            selected = true;
+        }
         #endregion
         #region EVENTI
 

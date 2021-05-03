@@ -501,10 +501,19 @@ namespace FotoOrganizzatore
             }
         }
 
-        #endregion
+        private void buttonSelezionaTutti_Click(object sender, EventArgs e)
+        {
+            for (int n = 0; n < vignette.Controls.Count; n++)
+            {
+                BoxImmagine bi = (BoxImmagine) vignette.Controls[n];
+                bi.seleziona();
+            }
+            Variabili.setComandi(Comandi.aggiornaMenuFoto);
+        }
+            #endregion
 
-        #region CRUSCOTTO
-        public void AggiungiDiscoBackup(Backup backup)
+            #region CRUSCOTTO
+            public void AggiungiDiscoBackup(Backup backup)
         {
             Discobackup db = new Discobackup(backup);
             splitContainerUpDx.Panel2.Controls.Add(db);
