@@ -19,7 +19,7 @@ namespace FotoOrganizzatore
         public SortedList<long, List<string>> elencoFotoPerDimensione = new SortedList<long, List<string>>();
         public SortedList<int, String> anni = new SortedList<int, string>();
         public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
-        public SortedList<string, string> classificazioni = new SortedList<string, string>();
+        public SortedList<string, List<DateTime>> classificazioni = new SortedList<string, List<DateTime>>();
         //public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         public string pathBase;
         public DataBaseFoto(string path)

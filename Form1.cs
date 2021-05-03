@@ -432,6 +432,7 @@ namespace FotoOrganizzatore
         private void classifica_Click(object sender, EventArgs e)
         {
             Classifica aub = new Classifica();
+            aub.elencaClassificazioniPresenti();
             DialogResult dr;
             dr = aub.ShowDialog();
             if ((dr == DialogResult.OK) || (dr == DialogResult.Yes))
@@ -443,7 +444,6 @@ namespace FotoOrganizzatore
                 BoxImmagine bi = (BoxImmagine)vignette.Controls[n];
                 if (bi.getSselected())
                 {
-                    bi.ruotaImmagine();
                     break;
                 }
             }

@@ -17,6 +17,15 @@ namespace FotoOrganizzatore.Dialogs
             InitializeComponent();
         }
 
+        public void elencaClassificazioniPresenti()
+        {
+            DataBaseFoto dbf = Variabili.getDataBaseFotoAttivo();
+            for (int n = 0; n < dbf.classificazioni.Count; n++)
+            {
+                string classificazione = dbf.classificazioni.Keys[n];
+                listBoxElencoClassificazioni.Items.Add(classificazione);
+            }
+        }
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -33,7 +42,7 @@ namespace FotoOrganizzatore.Dialogs
             DataBaseFoto dbf = Variabili.getDataBaseFotoAttivo();
             if (!dbf.classificazioni.ContainsKey(nuovo))
             {
-                dbf.classificazioni.Add(nuovo, nuovo);
+                dbf.classificazioni.Add(nuovo, null);
             }
         }
     }
