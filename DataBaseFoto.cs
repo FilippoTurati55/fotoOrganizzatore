@@ -187,7 +187,7 @@ namespace FotoOrganizzatore
                 }
             }
         }
-        void ProcessFile(string path)
+        public void ProcessFile(string path)
         {
             string estensione = path.Substring(path.LastIndexOf('.') + 1);
             if (estensione != "txt")
@@ -197,6 +197,22 @@ namespace FotoOrganizzatore
                 DateTime dt = new DateTime();
                 controllaNormalizzaNomeFile(path, ref dt);
             }
+        }
+        public bool verificaPresenzaFoto(string nomeFoto)
+        {
+            bool res = false;
+            if (File.Exists(nomeFoto))
+            {
+                var info = new FileInfo(nomeFoto);
+                long lunghezza = info.Length;
+                List<string> lista1;
+                if (elencoFotoPerDimensione.ContainsKey(lunghezza))
+                {
+                    lista1 = elencoFotoPerDimensione[lunghezza];
+                    // confronta per contenuto
+                }
+            }
+            return res;
         }
         bool aggiungiFoto(DateTime dt, string path)
         {

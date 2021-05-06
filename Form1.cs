@@ -510,10 +510,16 @@ namespace FotoOrganizzatore
             }
             Variabili.setComandi(Comandi.aggiornaMenuFoto);
         }
-            #endregion
 
-            #region CRUSCOTTO
-            public void AggiungiDiscoBackup(Backup backup)
+        private void buttonClassifica_Click(object sender, EventArgs e)
+        {
+            ClassificaCartella classifica = new ClassificaCartella();
+            classifica.Classifica();
+        }
+        #endregion
+
+        #region CRUSCOTTO
+        public void AggiungiDiscoBackup(Backup backup)
         {
             Discobackup db = new Discobackup(backup);
             splitContainerUpDx.Panel2.Controls.Add(db);
