@@ -33,9 +33,9 @@ namespace FotoOrganizzatore
             string[] fileEntries = Directory.GetFiles(cartella);
             foreach (string fileName in fileEntries)
             {
-                if (Variabili.getDataBaseFotoAttivo().verificaPresenzaFoto(fileName))
+                if (!Variabili.getDataBaseFotoAttivo().verificaPresenzaFoto(fileName))
                 {
-
+                    Utility.classificaFoto(fileName);
                 }
                 /*
                 FileInfo file = new FileInfo(fileName);

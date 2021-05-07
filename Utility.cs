@@ -29,15 +29,22 @@ namespace FotoOrganizzatore
         {
             bool res = false;
             int anno, mese, giorno;
+            int ora, minuto, secondo;
             string[] nomeSplit = nomeFile.Split('_');
             string annoS = nomeSplit[1].Substring(0, 4);
             string meseS = nomeSplit[1].Substring(4, 2);
             string giornoS = nomeSplit[1].Substring(6, 2);
+            string oraS = nomeSplit[2].Substring(0, 2);
+            string minutoS = nomeSplit[2].Substring(2, 2);
+            string secondoS = nomeSplit[2].Substring(4, 2);
             if (Int32.TryParse(annoS, out anno) &&
                 Int32.TryParse(meseS,out mese) &&
-                Int32.TryParse(giornoS,out giorno))
+                Int32.TryParse(giornoS,out giorno) &&
+                Int32.TryParse(oraS,out ora) &&
+                Int32.TryParse(minutoS,out minuto) &&
+                Int32.TryParse(secondoS,out secondo))
             {
-                data = new DateTime(anno, mese, giorno);
+                data = new DateTime(anno, mese, giorno,ora,minuto,secondo);
                 res = true;
             }
             return res;
