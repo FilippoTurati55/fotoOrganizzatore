@@ -288,6 +288,33 @@ namespace FotoOrganizzatore
         }
         #endregion
         #region DISCO
+        public static bool ConfrontaFile(string file1, string file2)
+        {
+            // confronta due file della stessa dimensione
+            bool res = false;
+            Int64 a, b;
+            try
+            {
+                if ((File.Exists(file1)) && (File.Exists(file2)))
+                {
+                    res = true;
+                    BinaryReader binaryReader1 = new BinaryReader(File.OpenRead(file1));
+                    BinaryReader binaryReader2 = new BinaryReader(File.OpenRead(file2));
+                    while (1 == 1)
+                    {
+                        a = binaryReader1.ReadInt64();
+                        b = binaryReader2.ReadInt64();
+                        if (a != b)
+                        {
+                            res = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch { }
+            return res;
+        }
         public static string CreaCartella(string disco, string nome)
         {
             string nomeCompleto = disco + @"/" + nome;

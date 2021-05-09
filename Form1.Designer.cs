@@ -36,6 +36,7 @@ namespace FotoOrganizzatore
             this.buttonRoot = new System.Windows.Forms.Button();
             this.vignette = new System.Windows.Forms.Panel();
             this.comandi = new System.Windows.Forms.Panel();
+            this.buttonClassifica = new System.Windows.Forms.Button();
             this.Cruscotto = new System.Windows.Forms.Button();
             this.panelAzioniSuFoto = new System.Windows.Forms.Panel();
             this.buttonSelezionaTutti = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace FotoOrganizzatore
             this.splitContainerUp = new System.Windows.Forms.SplitContainer();
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonClassifica = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -148,6 +148,16 @@ namespace FotoOrganizzatore
             this.comandi.Name = "comandi";
             this.comandi.Size = new System.Drawing.Size(2068, 124);
             this.comandi.TabIndex = 0;
+            // 
+            // buttonClassifica
+            // 
+            this.buttonClassifica.Location = new System.Drawing.Point(1392, 19);
+            this.buttonClassifica.Name = "buttonClassifica";
+            this.buttonClassifica.Size = new System.Drawing.Size(305, 68);
+            this.buttonClassifica.TabIndex = 5;
+            this.buttonClassifica.Text = "classifica";
+            this.buttonClassifica.UseVisualStyleBackColor = true;
+            this.buttonClassifica.Click += new System.EventHandler(this.buttonClassifica_Click);
             // 
             // Cruscotto
             // 
@@ -301,16 +311,6 @@ namespace FotoOrganizzatore
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonClassifica
-            // 
-            this.buttonClassifica.Location = new System.Drawing.Point(1392, 64);
-            this.buttonClassifica.Name = "buttonClassifica";
-            this.buttonClassifica.Size = new System.Drawing.Size(75, 23);
-            this.buttonClassifica.TabIndex = 5;
-            this.buttonClassifica.Text = "classifica";
-            this.buttonClassifica.UseVisualStyleBackColor = true;
-            this.buttonClassifica.Click += new System.EventHandler(this.buttonClassifica_Click);
             // 
             // Form1
             // 

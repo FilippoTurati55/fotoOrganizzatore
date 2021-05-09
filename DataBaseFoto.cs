@@ -210,6 +210,19 @@ namespace FotoOrganizzatore
                 {
                     lista1 = elencoFotoPerDimensione[lunghezza];
                     // confronta per contenuto
+                    foreach(string nomeFile in lista1)
+                    {
+                        if (Utility.ConfrontaFile(nomeFoto,nomeFile))
+                        {
+                            // foto doppia
+                            res = true;
+                            break;
+                        }
+                        else
+                        {
+                            // foto diversa
+                        }
+                    }
                 }
             }
             return res;
@@ -293,6 +306,10 @@ namespace FotoOrganizzatore
             {
                 FileImmagini.CalcolaMomentoScattoFoto(fileName, ref dt);
             }
+            else
+            {
+                Utility.CalcolaDateTimeDaNomeFile(nomeSoloFile, ref dt);
+            }
             // verifica se la data è univoca
             if (elencoFotoPerData.ContainsKey(dt))
             {
@@ -317,6 +334,7 @@ namespace FotoOrganizzatore
                 string nuovoNome = inizio + "\\" + nomeNuovo + estensione;
                 // rinominare il file!
                 // tracciare nel file di report
+                // verificare se esite il file, se esiste già ricalcolare data e ora come sopra
                 File.Move(fileName, nuovoNome);
                 fileName = nuovoNome;
             }
