@@ -190,7 +190,7 @@ namespace FotoOrganizzatore
         public void ProcessFile(string path)
         {
             string estensione = path.Substring(path.LastIndexOf('.') + 1);
-            if (estensione != "txt")
+            if ((estensione != "txt") && (estensione != "db") && (estensione != "ini"))
             {
                 //controllaNormalizzaNomeFile(path);
                 //aggiungiFoto(path);
@@ -335,6 +335,12 @@ namespace FotoOrganizzatore
                 // rinominare il file!
                 // tracciare nel file di report
                 // verificare se esite il file, se esiste già ricalcolare data e ora come sopra
+                while (File.Exists(nuovoNome))
+                {
+                    dt = dt.AddSeconds(1);
+                    nomeNuovo = Funzioni.nomeFileDaDateTime(dt);
+                    nuovoNome = inizio + "\\" + nomeNuovo + estensione;
+                }
                 File.Move(fileName, nuovoNome);
                 fileName = nuovoNome;
             }
@@ -388,5 +394,45 @@ namespace FotoOrganizzatore
             // todo
             return fileName;
         }
+        public bool classificaFoto(string nomeFile)
+        {
+            bool res = false;
+            string[] dirScomposto = nomeFile.Replace("/", "\\").Split('\\');
+            DateTime data = new DateTime();
+            string b = "";
+            string nome = nomeFile.Replace("/", "\\").Substring(nomeFile.LastIndexOf("\\") + 1);
+            if (Utility.CalcolaDateTimeDaNomeFile(nome, ref data))
+            {
+                SetDataOraBase sdob = Variabili.Calendario.getData(data);
+                string percorsoFoto;
+                if (sdob != null)
+                {
+                    // data già presente
+                    percorsoFoto = sdob.nomeCompletoCartella;
+                }
+                else
+                {
+                    percorsoFoto = Variabili.Calendario.CalcolaNomeCartella(data, "");
+                    if (!Directory.Exists(percorsoFoto))
+                    {
+                        Directory.CreateDirectory(percorsoFoto);
+                    }
+                }
+                string nomeFileNuovo = percorsoFoto + "\\" + dirScomposto[dirScomposto.Length - 1];
+                controllaNormalizzaNomeFile(nomeFileNuovo, ref data);
+                // File.Move(nomeFile, nomeFileNuovo);
+            }
+            else
+            {
+                // nome file non corretto
+                /*if (CalcolaDateTimeFileImmagine(nome, ref data))
+                {
+                    ;
+                }*/
+                ;
+            }
+            return res;
+        }
+
     }
 }

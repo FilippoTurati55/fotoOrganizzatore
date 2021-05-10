@@ -564,7 +564,17 @@ namespace FotoOrganizzatore
                     }
                 }
                 string nomeFileNuovo = percorsoFoto + "\\" + dirScomposto[dirScomposto.Length - 1];
+                
                 File.Move(nomeFile, nomeFileNuovo);
+            }
+            else
+            {
+                // nome file non corretto
+                if (CalcolaDateTimeFileImmagine(nome, ref data))
+                {
+                    ;
+                }
+                ;
             }
             return res;
         }
