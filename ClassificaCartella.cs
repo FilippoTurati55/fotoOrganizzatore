@@ -35,7 +35,14 @@ namespace FotoOrganizzatore
             {
                 if (!Variabili.getDataBaseFotoAttivo().verificaPresenzaFoto(fileName))
                 {
+                    // foto nuova
                     Utility.classificaFoto(fileName);
+                }
+                else
+                {
+                    // foto doppia
+                    Utility.muoviFileInCartellaDoppie(fileName);
+                    NumeroFotiDoppie++;
                 }
                 /*
                 FileInfo file = new FileInfo(fileName);

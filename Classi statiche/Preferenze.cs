@@ -11,7 +11,8 @@ namespace FotoOrganizzatore
     static class Preferenze
     {
         public static string NomeCartellaFotoOrganizzate = @"c:\foto";
-        public static string NomeCestino = NomeCartellaFotoOrganizzate + @"\cestino";
+        //public static string NomeCartellaFotoDoppie = NomeCartellaFotoOrganizzate + @"\doppie";
+        //public static string NomeCestino = NomeCartellaFotoOrganizzate + @"\cestino";
         public static bool LeggiPreferenze()
         {
             bool res = false;
@@ -34,7 +35,7 @@ namespace FotoOrganizzatore
                             {
                                 case "cartella locale foto":
                                     NomeCartellaFotoOrganizzate = sSplit[1];
-                                    NomeCestino = Preferenze.NomeCartellaFotoOrganizzate + @"\cestino";
+                                    // NomeCestino = Preferenze.NomeCartellaFotoOrganizzate + @"\cestino";
                                     break;
                                 case "disco esterno accreditato":
                                     Variabili.UnitaEsterneAccreditate.Add(sSplit[1], sSplit[2] + ";" + sSplit[3]);
@@ -85,6 +86,14 @@ namespace FotoOrganizzatore
 
             }
             return res;
+        }
+        public static string getNomeCartellaFotoDoppie()
+        {
+            return NomeCartellaFotoOrganizzate + @"\doppie";
+        }
+        public static string getNomeCestino()
+        {
+            return NomeCartellaFotoOrganizzate + @"\cestino";
         }
         static bool creaCartellaDatiPermanenti()
         {

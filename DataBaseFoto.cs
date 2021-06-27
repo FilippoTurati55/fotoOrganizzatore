@@ -22,9 +22,11 @@ namespace FotoOrganizzatore
         public SortedList<string, List<DateTime>> classificazioni = new SortedList<string, List<DateTime>>();
         //public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         public string pathBase;
-        public DataBaseFoto(string path)
+        public string pathFotoDoppie;
+        public DataBaseFoto(string path, string cartellaDoppie)
         {
             pathBase = path;
+            pathFotoDoppie = cartellaDoppie;
         }
         public bool creaDataBase(Calendario calendario)
         {

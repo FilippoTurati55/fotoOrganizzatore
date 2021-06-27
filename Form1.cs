@@ -41,7 +41,7 @@ namespace FotoOrganizzatore
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
 
-                Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate);
+                Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate, Preferenze.getNomeCartellaFotoDoppie());
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne(this);
@@ -244,7 +244,8 @@ namespace FotoOrganizzatore
             {
                 // Calendario va messo nelle variabili globali
                 Calendario calendario = new Calendario();
-                DataBaseFoto dataBaseFotoLocali = new DataBaseFoto(Variabili.nomeCartellaSpeciale);
+                // una cartella speciale non contiene foto doppie !!! ?
+                DataBaseFoto dataBaseFotoLocali = new DataBaseFoto(Variabili.nomeCartellaSpeciale, "");
                 dataBaseFotoLocali.creaDataBase(calendario, 1);
                 calendario.MostraCalendarioFoto(avvenimenti, false);
                 elencoFotiDaMostrareInVignetta = Directory.GetFiles(Variabili.nomeCartellaSpeciale);

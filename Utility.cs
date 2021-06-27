@@ -293,13 +293,15 @@ namespace FotoOrganizzatore
             // confronta due file della stessa dimensione
             bool res = false;
             Int64 a, b;
+            BinaryReader binaryReader1 = null;
+            BinaryReader binaryReader2 = null; ;
             try
             {
                 if ((File.Exists(file1)) && (File.Exists(file2)))
                 {
                     res = true;
-                    BinaryReader binaryReader1 = new BinaryReader(File.OpenRead(file1));
-                    BinaryReader binaryReader2 = new BinaryReader(File.OpenRead(file2));
+                    binaryReader1 = new BinaryReader(File.OpenRead(file1));
+                    binaryReader2 = new BinaryReader(File.OpenRead(file2));
                     while (1 == 1)
                     {
                         a = binaryReader1.ReadInt64();
@@ -307,12 +309,20 @@ namespace FotoOrganizzatore
                         if (a != b)
                         {
                             res = false;
+                            binaryReader1.Close();
+                            binaryReader2.Close();
                             break;
                         }
                     }
                 }
             }
-            catch { }
+            catch 
+            {
+                if (binaryReader1 != null)
+                    binaryReader1.Close();
+                if (binaryReader2 != null)
+                    binaryReader2.Close();
+            }
             return res;
         }
         public static string CreaCartella(string disco, string nome)
@@ -428,15 +438,30 @@ namespace FotoOrganizzatore
             }
             return res;
         }
+        public static int muoviFileInCartellaDoppie(string sorgente)
+        {
+            FileInfo fi = new FileInfo(sorgente);
+            string nomeFileDoppio = Variabili.getDataBaseFotoAttivo().pathFotoDoppie + @"\" + fi.Name;
+            if (!File.Exists(nomeFileDoppio))
+            {
+                muoviFile(sorgente, nomeFileDoppio);
+            }
+            else
+            {
+                // almeno tripla!
+
+            }
+            return 0;
+        }
         public static void cancellaFoto(string nomeFile)
         {
             // crea cartella cestino se non esistente
-            if (!Directory.Exists(Preferenze.NomeCestino))
+            if (!Directory.Exists(Preferenze.getNomeCestino()))
             {
-                Directory.CreateDirectory(Preferenze.NomeCestino);
+                Directory.CreateDirectory(Preferenze.getNomeCestino());
             }
             string nomeFilePulito = nomeFile.Substring(nomeFile.LastIndexOf('\\') + 1);
-            string nomeFileNuovo = Preferenze.NomeCestino + "\\" + nomeFilePulito;
+            string nomeFileNuovo = Preferenze.getNomeCestino() + "\\" + nomeFilePulito;
             File.Move(nomeFile, nomeFileNuovo);
             tracciaInfoRipristiniFotoCancellata(nomeFile, nomeFileNuovo);
             Variabili.MostraFotoInGiorno++;
@@ -444,7 +469,7 @@ namespace FotoOrganizzatore
         public static void ripristinaFoto(string nomeFile)
         {
             // crea cartella cestino se non esistente
-            if (Directory.Exists(Preferenze.NomeCestino))
+            if (Directory.Exists(Preferenze.getNomeCestino()))
             {
                 if (File.Exists(nomeFile))
                 {
@@ -472,7 +497,7 @@ namespace FotoOrganizzatore
         static void tracciaInfoRipristiniFotoCancellata(string originale, string nomeInCestino)
         {
             StreamWriter sw;
-            string nomeFileInfo = Preferenze.NomeCestino + @"\InfoResume.txt";
+            string nomeFileInfo = Preferenze.getNomeCestino() + @"\InfoResume.txt";
             if (!File.Exists(nomeFileInfo))
             {
                 sw = new StreamWriter(nomeFileInfo, false, Encoding.GetEncoding("iso-8859-1"));
@@ -488,7 +513,7 @@ namespace FotoOrganizzatore
         {
             bool result = false;
             string[] info = null;
-            string nomeFileInfo = Preferenze.NomeCestino + @"\InfoResume.txt";
+            string nomeFileInfo = Preferenze.getNomeCestino() + @"\InfoResume.txt";
             if (File.Exists(nomeFileInfo))
             {
                 info = File.ReadAllLines(nomeFileInfo);
@@ -521,7 +546,7 @@ namespace FotoOrganizzatore
         static string recuperaInfoRipristiniFotoCancellata(string nomeInCestino)
         {
             string originale = "";
-            string nomeFileInfo = Preferenze.NomeCestino + @"\InfoResume.txt";
+            string nomeFileInfo = Preferenze.getNomeCestino() + @"\InfoResume.txt";
             if (File.Exists(nomeFileInfo))
             {
                 string[] info = File.ReadAllLines(nomeFileInfo);
@@ -565,7 +590,7 @@ namespace FotoOrganizzatore
                 }
                 string nomeFileNuovo = percorsoFoto + "\\" + dirScomposto[dirScomposto.Length - 1];
                 
-                File.Move(nomeFile, nomeFileNuovo);
+                muoviFile(nomeFile, nomeFileNuovo);
             }
             else
             {

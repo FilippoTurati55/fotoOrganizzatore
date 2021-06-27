@@ -20,6 +20,7 @@ namespace FotoOrganizzatore
         string drive;           // unità disco es. F
         string numeroDiSerie;   // numero di serie
         public string pathFoto;        // per esempio foto
+        public string pathFotoDoppie;
         long spazioLibero, spazioDisponibile, spazioTotale;
         public string identificatore = "";     // identificatore utente es. copia sicurezza
         DriveType tipo;
@@ -62,6 +63,8 @@ namespace FotoOrganizzatore
                 string[] ssplit = s.Split(';');
                 identificatore = ssplit[0];
                 pathFoto = name + ssplit[1];
+                // verificare che pathFotoDoppie sia corretto
+                pathFotoDoppie = name + "doppie";  
                 Variabili.UnitaEsterne.Add(this);
                 result = true;
             }
@@ -125,7 +128,7 @@ namespace FotoOrganizzatore
         }
         void taskBackup()
         {
-            dataBaseFotoSuDiscoBackup = new DataBaseFoto(disco.pathFoto);
+            dataBaseFotoSuDiscoBackup = new DataBaseFoto(disco.pathFoto, disco.pathFotoDoppie);
             dataBaseFotoSuDiscoBackup.creaDataBase(calendarioBackup);
             // anni = Variabili.operazioniSuPc.elencaAnni(name);
             //Variabili.elencaDateFotoInCartellaClasse.ElencaImmediatamente(elencoDateFoti, anni, false, elencoDateDateDoppie, true);
