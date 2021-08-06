@@ -438,20 +438,35 @@ namespace FotoOrganizzatore
             }
             return res;
         }
-        public static int muoviFileInCartellaDoppie(string sorgente)
+        public static string muoviFileInCartellaDoppie(string sorgente)
         {
+            string nomeFileMultiplo = "";
             FileInfo fi = new FileInfo(sorgente);
-            string nomeFileDoppio = Variabili.getDataBaseFotoAttivo().pathFotoDoppie + @"\" + fi.Name;
+            /*string nomeFileDoppio = Variabili.getDataBaseFotoAttivo().pathFotoDoppie + @"\" + fi.Name;
             if (!File.Exists(nomeFileDoppio))
             {
                 muoviFile(sorgente, nomeFileDoppio);
             }
             else
-            {
-                // almeno tripla!
-
-            }
-            return 0;
+            {*/
+                bool nomeCalcolato = false;
+                int multiplo = 2;
+                string[] nomeFileSplit = fi.Name.Split('.');
+                while(!nomeCalcolato)
+                {
+                    nomeFileMultiplo = Variabili.getDataBaseFotoAttivo().pathFotoDoppie + @"\" + nomeFileSplit[0] + "_" + multiplo.ToString() + "." + nomeFileSplit[1];
+                    if (!File.Exists(nomeFileMultiplo))
+                    {
+                        muoviFile(sorgente, nomeFileMultiplo);
+                        nomeCalcolato = true;
+                    }
+                    else
+                    {
+                        multiplo++;
+                    }
+                }
+            //}
+            return nomeFileMultiplo;
         }
         public static void cancellaFoto(string nomeFile)
         {

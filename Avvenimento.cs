@@ -125,6 +125,7 @@ namespace FotoOrganizzatore
             if (EventoModificaCommento != null)
             {
                 EventoModificaCommento.Invoke(this);
+                EventoModificaCommento = null;
             }
             return cambiato;
         }

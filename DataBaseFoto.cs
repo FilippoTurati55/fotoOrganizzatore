@@ -20,6 +20,7 @@ namespace FotoOrganizzatore
         public SortedList<int, String> anni = new SortedList<int, string>();
         public SortedList<int, Anno> anniComponenti = new SortedList<int, Anno>();
         public SortedList<string, List<DateTime>> classificazioni = new SortedList<string, List<DateTime>>();
+        public List<string> elencoFotoNuovaClassificazione = new List<string>();
         //public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         public string pathBase;
         public string pathFotoDoppie;
@@ -343,8 +344,11 @@ namespace FotoOrganizzatore
                     nomeNuovo = Funzioni.nomeFileDaDateTime(dt);
                     nuovoNome = inizio + "\\" + nomeNuovo + estensione;
                 }
-                File.Move(fileName, nuovoNome);
-                fileName = nuovoNome;
+                if (fileName != nuovoNome)
+                {
+                    File.Move(fileName, nuovoNome);
+                    fileName = nuovoNome;
+                }
             }
             elencoFotoPerData.Add(dt, fileName);
             elencoFotoPerNome.Add(fileName, dt);
