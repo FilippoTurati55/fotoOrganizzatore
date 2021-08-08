@@ -59,6 +59,8 @@ namespace FotoOrganizzatore
         public static DataBaseFoto dataBaseFotoLocali;
         static DataBaseFoto dataBaseFotoAttivo;
         public static Show show = new Show();
+        static string TracciaMessaggi = "";
+        public static bool nuoviMessaggi = false;
         #region ACCESSO
         public static void setCalendarioAttivo(Calendario calendario, DataBaseFoto dataBaseFoto)
         {
@@ -80,6 +82,14 @@ namespace FotoOrganizzatore
         public static DataBaseFoto getDataBaseFotoAttivo()
         {
             return dataBaseFotoAttivo;
+        }
+        #endregion
+        #region messaggi
+        public static string tracciaMessaggi() { return TracciaMessaggi; }
+        public static void tracciaMessaggi(string messaggio)
+        {
+            TracciaMessaggi += messaggio + "\n";
+            nuoviMessaggi = true;
         }
         #endregion
         //public static Cruscotto cruscotto;

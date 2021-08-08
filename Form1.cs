@@ -259,6 +259,11 @@ namespace FotoOrganizzatore
                 aggiornaSplitContinerAnni();
                 Variabili.mostraCartellaSpeciale = false;
             }
+            if (Variabili.nuoviMessaggi)
+            {
+                Variabili.nuoviMessaggi = false;
+                messaggiGlobali.Text = Variabili.tracciaMessaggi();
+            }
         }
 
         private void show_Click(object sender, EventArgs e)
@@ -334,7 +339,7 @@ namespace FotoOrganizzatore
                         int dispositivoTrovato = PortableDrivers.CercaCartellaCameraInUnDispositivoUsb(pd);
                         if ((dispositivoTrovato >= 0) && (PortableDrivers.elencoDispositiviUsb.Count > dispositivoTrovato))
                         {
-                            ;// messaggi.Text = "trovato " + PortableDrivers.elencoDispositiviUsb[dispositivoTrovato].ToString() + " corretto";
+                            ; // Variabili.tracciaMessaggi("trovato un dispositivo collegato in USB corretto");
                         }
                         else
                         {

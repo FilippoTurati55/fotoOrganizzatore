@@ -50,6 +50,7 @@ namespace FotoOrganizzatore
             this.splitContainerUp = new System.Windows.Forms.SplitContainer();
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
+            this.messaggiGlobali = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -59,6 +60,7 @@ namespace FotoOrganizzatore
             this.panelAzioniSuFoto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCruscotto)).BeginInit();
             this.splitContainerCruscotto.Panel1.SuspendLayout();
+            this.splitContainerCruscotto.Panel2.SuspendLayout();
             this.splitContainerCruscotto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUp)).BeginInit();
             this.splitContainerUp.Panel2.SuspendLayout();
@@ -264,6 +266,7 @@ namespace FotoOrganizzatore
             // splitContainerCruscotto.Panel2
             // 
             this.splitContainerCruscotto.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splitContainerCruscotto.Panel2.Controls.Add(this.messaggiGlobali);
             this.splitContainerCruscotto.Size = new System.Drawing.Size(1598, 359);
             this.splitContainerCruscotto.SplitterDistance = 170;
             this.splitContainerCruscotto.TabIndex = 1;
@@ -312,6 +315,15 @@ namespace FotoOrganizzatore
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // messaggiGlobali
+            // 
+            this.messaggiGlobali.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.messaggiGlobali.Location = new System.Drawing.Point(0, 0);
+            this.messaggiGlobali.Name = "messaggiGlobali";
+            this.messaggiGlobali.Size = new System.Drawing.Size(1598, 185);
+            this.messaggiGlobali.TabIndex = 0;
+            this.messaggiGlobali.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -333,6 +345,7 @@ namespace FotoOrganizzatore
             this.panelAzioniSuFoto.ResumeLayout(false);
             this.panelAzioniSuFoto.PerformLayout();
             this.splitContainerCruscotto.Panel1.ResumeLayout(false);
+            this.splitContainerCruscotto.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCruscotto)).EndInit();
             this.splitContainerCruscotto.ResumeLayout(false);
             this.splitContainerUp.Panel2.ResumeLayout(false);
@@ -367,6 +380,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Button buttonCambiaData;
         private System.Windows.Forms.Button buttonSelezionaTutti;
         private System.Windows.Forms.Button buttonClassifica;
+        private System.Windows.Forms.RichTextBox messaggiGlobali;
     }
 }
 

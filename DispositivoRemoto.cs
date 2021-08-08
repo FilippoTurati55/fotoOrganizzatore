@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,7 @@ namespace FotoOrganizzatore
             idrive = _idrive;
             IdentificatoreUnico = idrive.unique_id;
             IdentificatoreTipoDispositivo = idrive.friendly_name;
+            Variabili.tracciaMessaggi("trovato dispositivo: " + IdentificatoreTipoDispositivo);
             var t = Task.Run(() => taskEsamina());
             return true;
         }
@@ -211,6 +213,7 @@ namespace FotoOrganizzatore
                                 break;
                             case "nome_dispositivo":
                                 NomeDispositivo = lineSplit[1];
+                                Variabili.tracciaMessaggi(IdentificatoreTipoDispositivo + " è registrato come: " + NomeDispositivo);
                                 break;
                             case "formato_data":
                                 FormatoData = lineSplit[1];
@@ -271,7 +274,10 @@ namespace FotoOrganizzatore
         }
         bool CalcolaDateCartellaRemota(IFolder folder, CartellaFoti cartellaFoti)
         {
-            bool nuoveDate = false;
+            Variabili.tracciaMessaggi("ultima lettura foto da " + NomeDispositivo + " il giorno " +
+                DataUltimaLetturaFoto.Day.ToString("D2") + " " +
+                DataUltimaLetturaFoto.Month.ToString("D2") + " " + 
+                DataUltimaLetturaFoto.Year.ToString("D4"));
             foreach (var file in folder.files)
             {
                 string nomeFile = file.name;
@@ -286,13 +292,18 @@ namespace FotoOrganizzatore
                     /*if (!Variabili.calendario.elencoDateFotiNuove.ContainsKey(dt1))
                         Variabili.calendario.elencoDateFotiNuove.Add(dt1, dt1);*/
                     Variabili.Passo = Passi.TrovateNuoveFoto;
-                    nuoveDate = true;
+                    //nuoveDate = true;
                 }
                 else cartellaFoti.DateTrovateVecchie.Add(nomeFile, foto);
             }
             /* provvisorio 27 1 21
              * if (nuoveDate)
                 Variabili.MostraCalendartioNuoveFoto = true; */
+            if (cartellaFoti.DateTrovateNuove.Count == 0)
+                Variabili.tracciaMessaggi("in " + NomeDispositivo + " non sono state trovate foto nuove");
+            Variabili.tracciaMessaggi("in " + NomeDispositivo + " trovate " + cartellaFoti.DateTrovateNuove.Count + " nuove foto");
+            if (cartellaFoti.DateTrovateVecchie.Count != 0)
+                Variabili.tracciaMessaggi("in " + NomeDispositivo + " sono presenti " + cartellaFoti.DateTrovateVecchie.Count + " foto già scaricate");
             return true;
         }
         void LeggiNuoveFotoDaRemoto()
@@ -352,6 +363,7 @@ namespace FotoOrganizzatore
                     }
                 }
             }
+            Variabili.tracciaMessaggi("da " + NomeDispositivo + " lette " + NumeroFotiNuove + " foto nuove");
         }
         #endregion
     }
