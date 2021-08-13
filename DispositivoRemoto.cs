@@ -59,7 +59,7 @@ namespace FotoOrganizzatore
             idrive = _idrive;
             IdentificatoreUnico = idrive.unique_id;
             IdentificatoreTipoDispositivo = idrive.friendly_name;
-            Variabili.tracciaMessaggi("trovato dispositivo: " + IdentificatoreTipoDispositivo);
+            // Variabili.tracciaMessaggi("trovato dispositivo: " + IdentificatoreTipoDispositivo);
             var t = Task.Run(() => taskEsamina());
             return true;
         }
@@ -70,12 +70,14 @@ namespace FotoOrganizzatore
             if (!LeggiInfoDevice())
             {
                 // dispositivo non classificato
+                Variabili.tracciaMessaggi("trovato nuovo dispositivo da catalogare di tipo: " + IdentificatoreTipoDispositivo);
                 statoDispositivo = STATO_DISPOSITIVO.DA_CATALOGARE;
             }
             else
             {
                 if (CartelleFoto.Count != 0)
                 {
+                    Variabili.tracciaMessaggi("trovato dispositivo: " + IdentificatoreTipoDispositivo);
                     Variabili.Passo = Passi.RicercaNuoveFoto;
                     Variabili.DispositivoPrincipale = this;
                     // cerca foto nuove su camera
@@ -363,7 +365,7 @@ namespace FotoOrganizzatore
                     }
                 }
             }
-            Variabili.tracciaMessaggi("da " + NomeDispositivo + " lette " + NumeroFotiNuove + " foto nuove");
+            Variabili.tracciaMessaggi("da " + NomeDispositivo + " lette " + NumeroFotiNuove + " foto");
         }
         #endregion
     }

@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndamentoAttivita.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AndamentoAttivita.Designer.cs">
+      <DependentUpon>AndamentoAttivita.cs</DependentUpon>
+    </Compile>
     <Compile Include="anno.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,6 +160,9 @@
       <DependentUpon>Show.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="AndamentoAttivita.resx">
+      <DependentUpon>AndamentoAttivita.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="anno.resx">
       <DependentUpon>anno.cs</DependentUpon>
     </EmbeddedResource>

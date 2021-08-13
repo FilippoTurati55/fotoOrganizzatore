@@ -42,6 +42,7 @@ namespace FotoOrganizzatore
             {
 
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate, Preferenze.getNomeCartellaFotoDoppie());
+                Variabili.dataBaseFotoLocali.pubblicaAndamentoInFinestra(splitContainerUp.Panel1,"archivio locale:");
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne(this);
@@ -263,6 +264,11 @@ namespace FotoOrganizzatore
             {
                 Variabili.nuoviMessaggi = false;
                 messaggiGlobali.Text = Variabili.tracciaMessaggi();
+            }
+            if (Variabili.codaMessaggi.Count != 0)
+            {
+                AndamentoAttivita aa = (AndamentoAttivita) Variabili.codaMessaggi.Dequeue();
+                aa.aggiorna();
             }
         }
 

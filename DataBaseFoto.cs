@@ -24,10 +24,19 @@ namespace FotoOrganizzatore
         //public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         public string pathBase;
         public string pathFotoDoppie;
+        AndamentoAttivita andamento = new AndamentoAttivita();
         public DataBaseFoto(string path, string cartellaDoppie)
         {
             pathBase = path;
             pathFotoDoppie = cartellaDoppie;
+        }
+        public void pubblicaAndamentoInFinestra(Panel dove, string nomeAttivita)
+        {
+            if (!dove.Controls.Contains(andamento))
+            {
+                andamento.nomina(nomeAttivita);
+                dove.Controls.Add(andamento);
+            }
         }
         public bool creaDataBase(Calendario calendario)
         {
@@ -36,11 +45,17 @@ namespace FotoOrganizzatore
         public bool creaDataBase(Calendario calendario, int saltaGiri)
         {
             bool res = false;
+            Variabili.tracciaMessaggi(andamento, "start creazione data base",true);
             ProcessDirectory(pathBase,calendario,saltaGiri);
+            Variabili.tracciaMessaggi(andamento, "data base creato",true);
+            Variabili.tracciaMessaggi("classificate per data " + elencoFotoPerData.Count + " in " + pathBase);
+            Variabili.tracciaMessaggi("classificate per nome " + elencoFotoPerNome.Count + " in " + pathBase);
+            Variabili.tracciaMessaggi("classificate per dimensione " + elencoFotoPerDimensione.Count + " in " + pathBase);
             return res;
         }
         void ProcessDirectory(string dir, Calendario calendario, int saltaGiri)
         {
+            Variabili.tracciaMessaggi(andamento, "analisi cartella " + dir, Preferenze.verboso);
             string[] fileEntries;
             DateTime dataTime = new DateTime();
             string commentoProposto = "";

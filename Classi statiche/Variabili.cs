@@ -61,6 +61,7 @@ namespace FotoOrganizzatore
         public static Show show = new Show();
         static string TracciaMessaggi = "";
         public static bool nuoviMessaggi = false;
+        public static Queue codaMessaggi = new Queue();
         #region ACCESSO
         public static void setCalendarioAttivo(Calendario calendario, DataBaseFoto dataBaseFoto)
         {
@@ -86,6 +87,13 @@ namespace FotoOrganizzatore
         #endregion
         #region messaggi
         public static string tracciaMessaggi() { return TracciaMessaggi; }
+        public static void tracciaMessaggi(AndamentoAttivita andamento, string messaggio, bool verboso)
+        {
+            codaMessaggi.Enqueue(andamento);
+            andamento.inAtto = messaggio;
+            if (verboso)
+                tracciaMessaggi(messaggio);
+        }
         public static void tracciaMessaggi(string messaggio)
         {
             TracciaMessaggi += messaggio + "\n";

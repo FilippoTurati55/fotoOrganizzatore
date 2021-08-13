@@ -11,6 +11,7 @@ namespace FotoOrganizzatore
     static class Preferenze
     {
         public static string NomeCartellaFotoOrganizzate = @"c:\foto";
+        public static bool verboso = false;
         //public static string NomeCartellaFotoDoppie = NomeCartellaFotoOrganizzate + @"\doppie";
         //public static string NomeCestino = NomeCartellaFotoOrganizzate + @"\cestino";
         public static bool LeggiPreferenze()
@@ -42,6 +43,12 @@ namespace FotoOrganizzatore
                                     break;
                                 case "disco esterno rifiutato":
                                     Variabili.UnitaEsterneRifiutate.Add(sSplit[1], "");
+                                    break;
+                                case "verboso":
+                                    Preferenze.verboso = true;
+                                    break;
+                                case "non verboso":
+                                    Preferenze.verboso = false;
                                     break;
                             }
                         }
@@ -82,6 +89,9 @@ namespace FotoOrganizzatore
                         sw.WriteLine("disco esterno rifiutato;" + id.Key + ";" + id.Value);
                     }
                 }
+                if (Preferenze.verboso)
+                    sw.WriteLine("verboso");
+                else sw.WriteLine("non verboso");
                 sw.Close();
 
             }
