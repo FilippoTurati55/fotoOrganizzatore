@@ -32,11 +32,11 @@ namespace FotoOrganizzatore
         }
         public void pubblicaAndamentoInFinestra(Panel dove, string nomeAttivita)
         {
-            if (!dove.Controls.Contains(andamento))
-            {
+            //if (!dove.Controls.Contains(andamento))
+            //{
                 andamento.nomina(nomeAttivita);
-                dove.Controls.Add(andamento);
-            }
+              //  dove.Controls.Add(andamento);
+            //}
         }
         public bool creaDataBase(Calendario calendario)
         {

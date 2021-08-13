@@ -62,6 +62,7 @@ namespace FotoOrganizzatore
         static string TracciaMessaggi = "";
         public static bool nuoviMessaggi = false;
         public static Queue codaMessaggi = new Queue();
+        // public static Queue codaComandiDaTask = new Queue();
         #region ACCESSO
         public static void setCalendarioAttivo(Calendario calendario, DataBaseFoto dataBaseFoto)
         {

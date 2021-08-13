@@ -53,6 +53,7 @@ namespace FotoOrganizzatore
         public int NumeroFotiNuove;
         public int NumeroFotiVecchie;
         public STATO_DISPOSITIVO statoDispositivo = STATO_DISPOSITIVO.DA_ESAMINARE;
+        AndamentoAttivita andamento = new AndamentoAttivita();
 
         public bool Esamina(IDrive _idrive)
         {
@@ -70,6 +71,8 @@ namespace FotoOrganizzatore
             if (!LeggiInfoDevice())
             {
                 // dispositivo non classificato
+                andamento.memoriaNomeAttivita = "dispositivo da classificare";
+                Variabili.tracciaMessaggi(andamento, IdentificatoreTipoDispositivo, false);
                 Variabili.tracciaMessaggi("trovato nuovo dispositivo da catalogare di tipo: " + IdentificatoreTipoDispositivo);
                 statoDispositivo = STATO_DISPOSITIVO.DA_CATALOGARE;
             }

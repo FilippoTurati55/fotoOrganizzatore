@@ -51,6 +51,7 @@ namespace FotoOrganizzatore
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
             this.messaggiGlobali = new System.Windows.Forms.RichTextBox();
+            this.panelAndamenti = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -63,6 +64,7 @@ namespace FotoOrganizzatore
             this.splitContainerCruscotto.Panel2.SuspendLayout();
             this.splitContainerCruscotto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUp)).BeginInit();
+            this.splitContainerUp.Panel1.SuspendLayout();
             this.splitContainerUp.Panel2.SuspendLayout();
             this.splitContainerUp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUpDx)).BeginInit();
@@ -280,6 +282,7 @@ namespace FotoOrganizzatore
             // splitContainerUp.Panel1
             // 
             this.splitContainerUp.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.splitContainerUp.Panel1.Controls.Add(this.panelAndamenti);
             // 
             // splitContainerUp.Panel2
             // 
@@ -324,6 +327,15 @@ namespace FotoOrganizzatore
             this.messaggiGlobali.TabIndex = 0;
             this.messaggiGlobali.Text = "";
             // 
+            // panelAndamenti
+            // 
+            this.panelAndamenti.AutoScroll = true;
+            this.panelAndamenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAndamenti.Location = new System.Drawing.Point(0, 0);
+            this.panelAndamenti.Name = "panelAndamenti";
+            this.panelAndamenti.Size = new System.Drawing.Size(130, 170);
+            this.panelAndamenti.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -348,6 +360,7 @@ namespace FotoOrganizzatore
             this.splitContainerCruscotto.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCruscotto)).EndInit();
             this.splitContainerCruscotto.ResumeLayout(false);
+            this.splitContainerUp.Panel1.ResumeLayout(false);
             this.splitContainerUp.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerUp)).EndInit();
             this.splitContainerUp.ResumeLayout(false);
@@ -381,6 +394,7 @@ namespace FotoOrganizzatore
         private System.Windows.Forms.Button buttonSelezionaTutti;
         private System.Windows.Forms.Button buttonClassifica;
         private System.Windows.Forms.RichTextBox messaggiGlobali;
+        private System.Windows.Forms.Panel panelAndamenti;
     }
 }
 

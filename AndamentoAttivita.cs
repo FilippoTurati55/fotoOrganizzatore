@@ -15,6 +15,7 @@ namespace FotoOrganizzatore
         //public delegate void Registra(AndamentoAttivita io);
         //public event Registra registra;
         public string inAtto = "";
+        public string memoriaNomeAttivita = "";
         public AndamentoAttivita()
         {
             InitializeComponent();

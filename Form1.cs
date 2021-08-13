@@ -25,6 +25,7 @@ namespace FotoOrganizzatore
         int mostrato = 0;
         int ritardoErroreLettura = 0;
         int aspettaSpegnimentoFoto = 0;
+        int yAttivita = 1;
         public Form1()
         {
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace FotoOrganizzatore
             {
 
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate, Preferenze.getNomeCartellaFotoDoppie());
-                Variabili.dataBaseFotoLocali.pubblicaAndamentoInFinestra(splitContainerUp.Panel1,"archivio locale:");
+                Variabili.dataBaseFotoLocali.pubblicaAndamentoInFinestra(panelAndamenti, "archivio locale:");
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
                 Variabili.Backup.CercaUnitaEsterne(this);
@@ -265,10 +266,17 @@ namespace FotoOrganizzatore
                 Variabili.nuoviMessaggi = false;
                 messaggiGlobali.Text = Variabili.tracciaMessaggi();
             }
-            if (Variabili.codaMessaggi.Count != 0)
+            while (Variabili.codaMessaggi.Count != 0)
             {
                 AndamentoAttivita aa = (AndamentoAttivita) Variabili.codaMessaggi.Dequeue();
+                if (!panelAndamenti.Controls.Contains(aa))
+                {
+                    panelAndamenti.Controls.Add(aa);
+                    aa.Location = new Point(0, yAttivita);
+                    yAttivita += aa.Height + 1;
+                }
                 aa.aggiorna();
+                aa.BringToFront();
             }
         }
 
