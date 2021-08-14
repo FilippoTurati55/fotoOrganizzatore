@@ -71,8 +71,8 @@ namespace FotoOrganizzatore
             if (!LeggiInfoDevice())
             {
                 // dispositivo non classificato
-                andamento.memoriaNomeAttivita = "dispositivo da classificare";
-                Variabili.tracciaMessaggi(andamento, IdentificatoreTipoDispositivo, false);
+                andamento.memoriaNomeAttivita = IdentificatoreTipoDispositivo;
+                Variabili.tracciaMessaggi(andamento, "da classificare", false);
                 Variabili.tracciaMessaggi("trovato nuovo dispositivo da catalogare di tipo: " + IdentificatoreTipoDispositivo);
                 statoDispositivo = STATO_DISPOSITIVO.DA_CATALOGARE;
             }
@@ -80,6 +80,8 @@ namespace FotoOrganizzatore
             {
                 if (CartelleFoto.Count != 0)
                 {
+                    andamento.memoriaNomeAttivita = NomeDispositivo;
+                    Variabili.tracciaMessaggi(andamento, "lettura foto", false);
                     Variabili.tracciaMessaggi("trovato dispositivo: " + IdentificatoreTipoDispositivo);
                     Variabili.Passo = Passi.RicercaNuoveFoto;
                     Variabili.DispositivoPrincipale = this;
@@ -218,6 +220,8 @@ namespace FotoOrganizzatore
                                 break;
                             case "nome_dispositivo":
                                 NomeDispositivo = lineSplit[1];
+                                //Variabili.tracciaMessaggi(andamento, NomeDispositivo, false);
+                                Variabili.tracciaMessaggi(andamento, "data base creato", true);
                                 Variabili.tracciaMessaggi(IdentificatoreTipoDispositivo + " è registrato come: " + NomeDispositivo);
                                 break;
                             case "formato_data":

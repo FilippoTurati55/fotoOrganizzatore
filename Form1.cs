@@ -271,12 +271,13 @@ namespace FotoOrganizzatore
                 AndamentoAttivita aa = (AndamentoAttivita) Variabili.codaMessaggi.Dequeue();
                 if (!panelAndamenti.Controls.Contains(aa))
                 {
+                    //aa.rinfrescaInizializzazione();
                     panelAndamenti.Controls.Add(aa);
                     aa.Location = new Point(0, yAttivita);
                     yAttivita += aa.Height + 1;
                 }
                 aa.aggiorna();
-                aa.BringToFront();
+                //aa.BringToFront();
             }
         }
 

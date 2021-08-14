@@ -26,10 +26,15 @@ namespace FotoOrganizzatore
         }*/
         public void nomina(string nome)
         {
-            nomeAttivita.Text = nome;
+            memoriaNomeAttivita = nomeAttivita.Text = nome;
+        }
+        public void rinfrescaInizializzazione()
+        {
+            nomeAttivita.Text = memoriaNomeAttivita;
         }
         public void aggiorna()
         {
+            nomeAttivita.Text = memoriaNomeAttivita;
             attivitaSvolta.Text = inAtto;
         }
     }
