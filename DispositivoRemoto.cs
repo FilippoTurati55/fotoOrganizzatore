@@ -90,6 +90,9 @@ namespace FotoOrganizzatore
                     Variabili.Passo = Passi.LetturaNuoveFoto;
                     LeggiNuoveFotoDaRemoto();
                     Variabili.Passo = Passi.ConclusaLetturaNuoveFoto;
+                    if (NumeroFotiNuove == 0)
+                        Variabili.tracciaMessaggi(andamento, "non trovate foto nuove", false);
+                    else Variabili.tracciaMessaggi(andamento, "lette " + NumeroFotiNuove + " foto nuove", false);
                     // modifica temporaneo 
                     AggiornaInfoDevice();
                 }
