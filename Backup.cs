@@ -14,14 +14,14 @@ namespace FotoOrganizzatore
         Backup backup;
         Discobackup interfaccia;
         public string idUnivoco;
-        string format;
-        string label;           // id costruttore o simile es. Lexar
-        string name;     // percorso. es. f://
-        string drive;           // unità disco es. F
-        string numeroDiSerie;   // numero di serie
+        public string format;
+        public string label;           // id costruttore o simile es. Lexar
+        public string name;     // percorso. es. f://
+        public string drive;           // unità disco es. F
+        public string numeroDiSerie;   // numero di serie
         public string pathFoto;        // per esempio foto
         public string pathFotoDoppie;
-        long spazioLibero, spazioDisponibile, spazioTotale;
+        public long spazioLibero, spazioDisponibile, spazioTotale;
         public string identificatore = "";     // identificatore utente es. copia sicurezza
         DriveType tipo;
         public UnitaEsterna(Backup riferimento)
@@ -101,6 +101,7 @@ namespace FotoOrganizzatore
         public DataBaseFoto dataBaseFotoSuDiscoBackup;
         public Calendario calendarioBackup = new Calendario();
         Form1 form1Ref;
+        AndamentoAttivita andamento = new AndamentoAttivita();
         public void CercaUnitaEsterne(Form1 form1)
         {
             form1Ref = form1;
@@ -110,15 +111,20 @@ namespace FotoOrganizzatore
                 switch (d.DriveType)
                 {
                     case DriveType.Removable:
+                        Variabili.tracciaMessaggi("trovato disco removibile");
                         disco = new UnitaEsterna(this);
                         if (disco.esaminaDisco(d))
                         {
+                            Variabili.tracciaMessaggi("trovato disco removibile unità " + disco.name + " id: " + disco.label + " num serie: " + disco.numeroDiSerie);
+                            Variabili.tracciaMessaggi("disco removibile spazio libero " + disco.spazioLibero + " Bytes di " + disco.spazioTotale + "Bytes totali");
                             form1.AggiungiDiscoBackup(this);
                             Variabili.UnitaEsterne.Add(disco);
-
+                            andamento.memoriaNomeAttivita = disco.identificatore;
                             if (disco.accredita())
                             {
                                 //Variabili.UnitaEsterneAccreditate.Add(disco.idUnivoco, disco.identificatore);
+                                Variabili.tracciaMessaggi("identificatore disco removibile " + disco.identificatore + " accreditato");
+                                Variabili.tracciaMessaggi(andamento, "avvio backup", true);
                                 var t = Task.Run(() => taskBackup());
                             }    
                         }
