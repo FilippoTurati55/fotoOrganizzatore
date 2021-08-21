@@ -93,7 +93,7 @@ namespace FotoOrganizzatore
             codaMessaggi.Enqueue(andamento);
             andamento.inAtto = messaggio;
             if (verboso)
-                tracciaMessaggi(messaggio);
+                tracciaMessaggi(andamento.memoriaNomeAttivita + " : " + messaggio);
         }
         public static void tracciaMessaggi(string messaggio)
         {

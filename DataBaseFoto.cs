@@ -30,7 +30,7 @@ namespace FotoOrganizzatore
             pathBase = path;
             pathFotoDoppie = cartellaDoppie;
         }
-        public void pubblicaAndamentoInFinestra(Panel dove, string nomeAttivita)
+        public void pubblicaAndamentoInFinestra(string nomeAttivita)
         {
             //if (!dove.Controls.Contains(andamento))
             //{
@@ -55,6 +55,8 @@ namespace FotoOrganizzatore
         }
         void ProcessDirectory(string dir, Calendario calendario, int saltaGiri)
         {
+            if (!dir.StartsWith("c:"))
+                ;
             Variabili.tracciaMessaggi(andamento, "analisi cartella " + dir, Preferenze.verboso);
             string[] fileEntries;
             DateTime dataTime = new DateTime();

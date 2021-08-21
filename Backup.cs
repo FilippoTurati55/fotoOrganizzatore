@@ -116,12 +116,12 @@ namespace FotoOrganizzatore
                         if (disco.esaminaDisco(d))
                         {
                             Variabili.tracciaMessaggi("trovato disco removibile unità " + disco.name + " id: " + disco.label + " num serie: " + disco.numeroDiSerie);
-                            Variabili.tracciaMessaggi("disco removibile spazio libero " + disco.spazioLibero + " Bytes di " + disco.spazioTotale + "Bytes totali");
+                            Variabili.tracciaMessaggi("disco removibile spazio libero " + disco.spazioLibero + " Bytes di " + disco.spazioTotale + " Bytes totali");
                             form1.AggiungiDiscoBackup(this);
                             Variabili.UnitaEsterne.Add(disco);
-                            andamento.memoriaNomeAttivita = disco.identificatore;
                             if (disco.accredita())
                             {
+                                andamento.memoriaNomeAttivita = disco.identificatore;
                                 //Variabili.UnitaEsterneAccreditate.Add(disco.idUnivoco, disco.identificatore);
                                 Variabili.tracciaMessaggi("identificatore disco removibile " + disco.identificatore + " accreditato");
                                 Variabili.tracciaMessaggi(andamento, "avvio backup", true);
@@ -135,9 +135,11 @@ namespace FotoOrganizzatore
         void taskBackup()
         {
             dataBaseFotoSuDiscoBackup = new DataBaseFoto(disco.pathFoto, disco.pathFotoDoppie);
+            dataBaseFotoSuDiscoBackup.pubblicaAndamentoInFinestra(disco.pathFoto);
             dataBaseFotoSuDiscoBackup.creaDataBase(calendarioBackup);
             // anni = Variabili.operazioniSuPc.elencaAnni(name);
             //Variabili.elencaDateFotoInCartellaClasse.ElencaImmediatamente(elencoDateFoti, anni, false, elencoDateDateDoppie, true);
+            Variabili.tracciaMessaggi(andamento, "controllo date", true);
             aggiungiModificaDateSuBackup();
             //copiaFotoNuove();
             
@@ -168,7 +170,15 @@ namespace FotoOrganizzatore
                     for (int n = 1; n < scomposto.Length - 1; n++)
                         ncartella += @"\" + scomposto[n];
                     calendarioBackup.AggiungiData(nomeCompletoNuovaCartella + @"\nomeFileFinto.fnt", ncartella);
-                    Utility.CopiaCartella(nomeCartellaOriginale, nomeCompletoNuovaCartella);
+                    if (Utility.CopiaCartella(nomeCartellaOriginale, nomeCompletoNuovaCartella))
+                    {
+                        Variabili.tracciaMessaggi(andamento, "copiata cartella " + nomeCartellaOriginale + " in " + nomeCompletoNuovaCartella, true);
+                    }
+                    else
+                    {
+                        // errore nella copia della cartella
+                        Variabili.tracciaMessaggi(andamento, "errore copia in " + nomeCompletoNuovaCartella, true);
+                    }
                 }
                 /*
                 DateTime confronto = new DateTime(2020, 11, 11);

@@ -48,10 +48,10 @@ namespace FotoOrganizzatore
             this.timerBase = new System.Windows.Forms.Timer(this.components);
             this.splitContainerCruscotto = new System.Windows.Forms.SplitContainer();
             this.splitContainerUp = new System.Windows.Forms.SplitContainer();
+            this.panelAndamenti = new System.Windows.Forms.Panel();
             this.splitContainerUpDx = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
             this.messaggiGlobali = new System.Windows.Forms.RichTextBox();
-            this.panelAndamenti = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAnni)).BeginInit();
             this.splitContainerAnni.Panel1.SuspendLayout();
             this.splitContainerAnni.Panel2.SuspendLayout();
@@ -291,6 +291,15 @@ namespace FotoOrganizzatore
             this.splitContainerUp.SplitterDistance = 130;
             this.splitContainerUp.TabIndex = 0;
             // 
+            // panelAndamenti
+            // 
+            this.panelAndamenti.AutoScroll = true;
+            this.panelAndamenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAndamenti.Location = new System.Drawing.Point(0, 0);
+            this.panelAndamenti.Name = "panelAndamenti";
+            this.panelAndamenti.Size = new System.Drawing.Size(130, 170);
+            this.panelAndamenti.TabIndex = 0;
+            // 
             // splitContainerUpDx
             // 
             this.splitContainerUpDx.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -321,20 +330,12 @@ namespace FotoOrganizzatore
             // messaggiGlobali
             // 
             this.messaggiGlobali.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.messaggiGlobali.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.07143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messaggiGlobali.Location = new System.Drawing.Point(0, 0);
             this.messaggiGlobali.Name = "messaggiGlobali";
             this.messaggiGlobali.Size = new System.Drawing.Size(1598, 185);
             this.messaggiGlobali.TabIndex = 0;
             this.messaggiGlobali.Text = "";
-            // 
-            // panelAndamenti
-            // 
-            this.panelAndamenti.AutoScroll = true;
-            this.panelAndamenti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAndamenti.Location = new System.Drawing.Point(0, 0);
-            this.panelAndamenti.Name = "panelAndamenti";
-            this.panelAndamenti.Size = new System.Drawing.Size(130, 170);
-            this.panelAndamenti.TabIndex = 0;
             // 
             // Form1
             // 

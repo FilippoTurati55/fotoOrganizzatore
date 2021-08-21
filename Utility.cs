@@ -343,15 +343,16 @@ namespace FotoOrganizzatore
         }
         public static bool CopiaCartella(string sorgente, string destinazione)
         {
+            bool result = false;
             if (sorgente != destinazione)
             {
                 if (!Directory.Exists(destinazione))
                 {
                     Directory.CreateDirectory(sorgente);
                 }
-                CopiaCartellainEsistente(sorgente, destinazione);
+               result = CopiaCartellainEsistente(sorgente, destinazione);
             }
-            return true;
+            return result;
         }
         public static bool MuoviCartella(string sorgente, string destinazione)
         {
@@ -418,10 +419,20 @@ namespace FotoOrganizzatore
                 }
                 else
                 {
-                    File.Copy(file, fileDestinazione);
+                    // verificare che ci sia spazio disponjibile
+                    try
+                    {
+                        File.Copy(file, fileDestinazione);
+                        result = true;
+                    }
+                    catch
+                    {
+                        result = false;
+                        break;
+                    }
                 }
             }
-            return true;
+            return result;
         }
         public static bool muoviFile(string sorgente, string destinazione)
         {
