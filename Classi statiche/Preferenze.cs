@@ -11,6 +11,7 @@ namespace FotoOrganizzatore
     static class Preferenze
     {
         public static string NomeCartellaFotoOrganizzate = @"c:\foto";
+        public static string NomeFileCalendarioComplessivo = @"c:\foto\calendarioComplessivo.txt";
         public static bool verboso = false;
         //public static string NomeCartellaFotoDoppie = NomeCartellaFotoOrganizzate + @"\doppie";
         //public static string NomeCestino = NomeCartellaFotoOrganizzate + @"\cestino";

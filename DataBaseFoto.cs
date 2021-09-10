@@ -47,6 +47,7 @@ namespace FotoOrganizzatore
             bool res = false;
             Variabili.tracciaMessaggi(andamento, "start creazione data base",true);
             ProcessDirectory(pathBase,calendario,saltaGiri);
+            calendario.aggiungiDateACalendarioComplessivo();
             Variabili.tracciaMessaggi(andamento, "data base creato",true);
             Variabili.tracciaMessaggi("classificate per data " + elencoFotoPerData.Count + " in " + pathBase);
             Variabili.tracciaMessaggi("classificate per nome " + elencoFotoPerNome.Count + " in " + pathBase);

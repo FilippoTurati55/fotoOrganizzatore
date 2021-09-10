@@ -168,6 +168,39 @@ namespace FotoOrganizzatore
                 location += cartellaSpeciale.Height;
             }
         }
+        #region CALENDARIO_COMPLESSIVO
+        public bool aggiungiDateACalendarioComplessivo()
+        {
+            bool res = false;
+            foreach (var dateTime in elencoDateFotiAsync)
+            {
+                if (dateTime.Value.testoCommento != "")
+                {
+                    // avvenimento!
+                    string avvenimento = dateTime.Value.testoCommento;
+                    ;
+                }
+            }
+            return res;
+        }
+        public bool salvaCalendarioSuDisco()
+        {
+            bool result = false;
+            string path = Preferenze.NomeFileCalendarioComplessivo;
+            if (File.Exists(path))
+            {
+                File.Move(path,path + ".bak");
+            }
+            StreamWriter sw = new StreamWriter(path, false, Encoding.GetEncoding("iso-8859-1"));
+            sw.WriteLine("calendario complessivo v1.0");
+            for (int n = 0; n < elencoDateFotiAsync.Count; n++)
+            {
+
+            }
+            sw.Close();
+            return result;
+        }
+        #endregion
         #region AZIONI_EVENTI
         private void EventoSelezionaData(Avvenimento origine)
         {
