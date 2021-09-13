@@ -55,6 +55,7 @@ namespace FotoOrganizzatore
         public static ArchivioLocale ArchivioLocale = new ArchivioLocale();
         public static Backup Backup = new Backup();
         public static Calendario Calendario = new Calendario();
+        public static Calendario CalendarioComplessivo = new Calendario();
         static Calendario CalendarioAttivo = Calendario;
         public static DataBaseFoto dataBaseFotoLocali;
         static DataBaseFoto dataBaseFotoAttivo;

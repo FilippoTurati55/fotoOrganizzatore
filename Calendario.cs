@@ -178,8 +178,22 @@ namespace FotoOrganizzatore
                 {
                     // avvenimento!
                     string avvenimento = dateTime.Value.testoCommento;
-                    ;
+                    AggiungiAvvenimentoACalendarioComplessivo(dateTime.Key,dateTime.Value);
                 }
+            }
+            return res;
+        }
+        bool AggiungiAvvenimentoACalendarioComplessivo(DateTime chiave, SetDataOraBase avvenimento)
+        {
+            bool res = false;
+            if (!Variabili.CalendarioComplessivo.elencoDateFotiAsync.ContainsKey(chiave))
+            {
+                // nuovo
+                Variabili.CalendarioComplessivo.elencoDateFotiAsync.Add(chiave, avvenimento);
+                res = true;
+            }
+            {
+                // già presente
             }
             return res;
         }
