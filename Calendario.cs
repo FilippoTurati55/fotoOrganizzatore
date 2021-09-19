@@ -177,24 +177,10 @@ namespace FotoOrganizzatore
                 if (dateTime.Value.testoCommento != "")
                 {
                     // avvenimento!
-                    string avvenimento = dateTime.Value.testoCommento;
-                    AggiungiAvvenimentoACalendarioComplessivo(dateTime.Key,dateTime.Value);
+                    Variabili.calendarioComplessivo.AggiungiData(dateTime.Key,dateTime.Value);
                 }
             }
-            return res;
-        }
-        bool AggiungiAvvenimentoACalendarioComplessivo(DateTime chiave, SetDataOraBase avvenimento)
-        {
-            bool res = false;
-            if (!Variabili.CalendarioComplessivo.elencoDateFotiAsync.ContainsKey(chiave))
-            {
-                // nuovo
-                Variabili.CalendarioComplessivo.elencoDateFotiAsync.Add(chiave, avvenimento);
-                res = true;
-            }
-            {
-                // già presente
-            }
+            Variabili.calendarioComplessivo.MessaggiConclusioneAggiunta();
             return res;
         }
         public bool salvaCalendarioSuDisco()

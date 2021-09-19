@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="ArchivioLocale.cs" />
     <Compile Include="Backup.cs" />
+    <Compile Include="CalendarioComplessivo.cs" />
     <Compile Include="Cartella.cs">
       <SubType>UserControl</SubType>
     </Compile>
