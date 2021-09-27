@@ -26,9 +26,19 @@ namespace FotoOrganizzatore
             }
             return res;
         }
+        public void Inizio()
+        {
+            numeroDateAggiunte = 0;
+        }
         public void MessaggiConclusioneAggiunta()
         {
             Variabili.tracciaMessaggi("aggiunte " + numeroDateAggiunte + " nuove date a calendario complessivo");
+            
+            Variabili.tracciaMessaggi("presenti " + elencoDateFotiAsync.Count + " date nel calendario complessivo");
+            if (avvenimentiDoppi.Count != 0)
+            {
+                Variabili.tracciaMessaggi("presenti " + avvenimentiDoppi.Count + " date doppie nel calendario complessivo");
+            }
         }
     }
 }

@@ -172,6 +172,7 @@ namespace FotoOrganizzatore
         public bool aggiungiDateACalendarioComplessivo()
         {
             bool res = false;
+            Variabili.calendarioComplessivo.Inizio();
             foreach (var dateTime in elencoDateFotiAsync)
             {
                 if (dateTime.Value.testoCommento != "")
