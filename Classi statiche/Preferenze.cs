@@ -106,7 +106,7 @@ namespace FotoOrganizzatore
         {
             return NomeCartellaFotoOrganizzate + @"\cestino";
         }
-        static bool creaCartellaDatiPermanenti()
+        public static bool creaCartellaDatiPermanenti()
         {
             bool res = false;
             bool errore = false;
