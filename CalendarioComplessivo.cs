@@ -62,6 +62,21 @@ namespace FotoOrganizzatore
                             string evento = lines[n];
                             string date = lines[n + 1];
                             string cartella = lines[n + 2];
+                            // data
+                            string[] dataInizioFine = date.Split(' ');
+                            string[] dataInizio = dataInizioFine[0].Split('_');
+                            string[] dataFine = dataInizioFine[1].Split('_');
+                            int annoInizio = Int32.Parse(dataInizio[0]);
+                            int meseInizio = Int32.Parse(dataInizio[1]);
+                            int giornoInizio = Int32.Parse(dataInizio[2]);
+                            int annoFine = Int32.Parse(dataFine[0]);
+                            int meseFine = Int32.Parse(dataFine[1]);
+                            int giornoFine = Int32.Parse(dataFine[2]);
+                            DateTime inizio = new DateTime(annoInizio, meseInizio, giornoInizio);
+                            DateTime fine = new DateTime(annoFine, meseFine, giornoFine);
+                            SetDataOraBase sdob = new SetDataOraBase();
+                            sdob.DateTimeInizio = inizio;
+                            sdob.SetDateTimeFine(fine);
                         }
                         res = true;
                     }
