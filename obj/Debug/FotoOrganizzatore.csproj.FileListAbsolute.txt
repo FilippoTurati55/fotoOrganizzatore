@@ -25,3 +25,4 @@ C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOr
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.csproj.AssemblyReference.cache
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.Messaggi.resources
 C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.AndamentoAttivita.resources
+C:\Users\carlo\source\repos\FotoOrganizzatore\FotoOrganizzatore\obj\Debug\FotoOrganizzatore.csproj.SuggestedBindingRedirects.cache

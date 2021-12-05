@@ -77,6 +77,30 @@ namespace FotoOrganizzatore
                             SetDataOraBase sdob = new SetDataOraBase();
                             sdob.DateTimeInizio = inizio;
                             sdob.SetDateTimeFine(fine);
+                            // evento
+                            string[] smontaEvento = evento.Split(':');
+                            string nomeEvento = "";
+                            bool eventoCalcolato = false;
+                            switch(smontaEvento[0])
+                            {
+                                case "evento":
+                                    nomeEvento = smontaEvento[1].Substring(1);
+                                    eventoCalcolato = true;
+                                    break;
+                            }
+                            if (eventoCalcolato)
+                            {
+                                sdob.SetCommento(nomeEvento);   // sarà corretto?
+                            }
+                            // cartella
+                            sdob.nomeCompletoCartella = cartella;
+                            // inserisci in elenco date
+                            if (!elencoDateFotiAsync.ContainsKey(inizio))
+                            {
+                                //prova
+                                elencoDateFotiAsync.Add(inizio, sdob);
+                                //Variabili.calendarioComplessivo.AggiungiData(dateTime.Key, dateTime.Value);
+                            }
                         }
                         res = true;
                     }
