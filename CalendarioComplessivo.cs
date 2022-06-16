@@ -84,13 +84,15 @@ namespace FotoOrganizzatore
                             switch(smontaEvento[0])
                             {
                                 case "evento":
-                                    nomeEvento = smontaEvento[1].Substring(1);
+                                    // nomeEvento = smontaEvento[1].Substring(1);  // se nel nome evento c'è un : no! corretto
+                                    int posizionePrimoDuepunti = evento.IndexOf(':');
+                                    nomeEvento = evento.Substring(posizionePrimoDuepunti + 2);
                                     eventoCalcolato = true;
                                     break;
                             }
                             if (eventoCalcolato)
                             {
-                                sdob.SetCommento(nomeEvento);   // sarà corretto?
+                                sdob.SetCommento(nomeEvento);   // sarà corretto? 
                             }
                             // cartella
                             sdob.nomeCompletoCartella = cartella;
@@ -99,7 +101,7 @@ namespace FotoOrganizzatore
                             {
                                 //prova
                                 elencoDateFotiAsync.Add(inizio, sdob);
-                                //Variabili.calendarioComplessivo.AggiungiData(dateTime.Key, dateTime.Value);
+                                // non serve Variabili.calendarioComplessivo.AggiungiData(dateTime.Key, dateTime.Value);
                             }
                         }
                         res = true;

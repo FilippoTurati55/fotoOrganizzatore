@@ -293,20 +293,27 @@ namespace FotoOrganizzatore
             foreach (var file in folder.files)
             {
                 string nomeFile = file.name;
-                DateTime dt = new DateTime();
-                //SetDataOra sdo = new SetDataOra();
-                dt = file.last_write_time;
-                DateTime dt1 = new DateTime(dt.Year, dt.Month, dt.Day);
-                Foto foto = new Foto(nomeFile, file, dt);
-                if (dt > DataUltimaLetturaFoto)
+                if (nomeFile == "")
                 {
-                    cartellaFoti.DateTrovateNuove.Add(nomeFile, foto);
-                    /*if (!Variabili.calendario.elencoDateFotiNuove.ContainsKey(dt1))
-                        Variabili.calendario.elencoDateFotiNuove.Add(dt1, dt1);*/
-                    Variabili.Passo = Passi.TrovateNuoveFoto;
-                    //nuoveDate = true;
+                    ;
                 }
-                else cartellaFoti.DateTrovateVecchie.Add(nomeFile, foto);
+                else
+                {
+                    DateTime dt = new DateTime();
+                    //SetDataOra sdo = new SetDataOra();
+                    dt = file.last_write_time;
+                    DateTime dt1 = new DateTime(dt.Year, dt.Month, dt.Day);
+                    Foto foto = new Foto(nomeFile, file, dt);
+                    if (dt > DataUltimaLetturaFoto)
+                    {
+                        cartellaFoti.DateTrovateNuove.Add(nomeFile, foto);
+                        /*if (!Variabili.calendario.elencoDateFotiNuove.ContainsKey(dt1))
+                            Variabili.calendario.elencoDateFotiNuove.Add(dt1, dt1);*/
+                        Variabili.Passo = Passi.TrovateNuoveFoto;
+                        //nuoveDate = true;
+                    }
+                    else cartellaFoti.DateTrovateVecchie.Add(nomeFile, foto);
+                }
             }
             /* provvisorio 27 1 21
              * if (nuoveDate)
