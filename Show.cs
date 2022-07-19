@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace FotoOrganizzatore
     {
         SortedList<int, ImmagineShow> elencoImmagini = new SortedList<int, ImmagineShow>();
         int indice;
+        string nomeCartella;
+        string[] elencoFile;
         public Show()
         {
             InitializeComponent();
@@ -21,6 +24,10 @@ namespace FotoOrganizzatore
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             this.Location = new Point(1, 1);
         }
+        public void SetCartella(string pathName )
+        {
+            nomeCartella = pathName;
+        }       
         public void associaImmagineENome(BoxImmagine immagine, string nome)
         {
             ImmagineShow immShow = new ImmagineShow();
@@ -36,23 +43,55 @@ namespace FotoOrganizzatore
         private void Show_Shown(object sender, EventArgs e)
         {
             indice = 0;
+            // lettura diretta cartella
+            if (nomeCartella != "")
+            {
+                elencoFile = Directory.GetFiles(nomeCartella);
+            }
             timer1.Interval = 2000;
             timer1.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (elencoImmagini.Count > 0)
+            // lettura diretta cartella
+            if (elencoFile != null)
             {
-                if (indice >= elencoImmagini.Count)
+                if (elencoFile.Length > 0)
                 {
-                    indice = 0;
+                    if (indice >= elencoFile.Length)
+                    {
+                        indice = 0;
+                    }
+                    string nomeFile = elencoFile[indice];
+                    //Immagine immagine = new Immagine();
+                    //immagine.leggiImmagineDaFile(nomeFile);
+                    //immagine1.Image = immagine.Image;
+                    immagine1.leggiImmagineDaFile(nomeFile);
+                    labelNome.Text = nomeFile;
+                    resize();
+                    indice++;
                 }
-                ImmagineShow ish = elencoImmagini[indice++];
-                // BoxImmagine bi = ish.boxImmagine; // elencoImmagini[indice++].boxImmagine;
-                immagine1.Image = ish.boxImmagine.getImmagine(); // bi.getImmagine();
-                labelNome.Text = ish.nome;
-                resize();
+            }
+            else
+            {
+                // qui non dovremmo mai arrivare
+                // fine lettura diretta cartella
+                if (elencoImmagini.Count > 0)
+                {
+                    if (indice >= elencoImmagini.Count)
+                    {
+                        indice = 0;
+                    }
+                    ImmagineShow ish = elencoImmagini[indice++];
+                    string nomeFile = ish.nome;
+                    Immagine immagine = new Immagine();
+                    immagine.leggiImmagineDaFile(nomeFile);
+                    // immagine1.Image = ish.boxImmagine.getImmagine(); // bi.getImmagine();
+                    immagine1.Image = immagine.Image;
+                    labelNome.Text = ish.nome;
+                    resize();
+                }
             }
         }
         bool resize()

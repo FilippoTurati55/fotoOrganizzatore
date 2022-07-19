@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -40,6 +41,32 @@ namespace FotoOrganizzatore
                     //creo un nuovo bitmap ridimensionandolo
                     // Bitmap img = new Bitmap(bmpStream, new Size(Width, Height));
                     Image = Image.FromStream(stream);
+                    // provo a ridurre qualità immagine
+                    /*
+                    int width = 100;
+                    int height = 50;
+                    var destRect = new Rectangle(0, 0, width, height);
+                    var destImage = new Bitmap(width, height);
+
+                    destImage.SetResolution(Image.HorizontalResolution, Image.VerticalResolution);
+
+                    using (var graphics = Graphics.FromImage(destImage))
+                    {
+                        graphics.CompositingMode = CompositingMode.SourceCopy;
+                        graphics.CompositingQuality = CompositingQuality.HighQuality;
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.SmoothingMode = SmoothingMode.HighQuality;
+                        graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                        using (var wrapMode = new ImageAttributes())
+                        {
+                            wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                            graphics.DrawImage(Image, destRect, 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel, wrapMode);
+                        }
+                    }
+*/
+
+
                     res = true;
                     try
                     {
@@ -108,6 +135,8 @@ namespace FotoOrganizzatore
             {
                 Size = new System.Drawing.Size(183, 92);
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+                //SizeMode = System.Windows.Forms.PictureBoxSizeMode.Normal; non ca,mbia niente
+                //Image.
             }
             return res;
         }

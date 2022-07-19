@@ -43,10 +43,14 @@ namespace FotoOrganizzatore
             if (Variabili.ArchivioLocale.PreparaCartelleFoto())
             {
 
+                // prova
                 Variabili.dataBaseFotoLocali = new DataBaseFoto(Preferenze.NomeCartellaFotoOrganizzate, Preferenze.getNomeCartellaFotoDoppie());
+                // prova
                 Variabili.dataBaseFotoLocali.pubblicaAndamentoInFinestra("archivio locale:");
+                // prova
                 Variabili.dataBaseFotoLocali.creaDataBase(Variabili.Calendario);
                 var t = Task.Run(() => taskCercaDispositivi());
+                // prova
                 Variabili.Backup.CercaUnitaEsterne(this);
                 // Variabili.Calendario.MostraCalendarioFoto(avvenimenti, false);
                 //Variabili.comandi = Comandi.mostraCalendarioFoto;
@@ -157,22 +161,25 @@ namespace FotoOrganizzatore
                             src = elencoFotiDaMostrareInVignetta[numeroFotoMostrate];
                             if (FileImmagini.IsImage(src))
                             {
-                                if (vignetta.leggiImmagineDaFile(src))
+                                if (numeroFotoMostrate < 50)   // 50 è per prova
                                 {
-                                    vignette.Controls.Add(vignetta);
-                                    Variabili.show.associaImmagineENome(vignetta,src);
-                                    vignetta.Location = new Point(posX, posY);
-                                    posX += vignetta.Width;
-                                    if (posX > vignetta.Width * 4)
+                                    if (vignetta.leggiImmagineDaFile(src))
                                     {
-                                        posX = 0;
-                                        posY += vignetta.Height;
+                                        vignette.Controls.Add(vignetta);
+                                        Variabili.show.associaImmagineENome(vignetta, src);
+                                        vignetta.Location = new Point(posX, posY);
+                                        posX += vignetta.Width;
+                                        if (posX > vignetta.Width * 4)
+                                        {
+                                            posX = 0;
+                                            posY += vignetta.Height;
+                                        }
+                                        numeroFotoMostrate++;
                                     }
-                                    numeroFotoMostrate++;
-                                }
-                                else
-                                {
-                                    ritardoErroreLettura = 20;
+                                    else
+                                    {
+                                        ritardoErroreLettura = 20;
+                                    }
                                 }
                             }
                             else
@@ -288,6 +295,7 @@ namespace FotoOrganizzatore
             //Show show = new Show();
             Variabili.show.SetDesktopLocation(0, 0);
             DialogResult dr;
+            Variabili.show.SetCartella(nomeCartella);
             dr = Variabili.show.ShowDialog();
         }
         public int getLarghezza()

@@ -1,15 +1,17 @@
-﻿using System;
+﻿using external_drive_lib;
+using external_drive_lib.interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using external_drive_lib;
+/*using external_drive_lib;
 using external_drive_lib.bulk;
 using external_drive_lib.interfaces;
 using external_drive_lib.monitor;
-using external_drive_lib.util;
+using external_drive_lib.util;*/
 
 namespace FotoOrganizzatore
 {
@@ -247,11 +249,13 @@ namespace FotoOrganizzatore
             var portable_drives = drive_root.inst.drives.Where(d => d.type.is_portable()).ToList();
             foreach (var pd in portable_drives)
             {
-                var d = drive_root.inst.try_get_drive("[p0]:/");
+                var d = drive_root.inst.try_get_drive("[p1]:/");  // ERA p0
                 if (d != null && d.is_available())
                 {
-                    //elencoDispositiviUsb.Add(pd.friendly_name);
-                    elencoDispositiviUsb.Add(pd);
+                    // cancellato da tempo elencoDispositiviUsb.Add(pd.friendly_name);
+                    // cancellato 19 7 22 elencoDispositiviUsb.Add(pd);
+                    if (!elencoDispositiviUsb.Contains(pd))
+                        elencoDispositiviUsb.Add(pd);
                 }
                 //Console.WriteLine("Drive Unique ID: " + pd.unique_id + ", friendly name=" + pd.friendly_name
                 //  + ", type=" + pd.type + ", available=" + pd.is_available());
