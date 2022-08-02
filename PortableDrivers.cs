@@ -19,7 +19,7 @@ namespace FotoOrganizzatore
     {
         public static ArrayList elencoDispositiviUsb = new ArrayList();
         public static ArrayList elencoFileSuDispositivo = new ArrayList();
-
+        public static int portableDrivesTrovati;
         /*foreach (var child in dest.files)
             child.delete_sync();*/
 
@@ -247,9 +247,26 @@ namespace FotoOrganizzatore
             //Console.WriteLine("Enumerating Portable Drives:");
             elencoDispositiviUsb.Clear();
             var portable_drives = drive_root.inst.drives.Where(d => d.type.is_portable()).ToList();
+            if (portable_drives.Count != portableDrivesTrovati)
+            {
+                string messaggio = "modifica numero drive USB trovati, ora sono " + portable_drives.Count + " : ";
+                for (int n1 = 0; n1 < portable_drives.Count; n1++)
+                {
+                    if (n1 != 0)
+                    {
+                        messaggio += " , ";
+                    }
+                    messaggio += portable_drives[n1].friendly_name;
+                }
+                Variabili.tracciaMessaggi(messaggio);
+                portableDrivesTrovati = portable_drives.Count;
+            }
+            int n = 0;
             foreach (var pd in portable_drives)
             {
-                var d = drive_root.inst.try_get_drive("[p1]:/");  // ERA p0
+                //var d = drive_root.inst.try_get_drive("[p0]:/");  // ERA p0
+                var d = drive_root.inst.try_get_drive("[p" + n + "]:/");  // ERA p0
+                n++;
                 if (d != null && d.is_available())
                 {
                     // cancellato da tempo elencoDispositiviUsb.Add(pd.friendly_name);
