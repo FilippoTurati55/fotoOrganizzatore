@@ -13,6 +13,7 @@ namespace FotoOrganizzatore
 {
     public class Calendario
     {
+        Avvenimento avvenimentoIniziale = null;
         public SortedList<DateTime, SetDataOraBase> elencoDateFotiAsync = new SortedList<DateTime, SetDataOraBase>();
         public SortedList<string, CartellaBase> cartelleSpeciali = new SortedList<string, CartellaBase>();
         Panel SceltaCalendario;
@@ -222,16 +223,18 @@ namespace FotoOrganizzatore
                             elencoDateFotiAsync[data].avvenimento.Stato = STATO_SELEZIONE_DATA.FINE;
                             int a = 0;*/
                             // occorre prima chiudere la finestra a destra
+                            SciogliRaggruppamento(avvenimentoIniziale);   // prova!!!
                             Raggruppa(dataInizio, dataFineOrigine, elencoDateFotiAsync[dataInizio].testoCommento, Preferenze.NomeCartellaFotoOrganizzate);
-                            /*if (EventoAggiornaCalendario != null)
-                                EventoAggiornaCalendario.Invoke();*/
-                            //ElencaDateFotoCatalogate();
-                            //MostraCalendarioFoto(SceltaCalendarioSP, false);
+                        /*if (EventoAggiornaCalendario != null)
+                            EventoAggiornaCalendario.Invoke();*/
+                        //ElencaDateFotoCatalogate();
+                        //MostraCalendarioFoto(SceltaCalendarioSP, false);
                         //}
                     }
                     else
                     {
                         elencoDateFotiAsync[dataInizioOrigine].Stato = STATO_SELEZIONE_DATA.INIZIO;
+                        avvenimentoIniziale = origine;
                     }
                     sdob.Stato = STATO_SELEZIONE_DATA.INIZIO;
                     break;
