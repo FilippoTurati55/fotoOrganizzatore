@@ -17,6 +17,8 @@ namespace FotoOrganizzatore
         int indice;
         string nomeCartella;
         string[] elencoFile;
+        int secondi;
+        int tempoCambiamentoQuestaFoto;
         public Show()
         {
             InitializeComponent();
@@ -48,7 +50,9 @@ namespace FotoOrganizzatore
             {
                 elencoFile = Directory.GetFiles(nomeCartella);
             }
-            timer1.Interval = 2000;
+            secondi = 0;
+            tempoCambiamentoQuestaFoto = Preferenze.tempoCambiamentoShowFoto;
+            timer1.Interval = 1000;
             timer1.Start();
         }
 
@@ -59,18 +63,26 @@ namespace FotoOrganizzatore
             {
                 if (elencoFile.Length > 0)
                 {
-                    if (indice >= elencoFile.Length)
+                    if (++secondi > tempoCambiamentoQuestaFoto)
                     {
-                        indice = 0;
+                        tempoCambiamentoQuestaFoto = Preferenze.tempoCambiamentoShowFoto;
+                        // Random.
+                        secondi = 0;
+                        if (indice >= elencoFile.Length)
+                        {
+                            indice = 0;
+                        }
+                        string nomeFile = elencoFile[indice];
+                        //Immagine immagine = new Immagine();
+                        //immagine.leggiImmagineDaFile(nomeFile);
+                        //immagine1.Image = immagine.Image;
+                        immagine1.leggiImmagineDaFile(nomeFile);
+                        if (Preferenze.visualizzaNomeFileShowFoto)
+                            labelNome.Text = nomeFile;
+                        else labelNome.Text = "";
+                        resize();
+                        indice++;
                     }
-                    string nomeFile = elencoFile[indice];
-                    //Immagine immagine = new Immagine();
-                    //immagine.leggiImmagineDaFile(nomeFile);
-                    //immagine1.Image = immagine.Image;
-                    immagine1.leggiImmagineDaFile(nomeFile);
-                    labelNome.Text = nomeFile;
-                    resize();
-                    indice++;
                 }
             }
             else

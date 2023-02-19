@@ -13,6 +13,7 @@ namespace FotoOrganizzatore
         public void Classifica()
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 string cartella = folderBrowserDialog.SelectedPath;
